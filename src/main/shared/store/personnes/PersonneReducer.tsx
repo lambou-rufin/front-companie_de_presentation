@@ -1,22 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Personne {
-  id: number;
-  name: string;
-  age: number;
-  contactNumber: string;
+  pers_id: number;
+  nom: string;
+  prenom: string;
+  email: string;
+  adress: string;
 }
 
 interface PersonneState {
   personnes: Personne[];
   loading: boolean;
   error: string | null;
+  success: string | null;
 }
 
 const initialState: PersonneState = {
   personnes: [],
   loading: false,
   error: null,
+  success: null
 };
 
 const personneSlice = createSlice({
@@ -39,13 +42,13 @@ const personneSlice = createSlice({
       state.personnes.push(action.payload);
     },
     updatePersonne(state, action: PayloadAction<Personne>) {
-      const index = state.personnes.findIndex(personne => personne.id === action.payload.id);
+      const index = state.personnes.findIndex(personne => personne.pers_id === action.payload.pers_id);
       if (index !== -1) {
         state.personnes[index] = action.payload;
       }
     },
     deletePersonne(state, action: PayloadAction<number>) {
-      state.personnes = state.personnes.filter(personne => personne.id !== action.payload);
+      state.personnes = state.personnes.filter(personne => personne.pers_id !== action.payload);
     },
   },
 });

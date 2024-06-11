@@ -1,16 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 // Importez les reducers que vous avez créés
-import tutorielsReducer from './store/tutorials/TutorialReducer';
-import personnesReducer from './store/personnes/PersonneReducer';
-import usersReducer from './store/users/UserReducer';
+// import tutorielsReducer from './store/tutorials/TutorialReducer';
+// import personnesReducer from './store/personnes/PersonneReducer';
+// import usersReducer from './store/users/UserReducer';
 
 // Configurez le store
 export const store = configureStore({
   reducer: {
-    tutoriels: tutorielsReducer,
-    personnes: personnesReducer,
-    users: usersReducer,
+    // tutoriels: tutorielsReducer,
+    // personnes: personnesReducer,
+    // users: usersReducer,
   },
 });
 

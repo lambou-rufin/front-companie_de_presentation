@@ -1,21 +1,22 @@
-import axios, { AxiosRequestConfig, AxiosError } from 'axios';
-import { getToken } from './auth';
+import axios from "axios";
 
-const api = axios.create({
-  baseURL: 'http://localhost:5000', // URL de base de votre API
+const Base = axios.create({
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost',
+    responseType: "json",
+    withCredentials: true,
+    headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+    },
 });
 
-api.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
-    const token = getToken();
-    if (token && config.headers) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error: AxiosError) => {
-    return Promise.reject(error);
-  }
-);
+export default Base;
 
-export default api;
+export const baseWithFormData = axios.create({
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost',
+    responseType: "json",
+    withCredentials: true,
+    headers: {
+        "content-type": "multipart/form-data",
+    },
+});

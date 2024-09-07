@@ -20,7 +20,9 @@ const Router: FC = () => {
           <Route path={routes.REGISTER} element={<Register />} />
           <Route path={routes.TUTORIAL} element={<Tutorial />} />
           <Route path={routes.LANGAGEDEPROGRAMMATION} element={<LangageDeProgrammation />} />
-          <Route path="*" element={<Navigate to={routes.HOME} />} />
+          {/* <Route path="*" element={<Navigate to={routes.HOME} />} /> */}
+          <Route path="*" element={<Navigate to={routes.LOGIN} />} />
+
         </Routes>
       </Layout>
     </BrowserRouter>

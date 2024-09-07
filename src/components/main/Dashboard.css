@@ -1,0 +1,12 @@
+/* src/components/Dashboard/Dashboard.css */
+
+.dashboard-container {
+    display: flex;
+  }
+  
+  .dashboard-content {
+    margin-left: 250px; /* Décale le contenu principal pour laisser de la place au SideNav */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ajuste la largeur du contenu */
+  }
+  

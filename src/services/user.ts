@@ -46,3 +46,10 @@ export async function login(email: string, password: string): Promise<LoginRespo
     throw new Error("Échec de la connexion. Veuillez vérifier vos identifiants et réessayer.");
   }
 }
+
+export async function clearToken(): Promise<void> {
+  return new Promise((resolve) => {
+    localStorage.removeItem('token'); // Supprimer le token du localStorage
+    resolve();
+  });
+}

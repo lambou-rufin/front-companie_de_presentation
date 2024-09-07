@@ -1,0 +1,51 @@
+/* src/components/Layout/SideNav.css */
+
+.sidenav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    color: white;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .sidenav.closed {
+    transform: translateX(-250px);
+  }
+  
+  .sidenav.open {
+    transform: translateX(0);
+  }
+  
+  .menu-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .nav-links {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    background-color: #495057;
+  }
+  

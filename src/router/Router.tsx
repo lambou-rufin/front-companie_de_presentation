@@ -8,7 +8,7 @@ import Tutorial from '../components/Tutorials';
 import routes from './routes';
 import LangageDeProgrammation from '../components/LangageDeProgrammation';
 import Layout from '../components/layout/Layout';
-import Dashboard from '../components/layout/Dashboard';
+import Dashboard from '../components/main/Dashboard';
 
 const Router: FC = () => {
   return (

@@ -6,6 +6,7 @@ import Login from '../components/Users/Login';
 import Register from '../components/Users/Register/Register';
 import Tutorial from '../components/Tutorials';
 import routes from './routes';
+import LangageDeProgrammation from '../components/LangageDeProgrammation';
 
  const Router: FC = () => {
   return (
@@ -16,6 +17,7 @@ import routes from './routes';
             <Route path={routes.LOGIN} element={<Login/>}/>
             <Route path={routes.REGISTER} element={<Register/>}/>
             <Route path={routes.TUTORIAL} element={<Tutorial/>}/>
+            <Route path={routes.LANGAGEDEPROGRAMMATION} element={<LangageDeProgrammation/>}/>
             <Route path="*" element={<Navigate to={routes.HOME}/>}/>
         </Routes>
     </BrowserRouter>

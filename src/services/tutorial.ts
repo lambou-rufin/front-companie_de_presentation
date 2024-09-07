@@ -12,7 +12,7 @@ const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
 async function getTutorial() {
   try {
-    const response = await fetch(`${baseURL}/api/tutorials`, {
+    const response = await fetch(`${baseURL}api/tutorials`, {
       method: "GET",
       credentials: "include", // Important for sending credentials
     });

@@ -12,6 +12,11 @@
 /build
 
 # misc
+build
+node_modules
+package-lock.json
+.env
+
 .DS_Store
 .env.local
 .env.development.local

@@ -4,5 +4,6 @@ const routes = {
     LOGIN: '/login',
     REGISTER: '/register',
     TUTORIAL: '/tutoriel',
+    LANGAGEDEPROGRAMMATION: '/langageDeProgrammation',
 }
 export default routes;

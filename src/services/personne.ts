@@ -1,8 +1,20 @@
-import api from "../common/api/api";
+const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
-export const getPersonne = () => {
-    api.get('${baseURL}/personnes').then((data) =>{
-        console.log(data);
-    }).catch((error) => console.log(error));
-// console.log('koto');
+async function getPersonne() {
+  try {
+    const response = await fetch(`${baseURL}api/personnes/getPersonnes`, {
+        method: "GET",
+        credentials: "include", // Important for sending credentials
+      });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching persones:", error);
+  }
 }
+
+export default getPersonne;
+

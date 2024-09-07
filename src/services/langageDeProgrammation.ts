@@ -1,8 +1,20 @@
-import api from "../common/api/api";
+const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
-export const getLangageDeProgrammation = () => {
-    api.get('${baseURL}/langageDeProgrammations').then((response) =>{
-        console.log(response);
-    }).catch((error) => console.log(error));
-// console.log('koto');
+async function getLangageDeProgrammation() {
+  try {
+    const response = await fetch(`${baseURL}api/langageDeProgrammations/`, {
+      method: "GET",
+      credentials: "include", // Important for sending credentials
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching langage de programmation", error);
+  }
 }
+
+export default getLangageDeProgrammation;
+

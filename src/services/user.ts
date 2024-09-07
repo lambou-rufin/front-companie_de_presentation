@@ -19,26 +19,30 @@ export async function register(username: string, email: string, password: string
   }
 }
 
+interface LoginResponse {
+  token: string; // Assurez-vous que la réponse du serveur contient un champ 'token'
+}
 
-// src/services/authService.ts
-export async function login(email: string, password: string): Promise<void> {
+export async function login(email: string, password: string): Promise<LoginResponse> {
   try {
     const response = await fetch(`${baseURL}api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include", // Important for sending credentials
-      body: JSON.stringify({ email, password }), // Include the credentials in the request body
+      credentials: "include", // Important pour envoyer les informations d'identification
+      body: JSON.stringify({ email, password }), // Inclure les informations d'identification dans le corps de la requête
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.message || `HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log(data);
+    const data: LoginResponse = await response.json();
+    return data; // Retourner les données de la réponse
   } catch (error) {
-    throw new Error("Failed to login. Please check your credentials and try again.");
+    // Lancer l'erreur pour que le composant appelant puisse la gérer
+    throw new Error("Échec de la connexion. Veuillez vérifier vos identifiants et réessayer.");
   }
 }

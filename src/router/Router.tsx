@@ -8,6 +8,7 @@ import Tutorial from '../components/Tutorials';
 import routes from './routes';
 import LangageDeProgrammation from '../components/LangageDeProgrammation';
 import Layout from '../components/layout/Layout';
+import Dashboard from '../components/layout/Dashboard';
 
 const Router: FC = () => {
   return (
@@ -18,6 +19,7 @@ const Router: FC = () => {
           <Route path={routes.PERSONNE} element={<Personne />} />
           <Route path={routes.LOGIN} element={<Login />} />
           <Route path={routes.REGISTER} element={<Register />} />
+          <Route path={routes.DASHBOARD} element={<Dashboard />} />
           <Route path={routes.TUTORIAL} element={<Tutorial />} />
           <Route path={routes.LANGAGEDEPROGRAMMATION} element={<LangageDeProgrammation />} />
           {/* <Route path="*" element={<Navigate to={routes.HOME} />} /> */}

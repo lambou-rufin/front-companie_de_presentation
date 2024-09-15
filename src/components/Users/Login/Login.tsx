@@ -115,6 +115,7 @@ import { Button, Form as BootstrapForm, Container, Row, Col } from 'react-bootst
 import { Link, useNavigate } from 'react-router-dom';
 import routes from '../../../router/routes';
 import { login } from '../../../services/user';  // Assurez-vous du chemin d'import
+import { AuthForm } from '../../../shared/inteface/interface';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Email is required').email('Invalid email address'),
@@ -125,7 +126,7 @@ const LoginForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleSubmit = async (values: { email: string; password: string }) => {
+  const handleSubmit = async (values: AuthForm) => {
     try {
       setError(null);
       await login(values.email, values.password); // Connexion réussie si aucune erreur n'est lancée
@@ -140,7 +141,7 @@ const LoginForm: React.FC = () => {
       <Row className="w-100">
         <Col md={6} className="d-flex align-items-center">
           <div className="w-100 text-center">
-            <img src="path-to-your-logo" alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
+            <img src="/assets/img/developer.jpg" alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
           </div>
         </Col>
         <Col md={6} className="d-flex align-items-center">
@@ -151,7 +152,7 @@ const LoginForm: React.FC = () => {
             </div>
             {error && <div className="alert alert-danger">{error}</div>}
             <Formik
-              initialValues={{ email: '', password: '' }}
+              initialValues={{ email: '', password: '', remember: false }}
               validationSchema={LoginSchema}
               onSubmit={handleSubmit}
             >
@@ -163,7 +164,7 @@ const LoginForm: React.FC = () => {
                       name="email"
                       as={BootstrapForm.Control}
                       type="email"
-                      placeholder="Enter email"
+                      placeholder="Entrer votre email"
                       isInvalid={!!errors.email && touched.email}
                     />
                     <BootstrapForm.Control.Feedback type="invalid">
@@ -177,7 +178,7 @@ const LoginForm: React.FC = () => {
                       name="password"
                       as={BootstrapForm.Control}
                       type="password"
-                      placeholder="Password"
+                      placeholder="Entrer votre mot de passe"
                       isInvalid={!!errors.password && touched.password}
                     />
                     <BootstrapForm.Control.Feedback type="invalid">
@@ -185,19 +186,18 @@ const LoginForm: React.FC = () => {
                     </BootstrapForm.Control.Feedback>
                   </BootstrapForm.Group>
 
-                  <BootstrapForm.Group className="d-flex justify-content-between align-items-center">
-                    <Field
-                      name="rememberMe"
-                      type="checkbox"
-                      as={BootstrapForm.Check}
-                      label="Remember Me"
-                    />
-                    <a href="#forgot-password" className="text-decoration-none">
-                      Forgot Password?
-                    </a>
+                  <BootstrapForm.Group className="d-flex justify-content-between align-items-center mt-3">
+                  <Field
+                    as={BootstrapForm.Check}
+                     className="form-check-sm"
+                       type="checkbox"
+                       id="remember"
+                      label="Remember me"
+                     name="remember"
+                                                            />
+                    <p><Link to={routes.FORGOTPASSWORD}>Forgot Password?</Link></p>
                   </BootstrapForm.Group>
-
-                  <Button variant="danger" type="submit" className="w-100 mt-3">
+                  <Button variant="danger" type="submit" className="w-100 mt-3 btn btn-danger">
                     Login
                   </Button>
                   <div className="text-center mt-3">

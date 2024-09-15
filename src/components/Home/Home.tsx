@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 export const Home: FC = () => {
   return (
-    <div>Home</div>
+    <div className="text-center mt-3">Home</div>
   )
 };
 

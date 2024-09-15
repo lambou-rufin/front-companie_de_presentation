@@ -1,0 +1,9 @@
+.registerCard{
+     width: 1200px;
+    margin-right: 5rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    margin-left: 5rem;
+    height: 70vh;
+}

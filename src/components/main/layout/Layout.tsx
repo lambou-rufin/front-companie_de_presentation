@@ -4,6 +4,7 @@ import Navbar from './Navbar'; // Assurez-vous que le chemin est correct
 import Header from './Header'; // Assurez-vous que le chemin est correct
 import Footer from './Footer'; // Assurez-vous que le chemin est correct
 import End from './End'; // Assurez-vous que le chemin est correct
+import SideNav from '../Sidenav';
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,7 +13,8 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div>
-      <Header />
+      <Header /> 
+      <SideNav />
       <main>{children}</main>
       <Footer />
       <End />

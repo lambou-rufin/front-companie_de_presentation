@@ -4,10 +4,12 @@
     position: fixed;
     left: 0;
     top: 0;
-    width: 250px;
+    width: 300px;
     height: 100%;
-    background-color: #343a40;
+    /* background-color: #1b1f24; */
+    background-color: #111827;
     color: white;
+    font: italic;
     transition: transform 0.3s ease;
     z-index: 1000;
   }
@@ -21,17 +23,21 @@
   }
   
   .menu-btn {
-    background-color: #007bff;
+    background-color: #111827;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     width: 100%;
-    text-align: left;
+    text-align: right;
     font-size: 1.2rem;
     margin-bottom: 1rem;
+    display: block;
   }
   
+  .sidenav .menu-btn{
+   display: block;
+  }
   .nav-links {
     margin-top: 20px;
     display: flex;
@@ -42,10 +48,61 @@
     color: white;
     text-decoration: none;
     padding: 10px;
-    transition: background-color 0.3s ease;
+    /* transition: background-color 0.3s ease; */
+    overflow: hidden;
+    transition: all 0.5s;
   }
   
   .nav-links a:hover {
-    background-color: #495057;
+    /* background-color: #495057; */
+    border-radius: 5px;
+    border-color: transparent;
+    background: linear-gradient(
+      90deg,
+      #222527,
+      #2c3332,
+      #313435,
+      #464546a8,
+      #494646,
+      #b8b8b8
+    );
+    background-size: 400%;
+    box-shadow: 0 0 15px rgb(2, 4, 24);
+    animation: glow 12s linear forwards;
   }
+
   
+  .nav-links a::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  right: -1px;
+  left: -1px;
+  background: inherit;
+  filter: blur(36px);
+  z-index: -1;
+  opacity: 0;
+  transition: 0.5s ease-out;
+}
+
+/* .nav-links a:hover::before {
+  opacity: 1;
+  z-index: -1;
+} */
+
+/* @keyframes glow {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 400%;
+  }
+} */
+
+  @media (max-width: 991.98px) {
+    .sidenav {
+      /* width: 100%; */
+      display: none;
+    }
+  }

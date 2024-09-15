@@ -10,7 +10,7 @@
 // };
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
-async function getTutorial() {
+async function getTutorialList() {
   try {
     const response = await fetch(`${baseURL}api/tutorials`, {
       method: "GET",
@@ -26,5 +26,5 @@ async function getTutorial() {
   }
 }
 
-export default getTutorial;
+export default getTutorialList;
 

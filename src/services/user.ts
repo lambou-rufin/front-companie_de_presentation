@@ -1,3 +1,5 @@
+import { ForgotpassResponse, IForgotPassword } from "../shared/inteface/interface";
+
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 export async function register(username: string, email: string, password: string) {
   try {
@@ -52,4 +54,29 @@ export async function clearToken(): Promise<void> {
     localStorage.removeItem('token'); // Supprimer le token du localStorage
     resolve();
   });
+}
+
+
+export async function forgotPass(email: string): Promise<ForgotpassResponse> {
+  try {
+    const response = await fetch(`${baseURL}api/users/forgotPassword`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // Important pour envoyer les informations d'identification
+      body: JSON.stringify({ email }), // Inclure les informations d'identification dans le corps de la requête
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.message || `HTTP error! Status: ${response.status}`);
+    }
+
+    const data: ForgotpassResponse = await response.json();
+    return data; // Retourner les données de la réponse
+  } catch (error) {
+    // Lancer l'erreur pour que le composant appelant puisse la gérer
+    throw new Error("Échec de la connexion. Veuillez vérifier vos identifiants et réessayer.");
+  }
 }

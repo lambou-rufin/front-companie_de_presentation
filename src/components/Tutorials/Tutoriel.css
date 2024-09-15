@@ -1,0 +1,13 @@
+.data-table-top{
+    margin: 0;
+}
+
+
+@media (max-width: 991.98px) {
+    .data-table-top{
+      width: 100%;
+    }
+    .data-table-top button{
+        display: list-item;
+    }
+  }

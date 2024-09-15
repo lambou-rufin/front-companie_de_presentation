@@ -9,4 +9,14 @@
     padding: 20px;
     width: calc(100% - 250px); /* Ajuste la largeur du contenu */
   }
+
+  @media (max-width: 991.98px) {
+    .dashboard-container{
+      width: 100%;
+    }
+    .dashboard-content {
+      width: 100%;
+    }
+  }
+  
   

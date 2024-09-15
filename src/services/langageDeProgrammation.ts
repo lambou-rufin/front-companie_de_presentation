@@ -1,8 +1,8 @@
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
-async function getLangageDeProgrammation() {
+async function getLangageDeProgrammationList() {
   try {
-    const response = await fetch(`${baseURL}api/langageDeProgrammations/`, {
+    const response = await fetch(`${baseURL}api/langageDeProgrammations`, {
       method: "GET",
       credentials: "include", // Important for sending credentials
     });
@@ -16,5 +16,5 @@ async function getLangageDeProgrammation() {
   }
 }
 
-export default getLangageDeProgrammation;
+export default getLangageDeProgrammationList;
 

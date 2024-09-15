@@ -1,0 +1,91 @@
+.profile_user{
+  position: relative;
+  width: 1000px;
+  height: 600px;
+  background: #fafafa;
+  margin: auto;
+  overflow: hidden;
+}
+
+h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: center;
+}
+
+
+.user_image{
+  border: 1px;
+  /* border-radius: 50%; */
+}
+
+
+.containera {
+  width: 15rem;
+  height: 10rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid;
+  border-radius: 5px;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+.containera h1{
+  font-size: 0.8em;
+}
+
+.containera h4{
+  font-size: 0.9em;
+}
+
+.containera img {
+  width: 100%;
+  transition: all 0.5s;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 25%;
+  width: 100%;
+  /* center the content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  transition: all 0.5s;
+  background-color: #111827;
+  transform: translateY(100%);
+}
+
+.containera:hover .content {
+  transform: translateY(0);
+}
+
+.containera:hover img {
+  transform: translateY(-30%);
+}
+
+
+/* Scrollbar */
+/* ::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#21d4fd, #b721ff);
+  border-radius: 100px;
+} */
+
+@media (max-width: 991.98px) {
+  .profile_user{
+    width: 100%;
+  }
+  .containera{
+    width: 100%;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import getPersonne from '../../services/personne';
+import getPersonneList from '../../services/personne';
 
 const Personne: FC = () => {
   const [personnes, setPersonnes] = useState<any>(null);
@@ -8,7 +8,7 @@ const Personne: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getPersonne();
+        const data = await getPersonneList();
         setPersonnes(data);
       } catch (err) {
         setError('Failed to fetch personnes');
@@ -22,7 +22,7 @@ const Personne: FC = () => {
 
   return (
     <div>
-      <h1>Personnes</h1>
+      <h1 className="text-center mt-3">Personnes</h1>
       {/* Render personnes or a message if no data */}
       {personnes ? <pre>{JSON.stringify(personnes, null, 2)}</pre> : <p>No personnes available</p>}
     </div>

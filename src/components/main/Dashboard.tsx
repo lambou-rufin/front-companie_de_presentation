@@ -6,7 +6,7 @@ import SideNav from './Sidenav';
 const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-container">
-      <SideNav />
+      {/* <SideNav /> */}
       <div className="dashboard-content">
         <h1>Dashboard</h1>
         {/* Ajoutez ici le contenu du tableau de bord */}

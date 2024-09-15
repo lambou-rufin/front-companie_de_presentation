@@ -1,0 +1,19 @@
+.logo-wrap {
+  .logo {
+    display: flex;
+
+    .logo-text {
+      margin-top: -14px;
+      display: block;
+    }
+
+    .logo-monogram {
+      display: none;
+
+      img {
+        height: -39.0069px;
+        width: 45px;
+      }
+    }
+  }
+}

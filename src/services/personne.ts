@@ -1,6 +1,6 @@
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
-async function getPersonne() {
+async function getPersonneList() {
   try {
     const response = await fetch(`${baseURL}api/personnes/getPersonnes`, {
         method: "GET",
@@ -16,5 +16,5 @@ async function getPersonne() {
   }
 }
 
-export default getPersonne;
+export default getPersonneList;
 

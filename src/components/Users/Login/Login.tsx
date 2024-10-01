@@ -132,7 +132,7 @@ const LoginForm: React.FC = () => {
       await login(values.email, values.password); // Connexion réussie si aucune erreur n'est lancée
       navigate('/dashboard'); // Redirection vers le tableau de bord après une connexion réussie
     } catch (error) {
-      setError('Failed to login. Please check your credentials and try again.');
+      setError('Connexion error, please try again.');
     }
   };
 

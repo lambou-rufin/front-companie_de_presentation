@@ -48,7 +48,7 @@
     color: white;
     text-decoration: none;
     padding: 10px;
-    /* transition: background-color 0.3s ease; */
+    transition: background-color 0.3s ease;
     overflow: hidden;
     transition: all 0.5s;
   }
@@ -59,16 +59,17 @@
     border-color: transparent;
     background: linear-gradient(
       90deg,
-      #222527,
-      #2c3332,
-      #313435,
-      #464546a8,
-      #494646,
+      #7a7b7c,
+      #696d6c,
+      #636566,
+      #9c9c9ca8,
+      #7e7d7d,
       #b8b8b8
     );
     background-size: 400%;
-    box-shadow: 0 0 15px rgb(2, 4, 24);
-    animation: glow 12s linear forwards;
+    /* box-shadow: 0 0 15px rgb(2, 4, 24); */
+    /* animation: glow 12s linear forwards; */
+    /* margin: 1rem; */
   }
 
   
@@ -83,13 +84,8 @@
   filter: blur(36px);
   z-index: -1;
   opacity: 0;
-  transition: 0.5s ease-out;
+  /* transition: 0.5s ease-out; */
 }
-
-/* .nav-links a:hover::before {
-  opacity: 1;
-  z-index: -1;
-} */
 
 /* @keyframes glow {
   from {
@@ -104,5 +100,6 @@
     .sidenav {
       /* width: 100%; */
       display: none;
+      transition: transform 0.3s ease;
     }
   }

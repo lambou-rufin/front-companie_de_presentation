@@ -40,7 +40,7 @@ import OverlineTitle from './Text/Text'
 // import Message from './Apps/chat/Message'
 // import ChatMedia from './Apps/chat/ChatMedia'
 // import Inbox from './Apps/mailbox/Inbox'
-import Asterisk from './Asterisk/Asterisk'
+// import Asterisk from './Asterisk/Asterisk'
 import Logo from './Logo/Logo'
 // import Reply from './Apps/mailbox/Reply'
 
@@ -87,7 +87,7 @@ export {
   // Message,
   // ChatMedia,
   // Inbox,
-  Asterisk,
+  // Asterisk,
   // Reply,
   // FlatDatePicker
 }

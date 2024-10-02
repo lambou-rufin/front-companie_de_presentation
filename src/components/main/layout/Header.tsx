@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import routes from "../../../router/routes";
 import "./Header.css"; // Assurez-vous de lier les styles
+import Icon from "shared/components/Icon/Icon";
 
 const Header: React.FC = () => {
   // État pour le toggle du menu
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
         <li>
           {/* Bouton Toggle pour le menu */}
           <div className="toggle_button" onClick={toggleMenu}>
-            <span>Menu</span>
+            <span><Icon name="user " type={'user'}></Icon></span>
           </div>
 
           {/* Menu déroulant qui s'affiche selon l'état */}

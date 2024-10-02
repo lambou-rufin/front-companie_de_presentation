@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import getLangageDeProgrammation from '../../services/langageDeProgrammation';
 import { Button, Accordion } from 'react-bootstrap';
-import Icon from '../../shared/components/Icon/Icon';
+import { Icon } from '../../shared/components';
 
 const LangageDeProgrammation: FC = () => {
   const [langageDeProgrammation, setLangageDeProgrammation] = useState<any>(null);
@@ -29,19 +29,19 @@ const LangageDeProgrammation: FC = () => {
     <div className="data-table-top mt-3">
         <div>
           <Button variant="success" size="sm" >
-            <Icon name="plus"></Icon>
+            <Icon name="plus" type={'home'}></Icon>
             <span>Ajouter langage</span>
           </Button>
           <Button variant="success" className="ms-2" size="sm" >
-            <Icon name="plus"></Icon>
+            <Icon name="plus" type={'code'}></Icon>
             <span>Ajouter équipe</span>
           </Button>
           <Button variant="success" className="ms-2" size="sm" >
-            <Icon name="plus"></Icon>
+            <Icon name="plus" type={'code'}></Icon>
             <span>Ajouter poste</span>
           </Button>
           <Button variant="success" className="ms-2" size="sm">
-            <Icon name="plus"></Icon>
+            <Icon name="plus" type={'code'}></Icon>
             <span>Ajouter volontaire</span>
           </Button>
         </div>

@@ -1,9 +1,8 @@
 import React from 'react';
-import './Logo.css';
-import logo from '../../assets/images/logo.png'; // Importez le logo ici
+import logo from '../../../assets/img/logo.jpg'; // Adjust this path as necessary
 
 const Logo: React.FC = () => {
-  return <img src={logo} alt="Logo" className="logo" />;
+  return <img src={logo} alt="Company Logo" />;
 };
 
 export default Logo;

@@ -1,0 +1,28 @@
+.sweetalert {
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .sweetalert.success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .sweetalert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .sweetalert.warning {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .sweetalert.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+  

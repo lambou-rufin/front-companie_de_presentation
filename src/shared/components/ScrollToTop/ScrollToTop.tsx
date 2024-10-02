@@ -1,14 +1,34 @@
-import { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import './ScrollToTop.css';
 
-const ScrollToTop: FC<any> = (props) => {
-  const location = useLocation()
+const ScrollToTop: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  return <>{props.children}</>
-}
+  return (
+    <button
+      className={`scroll-to-top ${isVisible ? 'visible' : ''}`}
+      onClick={scrollToTop}
+    >
+      ↑
+    </button>
+  );
+};
 
-export default ScrollToTop
+export default ScrollToTop;

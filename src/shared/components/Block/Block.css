@@ -1,0 +1,16 @@
+.block-container {
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .block-title {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+  }
+  
+  .block-content {
+    font-size: 1em;
+  }
+  

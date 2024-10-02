@@ -1,39 +1,27 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-// import { TailSpin } from "react-loader-spinner";
+import React from 'react';
+import './ConfirmationModal.css';
 
-const ConfirmationModal: React.FC<{
-  handleCloseModal: (value?: boolean) => void,
-  showModal: boolean,
-  message: string,
-  title: string,
-  loading?: boolean
-}> = ({ handleCloseModal, showModal, message, title, loading = false }) => {
-  return (
-    <>
-      <Modal show={showModal} onHide={() => handleCloseModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{message}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => handleCloseModal(false)}>
-            Annuler
-          </Button>
-          <Button variant="primary" onClick={() => handleCloseModal(true)}>
-            {/* {loading ?
-              <TailSpin
-                height="25"
-                width="30"
-                color="#fff"
-                ariaLabel="loading"
-              />
-              : 'Confirmer'} */}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+interface ConfirmationModalProps {
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+  message: string;
 }
+
+const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onConfirm, onCancel, message }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <p>{message}</p>
+        <div className="modal-actions">
+          <button onClick={onCancel}>Cancel</button>
+          <button onClick={onConfirm}>Confirm</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default ConfirmationModal;

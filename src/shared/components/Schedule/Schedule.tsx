@@ -1,36 +1,21 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from 'react';
+import './Schedule.css';
 
-const Schedule: React.FC<any> & { Item: React.FC<any> } = ({ className, children }) => {
-  const compClass = classNames({
-    'nk-schedule': true,
-    [className]: className,
-  })
-
-  return <ul className={compClass}>{children}</ul>
+interface ScheduleProps {
+  tasks: { time: string; task: string }[];
 }
 
-const ScheduleItem: React.FC<any> = ({ symbol, flush, grow, contentClass, type, children }) => {
-  const symbolClass = classNames({
-    'nk-schedule-symbol': true,
-    [symbol]: symbol,
-  })
-
-  const contentClasss = classNames({
-    'nk-schedule-content': true,
-    [contentClass]: contentClass,
-  })
-
+const Schedule: React.FC<ScheduleProps> = ({ tasks }) => {
   return (
-    <li className="nk-schedule-item">
-      <div className="nk-schedule-item-inner">
-        <div className={symbolClass}></div>
-        <div className={contentClasss}>{children}</div>
-      </div>
-    </li>
-  )
-}
+    <div className="schedule">
+      {tasks.map((task, index) => (
+        <div key={index} className="schedule-task">
+          <span className="schedule-time">{task.time}</span>
+          <span className="schedule-task-name">{task.task}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-Schedule.Item = ScheduleItem
-
-export default Schedule
+export default Schedule;

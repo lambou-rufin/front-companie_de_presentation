@@ -141,7 +141,7 @@ const LoginForm: React.FC = () => {
       <Row className="w-100">
         <Col md={6} className="d-flex align-items-center">
           <div className="w-100 text-center">
-            <img src="/assets/img/developer.jpg" alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
+            <img src="/assets/img/lery.jpg" alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
           </div>
         </Col>
         <Col md={6} className="d-flex align-items-center">

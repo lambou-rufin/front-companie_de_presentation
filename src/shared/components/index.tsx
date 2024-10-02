@@ -1,6 +1,5 @@
 import ScrollToTop from './ScrollToTop/ScrollToTop'
 import Icon from './Icon/Icon'
-import Logo from './Logo/Logo'
 // import Image from './Image/Image'
 
 // import Media from './Media/Media'
@@ -42,6 +41,7 @@ import OverlineTitle from './Text/Text'
 // import ChatMedia from './Apps/chat/ChatMedia'
 // import Inbox from './Apps/mailbox/Inbox'
 import Asterisk from './Asterisk/Asterisk'
+import Logo from './Logo/Logo'
 // import Reply from './Apps/mailbox/Reply'
 
 export {

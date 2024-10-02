@@ -1,0 +1,15 @@
+.schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .schedule-task {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .schedule-time {
+    font-weight: bold;
+  }
+  

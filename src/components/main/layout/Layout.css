@@ -1,0 +1,36 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    flex: 1; /* Prend tout l'espace disponible */
+  }
+  
+  .main-content {
+    flex: 1; /* Prend tout l'espace disponible après le SideNav */
+    padding: 20px; /* Espace intérieur */
+    overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
+  }
+  
+  /* Styles pour le Sidenav */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column; /* Empile le Sidenav au-dessus du contenu principal */
+    }
+  
+    SideNav {
+      display: none; /* Cache le SideNav sur les petits écrans */
+    }
+  }
+  
+  /* Affiche le Sidenav sur les écrans plus grands */
+  @media (min-width: 769px) {
+    SideNav {
+      display: block; /* Affiche le Sidenav sur les grands écrans */
+      width: 200px; /* Largeur fixe pour le Sidenav */
+    }
+  }
+  

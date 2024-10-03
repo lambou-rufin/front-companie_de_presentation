@@ -1,49 +1,66 @@
-/* src/shared/components/DataTable.css */
-
 .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .table th,
-  .table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .table th {
-    background-color: #f2f2f2;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .table tr:hover {
-    background-color: #f5f5f5; /* Couleur de fond lors du survol */
-  }
-  
-  .table .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f9f9f9; /* Couleur de fond pour les lignes impaires */
-  }
-  
-  .table .table-striped tbody tr:nth-of-type(even) {
-    background-color: #ffffff; /* Couleur de fond pour les lignes paires */
-  }
-  
-  .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .pagination select {
-    margin-left: 10px;
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre au tableau */
+  border-radius: 8px; /* Coins arrondis */
+  overflow: hidden; /* Cache les débordements */
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+.table tr:hover {
+  background-color: #e6f7ff; /* Couleur de fond lors du survol */
+  transition: background-color 0.2s; /* Ajout d'une transition */
+}
+
+.table .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9; /* Couleur de fond pour les lignes impaires */
+}
+
+.table .table-striped tbody tr:nth-of-type(even) {
+  background-color: #ffffff; /* Couleur de fond pour les lignes paires */
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end; /* Alignement à droite */
+  margin-top: 20px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none; /* Suppression des bordures par défaut */
+  background-color: #007bff; /* Couleur de fond des boutons */
+  color: white; /* Couleur du texte */
+  border-radius: 4px; /* Coins arrondis */
+  transition: background-color 0.3s; /* Ajout d'une transition */
+}
+
+.pagination button:hover {
+  background-color: #0056b3; /* Couleur de fond lors du survol */
+}
+
+.pagination select {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 4px; /* Coins arrondis pour le sélecteur */
+  border: 1px solid #ccc; /* Bordure du sélecteur */
+}

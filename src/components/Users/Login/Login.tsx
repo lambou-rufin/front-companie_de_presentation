@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
       }, 100000); // 10 seconds
     } catch (error) {
       // setError('Connection error, please try again.');
-      setAlertMessage('Connection error, please try again.');
+      setAlertMessage('Erreur lors de la connexion.');
       setAlertType('error');
       setAlertVisible(true); // Show SweetAlert
       setLoading(false); // Stop loading on error

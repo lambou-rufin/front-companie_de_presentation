@@ -5,9 +5,10 @@ import './DataTable.css';
 interface DataTableProps<T extends object> {
   columns: Column<T>[]; 
   data: T[]; 
+  onRowClick?: (row: T) => void; // Add onRowClick as an optional prop
 }
 
-const DataTable = <T extends object>({ columns, data }: DataTableProps<T>) => {
+const DataTable = <T extends object>({ columns, data, onRowClick }: DataTableProps<T>) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -47,7 +48,12 @@ const DataTable = <T extends object>({ columns, data }: DataTableProps<T>) => {
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} key={row.id}>
+              <tr
+                {...row.getRowProps()}
+                key={row.id}
+                onClick={() => onRowClick && onRowClick(row.original)} // Handle row click
+                style={{ cursor: 'pointer' }} // Make it clear that rows are clickable
+              >
                 {row.cells.map(cell => (
                   <td {...cell.getCellProps()} key={cell.column.id}>{cell.render('Cell')}</td>
                 ))}

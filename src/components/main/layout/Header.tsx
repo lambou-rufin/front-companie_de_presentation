@@ -1,49 +1,73 @@
+// Header.tsx
+import React, { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import routes from "../../../router/routes";
-import "./Header.css"; // Assurez-vous de lier les styles
-import Icon from "shared/components/Icon/Icon";
+import "./Header.css"; // Assurez-vous de lier vos styles
 
-const Header: React.FC = () => {
-  // État pour le toggle du menu
-  const [isOpen, setIsOpen] = useState(false);
+interface HeaderProps {
+  toggleSideNav: () => void; // Propriété pour toggler le Sidenav
+  isSideNavOpen: boolean; // Propriété pour savoir si le Sidenav est ouvert
+}
+
+const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
+  const [isOpen, setIsOpen] = useState(false); // État pour basculer le menu
   const [user, setUser] = useState<{ name: string; email: string } | null>(null); // État pour l'utilisateur
+  const [firstChar, setFirstChar] = useState<string>(""); // État pour le premier caractère de l'email
+
+  // Récupérer les informations utilisateur depuis localStorage au chargement du composant
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const parsedUser = JSON.parse(userData); // Convertir les données stockées en objet
+      setUser(parsedUser);
+      if (parsedUser.email) {
+        setFirstChar(parsedUser.email.charAt(0).toUpperCase()); // Extraire et mettre en majuscule le premier caractère
+      }
+    }
+  }, []);
 
   // Fonction pour basculer l'état du menu
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Effet pour récupérer les informations de l'utilisateur au chargement du composant
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData)); // Convertir les données stockées en objet
-    }
-  }, []);
-
   return (
-    <header>
+    <header className={isSideNavOpen ? "header-with-sidenav-open" : ""}>
       <ul className="ulhead">
+        <li className="toggle-sidenav">
+          {/* Bouton pour toggler le Sidenav */}
+          <button onClick={toggleSideNav} aria-label="Toggle Sidenav">
+            {isSideNavOpen ? "✖" : "☰"} {/* Afficher un icône pour ouvrir ou fermer */}
+          </button>
+        </li>
         <li>
           <h1>
             <i>Gestion de présentation</i>
           </h1>
         </li>
-        <li>
-          {/* Afficher le nom et l'email de l'utilisateur connecté */}
+        <li className="user-section">
+          {/* Afficher le nom et l'email de l'utilisateur */}
           {user && (
-            <span>
-              {user.name} {user.email}
-            </span>
+            <div className="user-info">
+              <span className="user-name">{user.name}</span>
+              <span className="user-email">{user.email}</span>
+            </div>
           )}
 
-          {/* Bouton Toggle pour le menu */}
-          <div className="toggle_button" onClick={toggleMenu}>
-            <span><Icon name="user" type={'user'}></Icon></span>
+          {/* Bouton pour basculer le menu */}
+          <div 
+            className="toggle_button" 
+            onClick={toggleMenu} 
+            aria-haspopup="true" 
+            aria-expanded={isOpen ? "true" : "false"}
+          >
+            {/* Utiliser le premier caractère au lieu de l'icône */}
+            <div className="email-initial">
+              <span>{firstChar}</span>
+            </div>
           </div>
 
-          {/* Menu déroulant qui s'affiche selon l'état */}
+          {/* Menu déroulant qui s'affiche en fonction de l'état du menu */}
           <div className={`dropdown_menu ${isOpen ? "open" : ""}`}>
             <ul className="uldrop">
               <li>

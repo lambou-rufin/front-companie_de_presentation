@@ -1,36 +1,61 @@
 .layout {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex: 1; /* Prend tout l'espace disponible */
+  transition: margin-left 0.3s ease; /* Animation fluide pour les déplacements */
+}
+
+.main-content {
+  flex: 1; /* Prend tout l'espace disponible après le SideNav */
+  padding: 20px; /* Espace intérieur */
+  overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
+  transition: margin-left 0.3s ease; /* Animation fluide pour le contenu */
+}
+
+/* Styles pour le Sidenav */
+.sidenav {
+  width: 300px; /* Largeur fixe pour le Sidenav */
+  transition: width 0.3s ease; /* Transition fluide pour l'ouverture du SideNav */
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.sidenav.closed {
+  width: 0; /* Réduit la largeur à 0 quand le Sidenav est fermé */
+}
+
+.container.sidenav-open {
+  margin-left: 300px; /* Décalage du contenu principal lorsque le SideNav est ouvert */
+}
+
+.header.sidenav-open {
+  margin-left: 200px; /* Décalage du header lorsque le SideNav est ouvert */
+}
+
+/* Responsive: Sidenav caché sur petits écrans */
+@media (max-width: 768px) {
   .container {
-    display: flex;
-    flex: 1; /* Prend tout l'espace disponible */
+    flex-direction: column; /* Empile le Sidenav au-dessus du contenu principal */
   }
-  
-  .main-content {
-    flex: 1; /* Prend tout l'espace disponible après le SideNav */
-    padding: 20px; /* Espace intérieur */
-    overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
+
+  .sidenav {
+    width: 0; /* Réduit la largeur à 0 quand le Sidenav est caché */
   }
-  
-  /* Styles pour le Sidenav */
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column; /* Empile le Sidenav au-dessus du contenu principal */
-    }
-  
-    SideNav {
-      display: none; /* Cache le SideNav sur les petits écrans */
-    }
+
+  .sidenav.open {
+    width: 100%; /* Le SideNav occupe toute la largeur sur petits écrans */
   }
-  
-  /* Affiche le Sidenav sur les écrans plus grands */
-  @media (min-width: 769px) {
-    SideNav {
-      display: block; /* Affiche le Sidenav sur les grands écrans */
-      width: 200px; /* Largeur fixe pour le Sidenav */
-    }
+
+  .container.sidenav-open {
+    margin-left: 0; /* Pas de décalage sur petits écrans */
   }
-  
+
+  .header.sidenav-open {
+    margin-left: 0; /* Pas de décalage sur petits écrans */
+  }
+}

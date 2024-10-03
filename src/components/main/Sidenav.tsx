@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+// SideNav.tsx
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import "./SideNav.css";
 import routes from "../../router/routes";
 import Icon from "../../shared/components/Icon/Icon";
 
-const SideNav: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false); // Initialement fermé
+const SideNav: FC<{ className: string }> = ({ className }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false); // État pour gérer l'ouverture du Sidenav
 
   const toggleSideNav = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(prev => !prev); // Fonction pour basculer l'état du Sidenav
   };
 
   return (
-    <div className={`sidenav ${isOpen ? "open" : "closed"}`}>
-      <button className="menu-btn" onClick={toggleSideNav}>
-        {isOpen ? "✖" : "☰"} {/* Afficher "✖" quand ouvert */}
-      </button>
+    <div className={`sidenav ${className}`}>
+     <div className="logoSidenav"><img src="" alt="Logo"/></div>
       <nav className="nav-links">
         <Link to={routes.DASHBOARD}>
           <Icon name="home" className="icon" type="home" /> Dashboard

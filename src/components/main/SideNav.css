@@ -4,7 +4,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    width: 300px;
+    /* width: 300px; */
     height: 100%;
     /* background-color: #1b1f24; */
     background-color: #111827;
@@ -22,6 +22,10 @@
     transform: translateX(0);
   }
   
+  .logoSidenav{
+  margin-top: 2rem;
+  }
+
   .menu-btn {
     background-color: #111827;
     color: white;
@@ -39,7 +43,7 @@
    display: block;
   }
   .nav-links {
-    margin-top: 20px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
   }

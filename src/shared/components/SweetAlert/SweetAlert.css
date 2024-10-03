@@ -1,28 +1,45 @@
+/* SweetAlert.css */
 .sweetalert {
-    padding: 16px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .sweetalert.success {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .sweetalert.error {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  .sweetalert.warning {
-    background-color: #fff3cd;
-    color: #856404;
-  }
-  
-  .sweetalert.info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-  }
-  
+  position: fixed;
+  top: 20%;
+  width: 240px;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  padding: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+}
+
+.sweetalert.success {
+  border-color: #28a745;
+}
+
+.sweetalert.error {
+  border-color: #dc3545;
+}
+
+.sweetalert.warning {
+  border-color: #ffc107;
+}
+
+.sweetalert.info {
+  border-color: #17a2b8;
+}
+
+.sweetalert-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.sweetalert-close {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

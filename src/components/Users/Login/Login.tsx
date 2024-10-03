@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { Button, Form as BootstrapForm, Container, Row, Col } from 'react-bootstrap';
+import { Button, Container, Row, Col, Form as BootstrapForm } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import routes from '../../../router/routes';
-import { login } from '../../../services/user';  // Assurez-vous du chemin d'import
-import { AuthForm } from '../../../shared/inteface/interface';
+import { login } from '../../../services/user'; // Adjust the import path
+import Spinner from 'shared/components/Spinner/Spinner';
+import SweetAlert from 'shared/components/SweetAlert/SweetAlert';
+import { AuthForm } from 'shared/inteface/interface';
+import routes from 'router/routes';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Email is required').email('Invalid email address'),
@@ -13,21 +15,36 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginForm: React.FC = () => {
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState<'success' | 'error' | 'warning' | 'info'>('success');
   const navigate = useNavigate();
 
   const handleSubmit = async (values: AuthForm) => {
     try {
-      setError(null);
-      const { token, user } = await login(values.email, values.password); // Connexion réussie si aucune erreur n'est lancée
-       // Stocker le token et les informations de l'utilisateur dans le local storage
-       localStorage.setItem('token', token);
-       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/dashboard'); // Redirection vers le tableau de bord après une connexion réussie
+      // setError(null);
+      setLoading(true); // Start loading
+  
+      const { token, user } = await login(values.email, values.password);
+      // Store the token and user information in local storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      navigate('/dashboard'); // Redirect to dashboard after successful login
+  
+      // Set loading to false after 10 seconds to keep spinner visible
+      setTimeout(() => {
+        setLoading(false);
+      }, 100000); // 10 seconds
     } catch (error) {
-      setError('Connexion error, please try again.');
+      // setError('Connection error, please try again.');
+      setAlertMessage('Connection error, please try again.');
+      setAlertType('error');
+      setAlertVisible(true); // Show SweetAlert
+      setLoading(false); // Stop loading on error
     }
   };
+  
 
   return (
     <Container className="vh-100 d-flex justify-content-center align-items-center">
@@ -43,7 +60,8 @@ const LoginForm: React.FC = () => {
               <h2>Se connecter</h2>
               <p>Welcome back. Please login to your account.</p>
             </div>
-            {error && <div className="alert alert-danger">{error}</div>}
+            {/* {error && <div className="alert alert-danger">{error}</div>} */}
+            {loading && <Spinner loading={loading} />} {/* Show spinner when loading */}
             <Formik
               initialValues={{ email: '', password: '', remember: false }}
               validationSchema={LoginSchema}
@@ -51,47 +69,34 @@ const LoginForm: React.FC = () => {
             >
               {({ errors, touched }) => (
                 <Form>
-                  <BootstrapForm.Group>
+                  {/* Input Field for Email */}
+                  <BootstrapForm.Group controlId="formEmail">
                     <BootstrapForm.Label>Email</BootstrapForm.Label>
                     <Field
                       name="email"
-                      as={BootstrapForm.Control}
                       type="email"
-                      placeholder="Entrer votre email"
-                      isInvalid={!!errors.email && touched.email}
+                      className={`form-control ${errors.email && touched.email ? 'is-invalid' : ''}`}
                     />
-                    <BootstrapForm.Control.Feedback type="invalid">
-                      {errors.email}
-                    </BootstrapForm.Control.Feedback>
+                    {errors.email && touched.email ? (
+                      <div className="invalid-feedback">{errors.email}</div>
+                    ) : null}
                   </BootstrapForm.Group>
 
-                  <BootstrapForm.Group>
+                  {/* Input Field for Password */}
+                  <BootstrapForm.Group controlId="formPassword">
                     <BootstrapForm.Label>Password</BootstrapForm.Label>
                     <Field
                       name="password"
-                      as={BootstrapForm.Control}
                       type="password"
-                      placeholder="Entrer votre mot de passe"
-                      isInvalid={!!errors.password && touched.password}
+                      className={`form-control ${errors.password && touched.password ? 'is-invalid' : ''}`}
                     />
-                    <BootstrapForm.Control.Feedback type="invalid">
-                      {errors.password}
-                    </BootstrapForm.Control.Feedback>
+                    {errors.password && touched.password ? (
+                      <div className="invalid-feedback">{errors.password}</div>
+                    ) : null}
                   </BootstrapForm.Group>
-
-                  <BootstrapForm.Group className="d-flex justify-content-between align-items-center mt-3">
-                  <Field
-                    as={BootstrapForm.Check}
-                     className="form-check-sm"
-                       type="checkbox"
-                       id="remember"
-                      label="Remember me"
-                     name="remember"
-                                                            />
-                    <p><Link to={routes.FORGOTPASSWORD}>Forgot Password?</Link></p>
-                  </BootstrapForm.Group>
-                  <Button variant="danger" type="submit" className="w-100 mt-3 btn btn-danger">
-                    Login
+                  <p><Link to={routes.FORGOTPASSWORD}>Forgot Password?</Link></p>
+                  <Button variant="danger" type="submit" className="w-100 mt-3" disabled={loading}>
+                    {loading ? 'Loading...' : 'Login'} {/* Change button text during loading */}
                   </Button>
                   <div className="text-center mt-3">
                     <p>Don't have an account? <Link to={routes.REGISTER}>Register here</Link></p>
@@ -99,6 +104,13 @@ const LoginForm: React.FC = () => {
                 </Form>
               )}
             </Formik>
+            {alertVisible && (
+              <SweetAlert
+                message={alertMessage}
+                type={alertType}
+                onClose={() => setAlertVisible(false)} // Close the alert
+              />
+            )}
           </div>
         </Col>
       </Row>

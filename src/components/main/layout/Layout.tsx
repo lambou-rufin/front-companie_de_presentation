@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import SideNav from "../Sidenav";
 import Footer from "./Footer";
-import './Layout.css'; // Assurez-vous d'importer votre fichier CSS
+import './Layout.css'; // Ensure your CSS file is imported
 
 const Layout: FC = () => {
   return (
@@ -12,7 +12,7 @@ const Layout: FC = () => {
       <div className="container">
         <SideNav />
         <main className="main-content">
-          <Outlet /> {/* Permet d'afficher les routes enfants */}
+          <Outlet /> {/* Allows child routes to be displayed */}
         </main>
       </div>
       <Footer />

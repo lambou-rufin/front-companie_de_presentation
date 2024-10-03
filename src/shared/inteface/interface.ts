@@ -74,7 +74,7 @@ export interface IPostCode {
     updated_at: string;
 }
 
-export interface IUser {
+export interface User {
     name: string;
     email: string;
     phoneNumber: string;
@@ -96,6 +96,8 @@ export interface IForgotPassword{
 
 export interface LoginResponse {
     token: string; // Assurez-vous que la réponse du serveur contient un champ 'token'
+    name: string;
+    user: User;  // Inclure l'utilisateur ici
   }
 
 

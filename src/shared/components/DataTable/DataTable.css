@@ -48,14 +48,14 @@
   padding: 5px 10px;
   cursor: pointer;
   border: none; /* Suppression des bordures par défaut */
-  background-color: #007bff; /* Couleur de fond des boutons */
+  background-color: #59595c; /* Couleur de fond des boutons */
   color: white; /* Couleur du texte */
   border-radius: 4px; /* Coins arrondis */
   transition: background-color 0.3s; /* Ajout d'une transition */
 }
 
 .pagination button:hover {
-  background-color: #0056b3; /* Couleur de fond lors du survol */
+  background-color: #59595c; /* Couleur de fond lors du survol */
 }
 
 .pagination select {

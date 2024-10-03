@@ -55,7 +55,7 @@ const RegisterForm: React.FC = () => {
           <Col md={6} className="d-flex align-items-center">
             <div className="w-100">
               <div className="text-center mb-4">
-                <h2>Register</h2>
+                <h2>Créer votre compte</h2>
                 <p>Create your account to get started.</p>
               </div>
               {error && <div className="alert alert-danger">{error}</div>}

@@ -1,4 +1,4 @@
-import { ForgotpassResponse, IForgotPassword } from "../shared/inteface/interface";
+import { ForgotpassResponse, IForgotPassword, LoginResponse } from "../shared/inteface/interface";
 
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 export async function register(username: string, email: string, password: string) {
@@ -21,9 +21,9 @@ export async function register(username: string, email: string, password: string
   }
 }
 
-interface LoginResponse {
-  token: string; // Assurez-vous que la réponse du serveur contient un champ 'token'
-}
+// interface LoginResponse {
+//   token: string; // Assurez-vous que la réponse du serveur contient un champ 'token'
+// }
 
 export async function login(email: string, password: string): Promise<LoginResponse> {
   try {
@@ -36,12 +36,20 @@ export async function login(email: string, password: string): Promise<LoginRespo
       body: JSON.stringify({ email, password }), // Inclure les informations d'identification dans le corps de la requête
     });
 
+    // Vérifiez si la réponse est OK
     if (!response.ok) {
       const errorResponse = await response.json();
       throw new Error(errorResponse.message || `HTTP error! Status: ${response.status}`);
     }
 
-    const data: LoginResponse = await response.json();
+    // Assurez-vous que les données correspondent à LoginResponse
+    const data: LoginResponse = await response.json(); 
+
+    // Vérifiez que 'user' existe et a les propriétés attendues
+    if (!data.user) {
+      throw new Error("User information is missing in the response.");
+    }
+
     return data; // Retourner les données de la réponse
   } catch (error) {
     // Lancer l'erreur pour que le composant appelant puisse la gérer
@@ -55,7 +63,6 @@ export async function clearToken(): Promise<void> {
     resolve();
   });
 }
-
 
 export async function forgotPass(email: string): Promise<ForgotpassResponse> {
   try {

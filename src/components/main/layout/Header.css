@@ -298,8 +298,8 @@ h1 {
 /* Styles pour le menu déroulant */
 .dropdown_menu {
   display: none;
-  background-color: #111827;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   padding: 10px;
   position: absolute;
   top: 50px;
@@ -325,7 +325,7 @@ h1 {
 } */
 
 .dropdown_menu ul li a {
-  color: white;
+  color: rgb(0, 0, 0);
   flex-direction: column;
   text-decoration: none;
 }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './SideNav.css';
-import routes from '../../router/routes';
-import Icon from '../../shared/components/Icon/Icon';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./SideNav.css";
+import routes from "../../router/routes";
+import Icon from "../../shared/components/Icon/Icon";
 
 const SideNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // Initialement fermé
@@ -12,9 +12,9 @@ const SideNav: React.FC = () => {
   };
 
   return (
-    <div className={`sidenav ${isOpen ? 'open' : 'closed'}`}>
+    <div className={`sidenav ${isOpen ? "open" : "closed"}`}>
       <button className="menu-btn" onClick={toggleSideNav}>
-        {isOpen ? '✖' : '☰'} {/* Afficher "✖" quand ouvert */}
+        {isOpen ? "✖" : "☰"} {/* Afficher "✖" quand ouvert */}
       </button>
       <nav className="nav-links">
         <Link to={routes.DASHBOARD}>
@@ -32,8 +32,12 @@ const SideNav: React.FC = () => {
         <Link to={routes.PROFILE}>
           <Icon name="user" className="icon" type="user" /> Profile
         </Link>
+        <Link to={routes.ABOUT}>
+          <Icon name="setting" className="icon" type="settings" />
+          About
+        </Link>
         <Link to={routes.SETTINGS}>
-          <Icon name="settings" className="icon" type="settings" /> Settings
+          <Icon name="setting" className="icon" type="settings" /> Settings
         </Link>
       </nav>
     </div>

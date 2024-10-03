@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import getPersonneList from '../../services/personne';
 import DataTable from 'shared/components/DataTable/DataTable';
+import Icon from 'shared/components/Icon/Icon';
 
 const Personne: FC = () => {
   const [personnes, setPersonnes] = useState<any[]>([]);
@@ -41,9 +42,18 @@ const Personne: FC = () => {
 
   if (error) return <div>Error: {error}</div>;
 
+
+  const handleAddPerson = () => {
+    // Logique pour ajouter une personne
+  };  
+
   return (
     <div>
-      <h1 className="text-center mt-3">Personnes</h1>
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <h1 className="text-center">Personnes</h1>
+        <span><Icon name="plus " type={'plus'}  onClick={handleAddPerson}></Icon></span>
+
+      </div>
       {personnes.length > 0 ? (
         <DataTable columns={columns} data={personnes} />
       ) : (
@@ -51,6 +61,7 @@ const Personne: FC = () => {
       )}
     </div>
   );
+  
 };
 
 export default Personne;

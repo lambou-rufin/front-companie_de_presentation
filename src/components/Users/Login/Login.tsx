@@ -23,27 +23,26 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = async (values: AuthForm) => {
     try {
-      // setError(null);
       setLoading(true); // Start loading
   
       const { token, user } = await login(values.email, values.password);
       // Store the token and user information in local storage
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/dashboard'); // Redirect to dashboard after successful login
   
-      // Set loading to false after 10 seconds to keep spinner visible
+      // Rediriger après un délai
       setTimeout(() => {
         setLoading(false);
-      }, 100000); // 10 seconds
+        navigate('/dashboard'); // Redirect to dashboard after spinner timeout
+      }, 1000); // 5 seconds
     } catch (error) {
-      // setError('Connection error, please try again.');
       setAlertMessage('Erreur lors de la connexion.');
       setAlertType('error');
       setAlertVisible(true); // Show SweetAlert
       setLoading(false); // Stop loading on error
     }
   };
+  
   
 
   return (

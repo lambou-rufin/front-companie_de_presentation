@@ -2,7 +2,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import routes from "../../../router/routes";
-import "./Header.css"; // Assurez-vous de lier vos styles
+import "./Header.css";
 
 interface HeaderProps {
   toggleSideNav: () => void; // Propriété pour toggler le Sidenav
@@ -11,7 +11,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false); // État pour basculer le menu
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null); // État pour l'utilisateur
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [firstChar, setFirstChar] = useState<string>(""); // État pour le premier caractère de l'email
 
   // Récupérer les informations utilisateur depuis localStorage au chargement du composant
@@ -35,9 +35,8 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
     <header className={isSideNavOpen ? "header-with-sidenav-open" : ""}>
       <ul className="ulhead">
         <li className="toggle-sidenav">
-          {/* Bouton pour toggler le Sidenav */}
           <button onClick={toggleSideNav} aria-label="Toggle Sidenav">
-            {isSideNavOpen ? "✖" : "☰"} {/* Afficher un icône pour ouvrir ou fermer */}
+            {isSideNavOpen ? "✖" : "☰"} 
           </button>
         </li>
         <li>

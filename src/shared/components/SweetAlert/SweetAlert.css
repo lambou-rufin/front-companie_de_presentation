@@ -2,14 +2,14 @@
 .sweetalert {
   position: fixed;
   top: 20%;
-  width: 240px;
+  width: 320px; /* Augmenter la largeur ici */
   left: 50%;
   transform: translate(-50%, -20%);
-  padding: 20px;
+  padding: 30px; /* Augmenter le padding ici */
   background: white;
   border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Légèrement augmenter l'ombre */
   z-index: 1000;
   text-align: center;
 }
@@ -31,15 +31,25 @@
 }
 
 .sweetalert-icon {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 28px; /* Augmenter la taille de l'icône */
+  margin-bottom: 15px; /* Ajuster l'espace sous l'icône */
 }
 
 .sweetalert-close {
-  padding: 10px 20px;
+  padding: 12px 25px; /* Ajuster le padding pour le bouton de fermeture */
   background: #d14646;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px; /* Augmenter la taille de la police du bouton */
+}
+.sweetalert p {
+  font-size: 16px; /* Augmenter la taille de la police du texte */
+  margin: 10px 0; /* Ajuster les marges autour du texte */
+}
+
+.sweetalert h1 {
+  font-size: 20px; /* Augmenter la taille du titre */
+  margin-bottom: 10px; /* Ajuster la marge en bas du titre */
 }

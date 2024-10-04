@@ -3,6 +3,7 @@ import getPersonneList from '../../services/personne';
 import DataTable from 'shared/components/DataTable/DataTable';
 import Icon from 'shared/components/Icon/Icon';
 import { useNavigate } from 'react-router-dom';
+import './Personne.css';
 
 const Personne: FC = () => {
   const [personnes, setPersonnes] = useState<any[]>([]);
@@ -55,15 +56,17 @@ const Personne: FC = () => {
     <div>
       <div className="d-flex justify-content-between align-items-center mt-3">
         <h1 className="text-center">Personnes</h1>
-        <span>
-          <Icon name="plus" type={'plus'} onClick={handleAddPerson} />
-        </span>
+        <button className="btn btn-success" onClick={handleAddPerson}>
+          Ajouter {/* Texte du bouton */}
+        </button>
       </div>
-      {personnes.length > 0 ? (
-        <DataTable columns={columns} data={personnes} onRowClick={handleRowClick} />
-      ) : (
-        <p>No personnes available</p>
-      )}
+      <div className="table-container"> {/* Wrapper for additional spacing */}
+        {personnes.length > 0 ? (
+          <DataTable columns={columns} data={personnes} onRowClick={handleRowClick} />
+        ) : (
+          <p>No personnes available</p>
+        )}
+      </div>
     </div>
   );
 };

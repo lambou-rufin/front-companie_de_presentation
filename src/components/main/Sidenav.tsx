@@ -32,8 +32,7 @@ const SideNav: FC<{ className: string }> = ({ className }) => {
           <Icon name="user" className="icon" type="user" /> Profile
         </Link>
         <Link to={routes.ABOUT}>
-          <Icon name="setting" className="icon" type="settings" />
-          About
+          <Icon name="setting" className="icon" type="settings" />About
         </Link>
         <Link to={routes.SETTINGS}>
           <Icon name="setting" className="icon" type="settings" /> Settings

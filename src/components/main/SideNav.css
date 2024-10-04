@@ -1,17 +1,38 @@
 /* src/components/Layout/SideNav.css */
 
-.sidenav {
+/* .sidenav {
     position: fixed;
     left: 0;
-    top: 0;
+    top: 0; */
     /* width: 300px; */
-    height: 100%;
+    /* height: 100%; */
     /* background-color: #1b1f24; */
-    background-color: #111827;
+    /* background-color: #111827;
     color: white;
     font: italic;
     transition: transform 0.3s ease;
     z-index: 1000;
+  } */
+  
+  /* .sidenav.closed {
+    transform: translateX(-250px);
+  }
+  
+  .sidenav.open {
+    transform: translateX(0);
+  } */
+
+  .sidenav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto; /* Si le contenu du sidenav dépasse, autoriser uniquement le scroll interne */
+    width: 250px; /* Définir une largeur fixe pour le menu latéral */
+    height: 100%;
+    background-color: #111827;
+    color: white;
+    transition: transform 0.3s ease;
+    z-index: 1000; /* S'assurer que le SideNav est derrière le bouton */
   }
   
   .sidenav.closed {
@@ -21,6 +42,7 @@
   .sidenav.open {
     transform: translateX(0);
   }
+  
   
   .logoSidenav{
   margin-top: 2rem;

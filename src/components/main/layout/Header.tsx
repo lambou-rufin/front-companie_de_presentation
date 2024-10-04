@@ -11,12 +11,14 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false); // État pour basculer le menu
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string } | null>(
+    null
+  );
   const [firstChar, setFirstChar] = useState<string>(""); // État pour le premier caractère de l'email
 
   // Récupérer les informations utilisateur depuis localStorage au chargement du composant
   useEffect(() => {
-    const userData = localStorage.getItem('user');
+    const userData = localStorage.getItem("user");
     if (userData) {
       const parsedUser = JSON.parse(userData); // Convertir les données stockées en objet
       setUser(parsedUser);
@@ -35,9 +37,7 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
     <header className={isSideNavOpen ? "header-with-sidenav-open" : ""}>
       <ul className="ulhead">
         <li className="toggle-sidenav">
-          <button onClick={toggleSideNav} aria-label="Toggle Sidenav">
-            {isSideNavOpen ? "✖" : "☰"} 
-          </button>
+          <button onClick={toggleSideNav}>{isSideNavOpen ? "✖" : "☰"}</button>
         </li>
         <li>
           <h1>
@@ -54,10 +54,10 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
           )}
 
           {/* Bouton pour basculer le menu */}
-          <div 
-            className="toggle_button" 
-            onClick={toggleMenu} 
-            aria-haspopup="true" 
+          <div
+            className="toggle_button"
+            onClick={toggleMenu}
+            aria-haspopup="true"
             aria-expanded={isOpen ? "true" : "false"}
           >
             {/* Utiliser le premier caractère au lieu de l'icône */}

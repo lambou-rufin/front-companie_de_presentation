@@ -8,12 +8,14 @@
   display: flex;
   flex: 1; /* Prend tout l'espace disponible */
   transition: margin-left 0.3s ease; /* Animation fluide pour les déplacements */
+  width: 100%;
 }
 
 .main-content {
   flex: 1; /* Prend tout l'espace disponible après le SideNav */
   padding: 20px; /* Espace intérieur */
   overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
+  width: 100%;
   transition: margin-left 0.3s ease; /* Animation fluide pour le contenu */
 }
 

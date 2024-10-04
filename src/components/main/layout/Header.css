@@ -93,7 +93,7 @@ header a:hover{
   align-items: center;
   width: 30px;
   height: 30px;
-  background-color: #8f8f8f;
+  background-color: #000000;
   border-radius: 50%;
   cursor: pointer;
   color: white;
@@ -136,4 +136,23 @@ header a:hover{
 
 .uldrop li a:hover {
   color: #000000;
+}
+
+/* Style par défaut du bouton */
+.toggle-sidenav button {
+  position: absolute;
+  top: 10px;
+  left: 10px; /* Position par défaut quand le SideNav est fermé */
+  z-index: 1100;
+  background-color: transparent;
+  color: black;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: left 0.3s ease; /* Animation fluide du déplacement */
+}
+
+/* Quand le SideNav est ouvert, le bouton est décalé */
+.header-with-sidenav-open .toggle-sidenav button {
+  left: 280px; /* Déplacement vers la droite quand le SideNav est ouvert */
 }

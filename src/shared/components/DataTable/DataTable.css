@@ -49,8 +49,9 @@
 }
 
 .pagination button {
-  margin: 0 5px;
-  padding: 5px 10px;
+  margin: 0 3px; /* Réduire l'espacement entre les boutons */
+  padding: 3px 6px; /* Réduire le padding pour rendre les boutons plus petits */
+  font-size: 12px; /* Réduire la taille de la police */
   cursor: pointer;
   border: none; /* Suppression des bordures par défaut */
   background-color: #59595c; /* Couleur de fond des boutons */
@@ -65,7 +66,8 @@
 
 .pagination select {
   margin-left: 10px;
-  padding: 5px;
+  padding: 3px; /* Réduire le padding du sélecteur */
+  font-size: 12px; /* Réduire la taille de la police pour le sélecteur */
   border-radius: 4px; /* Coins arrondis pour le sélecteur */
   border: 1px solid #ccc; /* Bordure du sélecteur */
 }

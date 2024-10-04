@@ -65,39 +65,45 @@ const DataTable = <T extends object>({ columns, data, onRowClick }: DataTablePro
 
       {/* Pagination Controls */}
       <div className="pagination">
-        <div className="pagination-controls">
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-            {'<<'}
-          </button>
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {'<'}
-          </button>
-          <span>
-            Page{' '}
-            <strong>
-              {pageIndex + 1} of {pageOptions.length}
-            </strong>{' '}
-          </span>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            {'>'}
-          </button>
-          <button onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
-            {'>>'}
-          </button>
-          <select
-            value={pageSize}
-            onChange={e => {
-              setPageSize(Number(e.target.value));
-            }}
-          >
-            {[10, 20, 30, 40, 50].map(size => (
-              <option key={size} value={size}>
-                Show {size}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+  <div className="pagination-controls">
+    {/* Retirer le bouton de retour à la première page */}
+    {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+      {'<<'}
+    </button> */}
+    
+    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+      {'<'}
+    </button>
+    <span>
+      Page{' '}
+      <strong>
+        {pageIndex + 1} of {pageOptions.length}
+      </strong>{' '}
+    </span>
+    <button onClick={() => nextPage()} disabled={!canNextPage}>
+      {'>'}
+    </button>
+    
+    {/* Retirer le bouton d'aller à la dernière page */}
+    {/* <button onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
+      {'>>'}
+    </button> */}
+    
+    <select
+      value={pageSize}
+      onChange={e => {
+        setPageSize(Number(e.target.value));
+      }}
+    >
+      {[10, 20, 30, 40, 50].map(size => (
+        <option key={size} value={size}>
+          Show {size}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+
     </div>
   );
 };

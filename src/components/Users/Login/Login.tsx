@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../services/user'; // Adjust the import path
 import Spinner from 'shared/components/Spinner/Spinner';
 import SweetAlert from 'shared/components/SweetAlert/SweetAlert';
-import { AuthForm } from 'shared/inteface/interface';
+import { AuthForm } from 'utils/inteface/interface';
 import routes from 'router/routes';
 
 const LoginSchema = Yup.object().shape({
@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
         navigate('/dashboard'); // Redirect to dashboard after spinner timeout
       }, 1000); // 5 seconds
     } catch (error) {
-      setAlertMessage('Erreur lors de la connexion.');
+      setAlertMessage('Une erreur se produite lors de la connexion.');
       setAlertType('error');
       setAlertVisible(true); // Show SweetAlert
       setLoading(false); // Stop loading on error

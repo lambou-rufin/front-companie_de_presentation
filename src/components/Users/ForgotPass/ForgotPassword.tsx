@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Button, Form as BootstrapForm, Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import routes from '../../../router/routes';
-import { IForgotPassword } from '../../../shared/inteface/interface';
+import { IForgotPassword } from '../../../utils/inteface/interface';
 import { forgotPass } from '../../../services/user';
 
 const ForgotPasswordSchema = Yup.object().shape({

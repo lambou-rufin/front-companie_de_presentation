@@ -49,7 +49,7 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
           {user && (
             <div className="user-info">
               <span className="user-name">{user.name}</span>
-              <span className="user-email">{user.email}</span>
+              {/* <span className="user-email">{user.email}</span> */}
             </div>
           )}
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './SweetAlert.css'; // Ensure you have the styles
 
 interface SweetAlertProps {
@@ -23,6 +23,16 @@ const SweetAlert: React.FC<SweetAlertProps> = ({ message, type, onClose }) => {
     }
   };
 
+  useEffect(() => {
+    // Set a timer to dismiss the alert after 10 seconds
+    const timer = setTimeout(() => {
+      onClose();
+    }, 5000); // 5 seconds
+
+    // Cleanup the timer when the component unmounts
+    return () => clearTimeout(timer);
+  }, [onClose]); // Dependency array to prevent stale closures
+
   return (
     <div className={`sweetalert ${type}`}>
       <div className="sweetalert-icon">{getIcon()}</div>
@@ -35,5 +45,6 @@ const SweetAlert: React.FC<SweetAlertProps> = ({ message, type, onClose }) => {
 };
 
 export default SweetAlert;
+
 
 

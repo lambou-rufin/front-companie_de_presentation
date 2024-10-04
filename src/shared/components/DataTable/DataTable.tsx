@@ -75,7 +75,7 @@ const DataTable = <T extends object>({ columns, data, onRowClick }: DataTablePro
       {'<'}
     </button>
     <span>
-      Page{' '}
+      {' '}
       <strong>
         {pageIndex + 1} of {pageOptions.length}
       </strong>{' '}

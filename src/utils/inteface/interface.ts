@@ -12,17 +12,28 @@ export interface IFrequencyPersonne {
     value: string;
 }
 
-export interface IPersonnes {
-    pers_id?: number;
-    nom: string;
-prenom: string;
-email: string;
-adress: string;
-image: string;
+// export interface IPersonnes {
+//     pers_id?: number;
+//     nom: string;
+// prenom: string;
+// email: string;
+// adress: string;
+// image: string;
 
     // date_debut: string;
     // programs?: IPrograms[];
-}
+// }
+
+// src/types/IPersonnes.ts
+export interface IPersonnes {
+    nom: string;
+    email: string;
+    phone: string;
+    prenom?: string; // Optional, if you want to include this
+    adress?: string; // Optional, if you want to include this
+    image?: string; // Optional, if you want to include this
+    roleId?: number; // Optional, if you want to include this
+  }
 
 export interface IPrograms {
     // debut_time: string;

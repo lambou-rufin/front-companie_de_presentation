@@ -1,4 +1,4 @@
-import { ForgotpassResponse, IForgotPassword, LoginResponse } from "../shared/inteface/interface";
+import { ForgotpassResponse, IForgotPassword, LoginResponse } from "../utils/inteface/interface";
 
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 export async function register(username: string, email: string, password: string) {

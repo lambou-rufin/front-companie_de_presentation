@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button, Container, Row, Col, Form as BootstrapForm } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../../services/user'; // Adjust the import path
+import { login } from '../../../services/user'; 
 import Spinner from 'shared/components/Spinner/Spinner';
 import SweetAlert from 'shared/components/SweetAlert/SweetAlert';
 import { AuthForm } from 'utils/inteface/interface';

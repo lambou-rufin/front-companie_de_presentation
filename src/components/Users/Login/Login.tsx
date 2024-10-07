@@ -9,41 +9,41 @@ import SweetAlert from 'shared/components/SweetAlert/SweetAlert';
 import { AuthForm } from 'utils/inteface/interface';
 import routes from 'router/routes';
 
+// Schéma de validation avec Yup pour les champs email et mot de passe
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Email is required').email('Invalid email address'),
   password: Yup.string().required('Password is required'),
 });
 
 const LoginForm: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [alertType, setAlertType] = useState<'success' | 'error' | 'warning' | 'info'>('success');
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // État pour gérer le spinner de chargement
+  const [alertVisible, setAlertVisible] = useState(false); // État pour afficher l'alerte
+  const [alertMessage, setAlertMessage] = useState(''); // Message d'alerte
+  const [alertType, setAlertType] = useState<'success' | 'error' | 'warning' | 'info'>('success'); // Type d'alerte
+  const navigate = useNavigate(); // Hook pour naviguer entre les routes
 
+  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (values: AuthForm) => {
     try {
-      setLoading(true); // Start loading
-  
+      setLoading(true); // Déclenche le spinner pendant le traitement du login
+
       const { token, user } = await login(values.email, values.password);
-      // Store the token and user information in local storage
+      // Stocke le token et les informations utilisateur dans le localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-  
-      // Rediriger après un délai
-      setTimeout(() => {
-        setLoading(false);
-        navigate('/dashboard'); // Redirect to dashboard after spinner timeout
-      }, 1000); // 5 seconds
+
+      // Arrête le spinner une fois que le login est réussi
+      setLoading(false);
+
+      // Redirige immédiatement après la réussite de la connexion
+      navigate('/dashboard'); // Redirection vers le tableau de bord
     } catch (error) {
-      setAlertMessage('Une erreur se produite lors de la connexion.');
+      setAlertMessage('Une erreur s\'est produite lors de la connexion.');
       setAlertType('error');
-      setAlertVisible(true); // Show SweetAlert
-      setLoading(false); // Stop loading on error
+      setAlertVisible(true); // Affiche l'alerte en cas d'erreur
+      setLoading(false); // Arrête le spinner en cas d'erreur
     }
   };
-  
-  
 
   return (
     <Container className="vh-100 d-flex justify-content-center align-items-center">
@@ -59,8 +59,9 @@ const LoginForm: React.FC = () => {
               <h2>Se connecter</h2>
               <p>Welcome back. Please login to your account.</p>
             </div>
-            {/* {error && <div className="alert alert-danger">{error}</div>} */}
-            {loading && <Spinner loading={loading} />} {/* Show spinner when loading */}
+            {/* Affiche le spinner pendant le chargement */}
+            {loading && <Spinner loading={loading} />} 
+            
             <Formik
               initialValues={{ email: '', password: '', remember: false }}
               validationSchema={LoginSchema}
@@ -68,7 +69,7 @@ const LoginForm: React.FC = () => {
             >
               {({ errors, touched }) => (
                 <Form>
-                  {/* Input Field for Email */}
+                  {/* Champ pour l'email */}
                   <BootstrapForm.Group controlId="formEmail">
                     <BootstrapForm.Label>Email</BootstrapForm.Label>
                     <Field
@@ -81,7 +82,7 @@ const LoginForm: React.FC = () => {
                     ) : null}
                   </BootstrapForm.Group>
 
-                  {/* Input Field for Password */}
+                  {/* Champ pour le mot de passe */}
                   <BootstrapForm.Group controlId="formPassword">
                     <BootstrapForm.Label>Password</BootstrapForm.Label>
                     <Field
@@ -95,7 +96,7 @@ const LoginForm: React.FC = () => {
                   </BootstrapForm.Group>
                   <p><Link to={routes.FORGOTPASSWORD}>Forgot Password?</Link></p>
                   <Button variant="danger" type="submit" className="w-100 mt-3" disabled={loading}>
-                    {loading ? 'Loading...' : 'Login'} {/* Change button text during loading */}
+                    {loading ? 'Loading...' : 'Login'} {/* Change le texte du bouton pendant le chargement */}
                   </Button>
                   <div className="text-center mt-3">
                     <p>Don't have an account? <Link to={routes.REGISTER}>Register here</Link></p>
@@ -103,11 +104,13 @@ const LoginForm: React.FC = () => {
                 </Form>
               )}
             </Formik>
+
+            {/* Affiche l'alerte si nécessaire */}
             {alertVisible && (
               <SweetAlert
                 message={alertMessage}
                 type={alertType}
-                onClose={() => setAlertVisible(false)} // Close the alert
+                onClose={() => setAlertVisible(false)} // Ferme l'alerte
               />
             )}
           </div>

@@ -21,7 +21,6 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
       email: '',
       phone: '',
       adress: '',
-      image: '', // Nouveau champ image
     },
     validationSchema: Yup.object({
       nom: Yup.string()
@@ -62,7 +61,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
 
   return (
     <Form onSubmit={formik.handleSubmit}>
-      <Form.Group controlId="formNom" className="text-center mt-3">
+      <Form.Group controlId="formNom" className="text-start mt-3">
         <Form.Label>Nom:</Form.Label>
         <Form.Control
           type="text"
@@ -76,7 +75,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group controlId="formPrenom" className="text-center mt-3">
+      <Form.Group controlId="formPrenom" className="text-start mt-3">
         <Form.Label>Prénom:</Form.Label>
         <Form.Control
           type="text"
@@ -90,7 +89,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group controlId="formEmail" className="text-center mt-3">
+      <Form.Group controlId="formEmail" className="text-start mt-3">
         <Form.Label>Email:</Form.Label>
         <Form.Control
           type="email"
@@ -104,7 +103,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group controlId="formPhone" className="text-center mt-3">
+      <Form.Group controlId="formPhone" className="text-start mt-3">
         <Form.Label>Numéro de téléphone:</Form.Label>
         <Form.Control
           type="text"
@@ -118,7 +117,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group controlId="formAdress" className="text-center mt-3">
+      <Form.Group controlId="formAdress" className="text-start mt-3">
         <Form.Label>Adresse:</Form.Label>
         <Form.Control
           type="text"
@@ -128,7 +127,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         />
       </Form.Group>
 
-      <Form.Group controlId="formImage" className="text-center mt-3">
+      <Form.Group controlId="formImage" className="text-start mt-3">
         <Form.Label>Image (télécharger):</Form.Label>
         <Form.Control
           type="file"
@@ -146,7 +145,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         )}
       </Form.Group>
 
-      <Button variant="success" type="submit" className="text-center mt-3" disabled={loading}>
+      <Button variant="success" type="submit" className="text-start mt-3" disabled={loading}>
         {loading ? (
           <>
             <Spinner loading={loading} /> {' '}Ajout...

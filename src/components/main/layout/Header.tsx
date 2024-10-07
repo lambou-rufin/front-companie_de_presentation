@@ -3,6 +3,7 @@ import React, { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import routes from "../../../router/routes";
 import "./Header.css";
+import Icon from "shared/components/Icon/Icon";
 
 interface HeaderProps {
   toggleSideNav: () => void; // Propriété pour toggler le Sidenav
@@ -70,7 +71,7 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
           <div className={`dropdown_menu ${isOpen ? "open" : ""}`}>
             <ul className="uldrop">
               <li>
-                <Link to={routes.LOGOUT}>Déconnexion</Link>
+                <Link to={routes.LOGOUT}><Icon name="user" className="icon" type="user" />Déconnexion</Link>
               </li>
             </ul>
           </div>

@@ -26,15 +26,15 @@ const LoginForm: React.FC = () => {
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (values: AuthForm) => {
     try {
-      setLoading(true); // Déclenche le spinner pendant le traitement du login
-
+      // Déclenche le spinner pendant le traitement du login
+      // setLoading(true);
       const { token, user } = await login(values.email, values.password);
       // Stocke le token et les informations utilisateur dans le localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
       // Arrête le spinner une fois que le login est réussi
-      setLoading(false);
+      // setLoading(false);
 
       // Redirige immédiatement après la réussite de la connexion
       navigate('/dashboard'); // Redirection vers le tableau de bord
@@ -42,7 +42,8 @@ const LoginForm: React.FC = () => {
       setAlertMessage('Une erreur s\'est produite lors de la connexion.');
       setAlertType('error');
       setAlertVisible(true); // Affiche l'alerte en cas d'erreur
-      setLoading(false); // Arrête le spinner en cas d'erreur
+      // setLoading(false); 
+      // Arrête le spinner en cas d'erreur
     }
   };
 

@@ -11,10 +11,10 @@
   padding: 5px;
   text-align: left;
   border-bottom: 1px solid #ffffff;
+  background-color: #ffffff; /* Couleur de fond blanche pour toutes les cellules */
 }
 
 .table th {
-  background-color: #f2f2f2;
   color: #333;
   font-weight: bold;
 }
@@ -54,7 +54,7 @@
 }
 
 .pagination button:hover {
-  background-color: #59595c; /* Couleur de fond lors du survol */
+  background-color: #4b4b4e; /* Couleur de fond lors du survol */
 }
 
 .pagination select {

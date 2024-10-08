@@ -8,7 +8,8 @@ import Spinner from 'shared/components/Spinner/Spinner';
 import SweetAlert from 'shared/components/SweetAlert/SweetAlert';
 import { AuthForm } from 'utils/inteface/interface';
 import routes from 'router/routes';
-import logo from '../../../assets/img/logo.png';
+const logo = require("../../../assets/img/logo.jpg")
+
 
 // Schéma de validation avec Yup pour les champs email et mot de passe
 const LoginSchema = Yup.object().shape({
@@ -53,7 +54,7 @@ const LoginForm: React.FC = () => {
         <Col md={6} className="d-flex align-items-center">
           <div className="w-100 text-center">
               {/* Utilisation de l'image importée */}
-              <img src="/assets/img/logo.png" alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
+              <img src={logo} alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
               </div>
         </Col>
         <Col md={6} className="d-flex align-items-center">

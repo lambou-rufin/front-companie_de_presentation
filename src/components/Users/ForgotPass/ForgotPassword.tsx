@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import routes from '../../../router/routes';
 import { IForgotPassword } from '../../../utils/inteface/interface';
 import { forgotPass } from '../../../services/user';
+const logo = require("../../../assets/img/logo.jpg")
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().required('Email is required').email('Invalid email address'),
@@ -31,7 +32,7 @@ const ForgotPasswordForm: React.FC = () => {
       <Row className="w-100">
         <Col md={6} className="d-flex align-items-center">
           <div className="w-100 text-center">
-            <img src="path-to-your-logo" alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
+          <img src={logo} alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
           </div>
         </Col>
         <Col md={6} className="d-flex align-items-center">

@@ -1,6 +1,7 @@
 /* SweetAlert.css */
 .sweetalert {
   position: fixed;
+  color: #000000;
   top: 20%;
   width: 320px; /* Augmenter la largeur ici */
   left: 50%;
@@ -19,7 +20,7 @@
 }
 
 .sweetalert.error {
-  border-color: #dc3545;
+  border-color: #ffffff;
 }
 
 .sweetalert.warning {
@@ -37,7 +38,7 @@
 
 .sweetalert-close {
   padding: 12px 25px; /* Ajuster le padding pour le bouton de fermeture */
-  background: #d14646;
+  background: #000000;
   color: white;
   border: none;
   border-radius: 5px;

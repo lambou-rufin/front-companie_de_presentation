@@ -7,6 +7,8 @@ import routes from '../../../router/routes';
 import Layout from '../../main/layout/Layout'; // Décommentez si vous utilisez Layout
 import { register } from '../../../services/user'; // Assurez-vous du chemin d'import
 import './Register.css';
+const logo = require("../../../assets/img/logo.jpg")
+
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
@@ -49,7 +51,7 @@ const RegisterForm: React.FC = () => {
         <Row className="w-100">
           <Col md={6} className="d-flex align-items-center">
             <div className="w-100 text-center">
-              <img src="path-to-your-logo" alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
+            <img src={logo} alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
             </div>
           </Col>
           <Col md={6} className="d-flex align-items-center">

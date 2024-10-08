@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./SideNav.css";
 import routes from "../../router/routes";
 import Icon from "../../shared/components/Icon/Icon";
+const sariko = require("../../assets/img/sariko.jpg")
 
 const SideNav: FC<{ className: string }> = ({ className }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); // État pour gérer l'ouverture du Sidenav
@@ -14,7 +15,8 @@ const SideNav: FC<{ className: string }> = ({ className }) => {
 
   return (
     <div className={`sidenav ${className}`}>
-     <div className="logoSidenav"><img src="" alt="Logo"/></div>
+     <div className="logoSidenav"><img src={sariko} alt="Logo" className="img-fluid"/>
+     </div>
       <nav className="nav-links">
         <Link to={routes.DASHBOARD}>
           <Icon name="home" className="icon" type="home" /> Dashboard

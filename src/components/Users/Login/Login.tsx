@@ -54,7 +54,7 @@ const LoginForm: React.FC = () => {
         <Col md={6} className="d-flex align-items-center">
           <div className="w-100 text-center">
               {/* Utilisation de l'image importée */}
-              <img src={logo} alt="Logo" className="img-fluid" style={{ maxWidth: '100%' }} />
+              <img src={logo} alt="Logo" className="img-fluid"/>
               </div>
         </Col>
         <Col md={6} className="d-flex align-items-center">

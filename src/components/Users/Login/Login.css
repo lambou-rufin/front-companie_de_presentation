@@ -1,0 +1,33 @@
+.container {
+  height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+}
+
+.image-container {
+  background: url('../../../assets/img/logo.jpg') no-repeat center center; /* Chemin vers l'image */
+  background-size: cover; /* Fait en sorte que l'image couvre entièrement le conteneur */
+  flex: 1; /* Fait en sorte que ce conteneur prenne tout l'espace disponible */
+}
+
+.form-container {
+  flex: 1; /* Fait en sorte que ce conteneur prenne tout l'espace disponible */
+  display: flex; /* Active Flexbox pour centrer le contenu */
+  flex-direction: column; /* Colonne pour le contenu */
+  justify-content: center; /* Centre verticalement */
+}
+
+.logoSidenav {
+  margin-bottom: 2rem; /* Marge en bas du logo */
+  text-align: center; /* Centre le logo horizontalement */
+}
+
+h2 {
+  margin-bottom: 1rem; /* Espace en bas du titre */
+}
+
+.text-center {
+  margin-bottom: 1.5rem; /* Espace en bas pour le texte centré */
+}
+
+.invalid-feedback {
+  display: block; /* Affiche le message d'erreur */
+}

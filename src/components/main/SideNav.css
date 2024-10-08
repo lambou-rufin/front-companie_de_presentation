@@ -145,4 +145,18 @@
     font-size: 18px;
   }
   
+  .logoSidenav {
+    margin-top: 1rem; /* Espace en haut */
+    display: flex; /* Pour centrer l'image si besoin */
+    justify-content: center; /* Centre l'image horizontalement */
+  }
+  
+  .logoSidenav img {
+    width: 80%; /* Ajuste la largeur de l'image à 80% de la largeur de son conteneur */
+    max-width: 200px; /* Limite la largeur maximale de l'image */
+    height: auto; /* Garde les proportions de l'image */
+    border-radius: 5px; /* Arrondir les coins de l'image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet 3D */
+    height: 5rem;
+  }
   

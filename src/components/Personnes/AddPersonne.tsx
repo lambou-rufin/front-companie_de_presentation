@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { IPersonnes } from 'utils/inteface/interface';
@@ -21,6 +21,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
       email: '',
       phone: '',
       adress: '',
+      image: null, // Ajout de l'image ici
     },
     validationSchema: Yup.object({
       nom: Yup.string()
@@ -35,7 +36,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         .matches(/^[0-9]+$/, 'Le numéro de téléphone ne peut contenir que des chiffres')
         .min(10, 'Le numéro de téléphone doit comporter au moins 10 chiffres'),
       adress: Yup.string().optional(),
-      image: Yup.string().optional(), // Image facultative
+      image: Yup.mixed().nullable().optional(), // Image facultative
     }),
     onSubmit: async (values, { resetForm }) => {
       setLoading(true);
@@ -128,7 +129,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
       </Form.Group>
 
       <Form.Group controlId="formImage" className="text-start mt-3">
-        <Form.Label>Image (télécharger):</Form.Label>
+        <Form.Label>Image:</Form.Label>
         <Form.Control
           type="file"
           accept="image/*" // Accepter uniquement les images
@@ -145,15 +146,22 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         )}
       </Form.Group>
 
-      <Button variant="success" type="submit" className="text-start mt-3" disabled={loading}>
-        {loading ? (
-          <>
-            <Spinner loading={loading} /> {' '}Ajout...
-          </>
-        ) : (
-          'Ajouter'
-        )}
-      </Button>
+      <Row className="text-space-beetween mt-3">
+        <Col>
+          <Button variant="success" type="submit" disabled={loading} className="me-2">
+            {loading ? (
+              <>
+                <Spinner loading={loading} /> {' '}Ajout...
+              </>
+            ) : (
+              'Ajouter'
+            )}
+          </Button>
+          <Button variant="danger" onClick={onClose}>
+            Annuler
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 };

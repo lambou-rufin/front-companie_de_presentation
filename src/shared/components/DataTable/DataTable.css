@@ -4,6 +4,7 @@
   box-shadow: 0 0 10px rgb(190, 190, 194);
   border-radius: 8px; /* Coins arrondis */
   overflow: hidden; /* Cache les débordements */
+  margin: auto;
 }
 
 .table th,

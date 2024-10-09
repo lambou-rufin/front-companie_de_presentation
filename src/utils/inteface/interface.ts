@@ -24,16 +24,15 @@ export interface IFrequencyPersonne {
     // programs?: IPrograms[];
 // }
 
-// src/types/IPersonnes.ts
 export interface IPersonnes {
     nom: string;
+    prenom: string;
     email: string;
     phone: string;
-    prenom?: string; // Optional, if you want to include this
-    adress?: string; // Optional, if you want to include this
-    image?: string; // Optional, if you want to include this
-    roleId?: number; // Optional, if you want to include this
+    adress?: string;
+    image?: string | null; // Accepter null en plus de string ou undefined
   }
+  
 
 export interface IPrograms {
     // debut_time: string;

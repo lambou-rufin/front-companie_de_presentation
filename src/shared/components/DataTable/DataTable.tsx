@@ -34,7 +34,7 @@ const DataTable = <T extends object>({ columns, data, onRowClick }: DataTablePro
 
   return (
     <div>
-      <table {...getTableProps()} className="table table-striped">
+      <table {...getTableProps()} className="table table-hover">
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>

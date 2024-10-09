@@ -15,8 +15,9 @@
 }
 
 .table th {
-  color: #333;
+  color: #000000;
   font-weight: bold;
+  font-size: 20px;
 }
 
 /* Couleur de fond uniforme pour toutes les lignes */

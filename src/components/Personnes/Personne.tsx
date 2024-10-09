@@ -126,7 +126,7 @@ const Personne: FC = () => {
       </div>
 
       {/* Modal pour ajouter une personne */}
-      <Modal isOpen={isModalOpen} title="Ajouter une Personne" onClose={closeModal}>
+      <Modal isOpen={isModalOpen} title="Ajouter une personne" onClose={closeModal}>
         <AddPersonne onAddPerson={handleAddPerson} onClose={closeModal} /> {/* Passez onClose ici */}
       </Modal>
     </div>

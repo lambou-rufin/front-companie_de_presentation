@@ -68,6 +68,7 @@
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    justify-content: start;
   }
   
   .nav-links a {
@@ -126,7 +127,8 @@
     .sidenav {
       /* width: 100%; */
       display: none;
-      transition: transform 0.3s ease;
+      transition: left 0.3s ease; /* Animation fluide du déplacement */
+
     }
   }
 
@@ -152,8 +154,8 @@
   }
   
   .logoSidenav img {
-    width: 50px; /* Ajuste la largeur de l'image à 80% de la largeur de son conteneur */
-    max-width: 50px; /* Limite la largeur maximale de l'image */
+    width: 80px; /* Ajuste la largeur de l'image à 80% de la largeur de son conteneur */
+    max-width: 100px; /* Limite la largeur maximale de l'image */
     height: auto; /* Garde les proportions de l'image */
     border-radius: 5px; /* Arrondir les coins de l'image */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet 3D */

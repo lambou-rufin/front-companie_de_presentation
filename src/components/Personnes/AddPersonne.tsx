@@ -11,7 +11,7 @@ interface AddPersonneProps {
 }
 
 const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Etat pour le loading
   const [imagePreview, setImagePreview] = useState<string | null>(null); // État pour l'aperçu de l'image
 
   const formik = useFormik({
@@ -25,17 +25,16 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
     },
     validationSchema: Yup.object({
       nom: Yup.string()
-        .required('Le nom est requis')
-        .min(2, 'Le nom doit comporter au moins 2 caractères'),
-      prenom: Yup.string().min(2, 'Le prénom doit comporter au moins 2 caractères'),
+        .required('Le nom est requis'),
+      prenom: Yup.string().required("Le prénom est requis"),
       email: Yup.string()
         .required("L'email est requis")
         .email('Adresse email invalide'),
-      phone: Yup.string()
+      phone: Yup.string().required("Le contact est requis")
         .required('Le numéro de téléphone est requis')
         .matches(/^[0-9]+$/, 'Le numéro de téléphone ne peut contenir que des chiffres')
         .min(10, 'Le numéro de téléphone doit comporter au moins 10 chiffres'),
-      adress: Yup.string().optional(),
+      adress: Yup.string().required("L'adresse est requise"),
       image: Yup.mixed().nullable().optional(), // Image facultative
     }),
     onSubmit: async (values, { resetForm }) => {

@@ -13,7 +13,7 @@
 
 .main-content {
   flex: 1; /* Prend tout l'espace disponible après le SideNav */
-  padding: 20px; /* Espace intérieur */
+  padding: 10px; /* Espace intérieur */
   overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
   width: 100%;
   transition: margin-left 0.3s ease; /* Animation fluide pour le contenu */
@@ -31,12 +31,29 @@
   width: 0; /* Réduit la largeur à 0 quand le Sidenav est fermé */
 }
 
-.container.sidenav-open {
+.main-content.sidenav-open {
   margin-left: 300px; /* Décalage du contenu principal lorsque le SideNav est ouvert */
 }
 
+.main-content.sidenav-closed {
+   width: 100%; /* Décalage du contenu principal lorsque le SideNav est fermé */
+}
+
+
+.container.sidenav-open {
+  margin-left: 300px;/* Décalage du contenu principal lorsque le SideNav est fermé */
+ }
+
+.container.sidenav-closed {
+ width: 100%; /* Décalage du contenu principal lorsque le SideNav est fermé */
+}
+
+.header.sidenav-closed {
+    width: 100%; /* Décalage du header lorsque le SideNav est fermé */
+}
+
 .header.sidenav-open {
-  margin-left: 200px; /* Décalage du header lorsque le SideNav est ouvert */
+  margin-left: 300px; /* Décalage du header lorsque le SideNav est ouvert */
 }
 
 /* Responsive: Sidenav caché sur petits écrans */

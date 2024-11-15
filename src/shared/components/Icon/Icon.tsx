@@ -2,7 +2,7 @@
 import React from 'react';
 import { FaHome, FaUser, FaCog, FaBook, FaCode} from 'react-icons/fa';
 
-export type IconType = 'home' | 'user' | 'settings' | 'book' | 'code' | 'solid'| 'about' | 'plus';
+export type IconType = 'home' | 'user' | 'settings' | 'book' | 'code' | 'solid'| 'about' | 'plus' | 'dots';
 
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
@@ -31,7 +31,7 @@ const Icon: React.FC<IconProps> = ({ type, ...props }) => {
       IconComponent = FaCode;
       // break;
       // case 'plus':
-      //   IconComponent = FaPlus;
+      //   IconComponent = FaDots;
       break;
     default:
       IconComponent = FaHome;

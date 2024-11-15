@@ -1,28 +1,19 @@
-// import api from "../common/api/api";
-
-// export const getTutorial = () => {
-//   api.get('${baseURL}/tutorials')
-//     .then((response) => {
-//       console.log(response);
-//     })
-//     .catch((error) => console.log(error));
-//   // console.log("koto");
-// };
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
-async function getTutorialList() {
+async function getTutorialList(): Promise<any[]> { // Ajout d'un type de retour
   try {
-    const response = await fetch(`${baseURL}api/tutorials`, {
+    const response = await fetch(`${baseURL}api/tutorials/findAll`, {
       method: "GET",
-      credentials: "include", // Important for sending credentials
+      credentials: "include", // Important pour envoyer les credentials
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
+    return data; // Assurez-vous de retourner les données ici
   } catch (error) {
     console.error("Error fetching tutorials:", error);
+    throw error; // Propager l'erreur
   }
 }
 

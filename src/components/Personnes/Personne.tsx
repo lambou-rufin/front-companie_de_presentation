@@ -33,6 +33,10 @@ const Personne: FC = () => {
   const columns = React.useMemo(
     () => [
       {
+        Header: "ID",
+        accessor: "pers_id",
+      },
+      {
         Header: "Nom",
         accessor: "nom",
       },

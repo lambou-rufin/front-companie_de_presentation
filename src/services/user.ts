@@ -1,14 +1,14 @@
 import { ForgotpassResponse, IForgotPassword, LoginResponse } from "../utils/inteface/interface";
 
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
-export async function register(username: string, email: string, password: string) {
+export async function register(name: string, email: string, password: string) {
   try {
     const response = await fetch(`${baseURL}api/auth/signup`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ name, email, password }),
       credentials: "include", // Important for sending credentials
     });
     if (!response.ok) {

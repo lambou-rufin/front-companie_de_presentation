@@ -1,6 +1,6 @@
 // Footer.tsx
 import React from 'react';
-import './Footer.css'; // Make sure to import your CSS file
+import './Footer.css';
 
 const Footer: React.FC = () => {
   return (

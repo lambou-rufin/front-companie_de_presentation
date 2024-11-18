@@ -40,11 +40,9 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
         <li className="toggle-sidenav">
           <button onClick={toggleSideNav}>{isSideNavOpen ? "✖" : "☰"}</button>
         </li>
-        {/* <li>
-          <h1>
-            <i>Gestion de présentation</i>
-          </h1>
-        </li> */}
+        <li>
+          <h1>Gestion de présentation</h1>
+        </li>
         <li className="user-section">
           {/* Afficher le nom et l'email de l'utilisateur */}
           {user && (

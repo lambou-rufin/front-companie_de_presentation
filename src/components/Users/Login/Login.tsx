@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
       // setLoading(false);
 
       // Redirige immédiatement après la réussite de la connexion
-      navigate('/dashboard'); // Redirection vers le tableau de bord
+      navigate('/personne'); // Redirection vers le tableau de bord
     } catch (error) {
       setAlertMessage('Une erreur s\'est produite lors de la connexion.');
       setAlertType('error');

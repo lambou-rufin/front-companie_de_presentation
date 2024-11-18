@@ -5,6 +5,7 @@ import {
     ETypeLocalizations,
     ETypeProgramsEventEnum,
     ERole,
+    TutorialStatus,
 } from "./enum";
 
 export interface IFrequencyPersonne {
@@ -115,7 +116,30 @@ export interface LoginResponse {
     password: string
   }
 
-// export const formatDate = (date: Date) => {
-//     const NonFormatedDate = new Date(date);
-//     return `${NonFormatedDate.getDate()}/${NonFormatedDate.getMonth() + 1}/${NonFormatedDate.getFullYear()}`;
-// };
+ export interface AddPersonneProps {
+    onAddPerson: (person: IPersonnes) => void;
+    onClose: () => void;
+  }
+
+export interface ILanguage{
+    nom: string
+}
+export interface AddLanguageProps {
+    onAddLanguage: (language: ILanguage) => void;
+    onClose: () => void;
+  }
+
+  export interface AddTutorialProps {
+    onAddTutorial: (tutorial: ITutorial) => void;
+    onClose: () => void;
+  }
+
+  export interface ITutorial {
+    id?: number;
+    title: string;
+    description: string;
+    designation: string;
+    status: TutorialStatus; // Utilisation de l'énumération
+    createdAt: Date; // Type Date
+}
+  

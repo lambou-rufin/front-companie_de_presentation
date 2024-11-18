@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { IPersonnes } from 'utils/inteface/interface';
+import { AddPersonneProps, IPersonnes } from 'utils/inteface/interface';
 import Spinner from 'shared/components/Spinner/Spinner';
 
-interface AddPersonneProps {
-  onAddPerson: (person: IPersonnes) => void;
-  onClose: () => void;
-}
 
 const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
   const [loading, setLoading] = useState(false); // Etat pour le loading

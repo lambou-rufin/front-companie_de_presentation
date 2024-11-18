@@ -33,3 +33,11 @@ export enum ECrudAction {
     ADD = "add",
     EDIT = "edit",
 }
+
+
+export enum TutorialStatus {
+    EN_COURS = 'en_cours',
+    EN_ATTENTE = 'en_attente',
+    DEJA_FINI = 'déjà_fini',
+  }
+  

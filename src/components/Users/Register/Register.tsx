@@ -11,7 +11,7 @@ const logo = require("../../../assets/img/logo.jpg")
 
 
 const RegisterSchema = Yup.object().shape({
-  username: Yup.string().required('Username is required'),
+  name: Yup.string().required('name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   image: Yup.mixed()
   .test('fileSize', 'Le fichier est trop volumineux', (value: any | undefined) => {
@@ -32,10 +32,10 @@ const RegisterForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleSubmit = async (values: { username: string; email: string; image: string, password: string; confirmPassword: string }) => {
+  const handleSubmit = async (values: { name: string; email: string; image: string, password: string; confirmPassword: string }) => {
     try {
       setError(null); // Réinitialiser les erreurs
-      await register(values.username, values.email, values.password); // Appel à la fonction d'inscription
+      await register(values.name, values.email, values.password); // Appel à la fonction d'inscription
       // Redirection ou gestion après une inscription réussie
          navigate('/login'); // Redirection après une connexion réussie
 
@@ -63,7 +63,7 @@ const RegisterForm: React.FC = () => {
               {error && <div className="alert alert-danger">{error}</div>}
               <Formik
                 initialValues={{
-                  username: '',
+                  name: '',
                   email: '',
                   image:  '',
                   password: '',
@@ -75,16 +75,16 @@ const RegisterForm: React.FC = () => {
                 {({ errors, touched }) => (
                   <Form>
                     <BootstrapForm.Group>
-                      <BootstrapForm.Label>Username</BootstrapForm.Label>
+                      <BootstrapForm.Label>Name</BootstrapForm.Label>
                       <Field
-                        name="username"
+                        name="name"
                         as={BootstrapForm.Control}
                         type="text"
-                        placeholder="Enter username"
-                        isInvalid={!!errors.username && touched.username}
+                        placeholder="Enter name"
+                        isInvalid={!!errors.name && touched.name}
                       />
                       <BootstrapForm.Control.Feedback type="invalid">
-                        {errors.username}
+                        {errors.name}
                       </BootstrapForm.Control.Feedback>
                     </BootstrapForm.Group>
 
@@ -109,7 +109,7 @@ const RegisterForm: React.FC = () => {
                         as={BootstrapForm.Control}
                         type="file"
                         placeholder="Enter image"
-                        isInvalid={!!errors.username && touched.username}
+                        isInvalid={!!errors.name && touched.name}
                       />
                       <BootstrapForm.Control.Feedback type="invalid">
                         {errors.image}

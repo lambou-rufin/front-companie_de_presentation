@@ -1,5 +1,5 @@
 // Layout.tsx
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import SideNav from "../Sidenav";
@@ -25,7 +25,7 @@ const Layout: FC = () => {
     };
 
     // Détection des changements de route
-    React.useEffect(() => {
+    useEffect(() => {
         handleRouteChange(); // Appel de la fonction lorsque la route change
     }, [location.pathname]); // Dépendance sur la route actuelle
 

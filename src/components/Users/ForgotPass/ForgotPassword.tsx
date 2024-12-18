@@ -48,7 +48,7 @@ const ForgotPasswordForm: React.FC = () => {
             >
               {({ errors, touched }) => (
                 <Form>
-                  <BootstrapForm.Group>
+                  <BootstrapForm.Group className="text-start mt-3">
                     <BootstrapForm.Label>Email</BootstrapForm.Label>
                     <Field
                       name="email"

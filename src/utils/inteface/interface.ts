@@ -119,6 +119,8 @@ export interface LoginResponse {
  export interface AddPersonneProps {
     onAddPerson: (person: IPersonnes) => void;
     onClose: () => void;
+    onSuccessToast: () => void;
+
   }
 
 export interface ILanguage{

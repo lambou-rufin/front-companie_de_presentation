@@ -87,7 +87,7 @@ header a:hover{
 }
 
 /* Toggle button styles */
-.toggle_button {
+/* .toggle_button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,7 +98,7 @@ header a:hover{
   cursor: pointer;
   color: white;
   font-size: 18px;
-}
+} */
 
 /* Dropdown menu */
 .dropdown_menu {
@@ -113,6 +113,9 @@ header a:hover{
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 15px rgb(109, 112, 145);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .dropdown_menu.open {
@@ -156,4 +159,71 @@ header a:hover{
 .header-with-sidenav-open .toggle-sidenav button {
   left: 240px; /* Déplacement vers la droite quand le SideNav est ouvert */
   color: white;
+}
+
+
+
+.uldrop {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Alignement en colonne */
+  gap: 10px; /* Espacement entre les éléments */
+}
+
+.uldrop li {
+  display: flex;
+  align-items: center; /* Aligner les éléments de chaque ligne */
+  padding: 10px 20px; /* Espacement interne des éléments */
+  border-bottom: 1px solid #ddd; /* Ligne de séparation entre les éléments */
+}
+
+.uldrop li:last-child {
+  border-bottom: none; /* Supprimer la bordure du dernier élément */
+}
+
+.email-initial {
+  display: flex;
+  align-items: center;
+}
+
+.toggle_button {
+  background-color: #111827;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #888;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
 }

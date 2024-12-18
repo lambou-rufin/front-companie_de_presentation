@@ -16,7 +16,12 @@
   padding: 10px; /* Espace intérieur */
   overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
   width: 100%;
+  /* grid-area: main; */
   transition: margin-left 0.3s ease; /* Animation fluide pour le contenu */
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+
 }
 
 /* Styles pour le Sidenav */
@@ -25,6 +30,7 @@
   transition: width 0.3s ease; /* Transition fluide pour l'ouverture du SideNav */
   overflow-x: hidden;
   white-space: nowrap;
+  /* grid-area: sidenav; */
 }
 
 .sidenav.closed {
@@ -64,6 +70,7 @@
 
   .sidenav {
     width: 0; /* Réduit la largeur à 0 quand le Sidenav est caché */
+    flex: 1;
   }
 
   .sidenav.open {
@@ -76,5 +83,8 @@
 
   .header.sidenav-open {
     margin-left: 0; /* Pas de décalage sur petits écrans */
+  }
+  .main-content{
+    flex-direction: column;
   }
 }

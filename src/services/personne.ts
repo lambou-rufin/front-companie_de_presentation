@@ -21,26 +21,52 @@ async function getPersonneList() {
 export default getPersonneList;
 
 // Nouvelle fonction pour ajouter une personne
-export async function addPersonne(person:any) {
+export async function addPersonne(person: any) {
   try {
-    const response = await fetch(`${baseURL}api/personnes`, {
-      method: "POST",
-      credentials: "include", // Important pour envoyer les informations d'identification
+    console.log('Sending person data:', person);  // Vérifiez l'objet envoyé
+
+    const response = await fetch(`${baseURL}api/personnes/createPers`, {
+      method: 'POST',
+      credentials: 'include',  // Important pour envoyer les informations d'identification
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(person), // Conversion de l'objet en chaîne JSON
+      body: JSON.stringify(person), // Envoi des données sous forme de JSON
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    
-    const data = await response.json(); // Optionnel, en fonction de ce que votre API retourne
-    return data; // Assurez-vous de retourner les données si nécessaire
+
+    const data = await response.json();  // Vérifiez la réponse
+    console.log('Response data:', data);  // Afficher la réponse du serveur
+    return data;  // Assurez-vous de retourner les données si nécessaire
   } catch (error) {
-    console.error("Error adding personne:", error);
-    throw error; // Lancez l'erreur pour qu'elle soit gérée dans le composant
+    console.error('Error adding personne:', error);
+    throw error;  // Lancez l'erreur pour qu'elle soit gérée dans le composant
   }
 }
+
+
+// Fonction pour supprimer une personne
+export async function deletePersonne(pers_id: string) {
+  try {
+    const response = await fetch(`${baseURL}api/personnes/deletePersonne/${pers_id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erreur API : ${response.statusText}`);
+    }
+
+    return await response.json(); // Optionnel, selon ce que l’API retourne
+  } catch (error) {
+    console.error("Erreur dans deletePersonne :", error);
+    throw error;
+  }
+}
+
+
+
 

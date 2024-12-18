@@ -1,5 +1,6 @@
 import React from 'react';
-import './ConfirmationModal.css';
+import { Modal, Button } from 'react-bootstrap';  // Importer les composants Modal et Button de React Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';  // Assure-toi que le CSS de Bootstrap est importé
 
 interface ConfirmationModalProps {
   isOpen: boolean;
@@ -9,18 +10,19 @@ interface ConfirmationModalProps {
 }
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onConfirm, onCancel, message }) => {
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <Modal show={isOpen} onHide={onCancel} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Confirmation</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <p>{message}</p>
-        <div className="modal-actions">
-          <button onClick={onCancel}>Cancel</button>
-          <button onClick={onConfirm}>Confirm</button>
-        </div>
-      </div>
-    </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+        <Button variant="primary" onClick={onConfirm}>Confirm</Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

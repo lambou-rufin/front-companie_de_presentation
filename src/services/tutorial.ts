@@ -19,3 +19,21 @@ async function getTutorialList(): Promise<any[]> { // Ajout d'un type de retour
 
 export default getTutorialList;
 
+// Fonction pour supprimer un tuto
+export async function deleteTutoriel(id: number) {
+  try {
+    const response = await fetch(`${baseURL}api/tutorials/deleteTutoriel/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erreur API : ${response.statusText}`);
+    }
+
+    return await response.json(); // Optionnel, selon ce que l’API retourne
+  } catch (error) {
+    console.error("Erreur dans delete tutoriel :", error);
+    throw error;
+  }
+}

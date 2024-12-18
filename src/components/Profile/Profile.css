@@ -1,4 +1,4 @@
-.profile_user{
+.profile_user {
   position: relative;
   width: 1000px;
   height: 600px;
@@ -7,17 +7,14 @@
   overflow: hidden;
 }
 
-h1{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    justify-content: center;
+h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: center;
 }
 
-
-.user_image{
+.user_image {
   border: 1px;
-  /* border-radius: 50%; */
 }
-
 
 .containera {
   width: 15rem;
@@ -29,19 +26,18 @@ h1{
   margin-left: 1rem;
   margin-top: 1rem;
 }
-.containera h1{
+
+.containera h1 {
   font-size: 0.8em;
 }
 
-.containera h4{
+.containera h4 {
   font-size: 0.9em;
 }
 
 .containera img {
   width: 100%;
   transition: all 0.5s;
-  /* justify-content: center;
-  align-items: center; */
 }
 
 .content {
@@ -50,7 +46,6 @@ h1{
   left: 0;
   height: 25%;
   width: 100%;
-  /* center the content */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,23 +64,40 @@ h1{
   transform: translateY(-30%);
 }
 
-
-/* Scrollbar */
-/* ::-webkit-scrollbar {
-  background-color: transparent;
-  width: 10px;
+/* Style pour le bouton en bas à droite */
+/* Style pour le bouton en bas à droite */
+.edit-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1975f7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(#21d4fd, #b721ff);
-  border-radius: 100px;
+/* .edit-button:hover {
+  background-color: #582188;
 } */
 
+/* Ajoutez ce CSS si vous souhaitez un contrôle plus précis */
+.modal-dialog {
+  margin: auto; /* Centre le modal horizontalement */
+}
+
+.modal-content {
+  max-width: 500px; /* Limite la largeur maximale du modal */
+}
+
+/* Responsiveness */
 @media (max-width: 991.98px) {
-  .profile_user{
+  .profile_user {
     width: 100%;
   }
-  .containera{
+  .containera {
     width: 100%;
   }
 }

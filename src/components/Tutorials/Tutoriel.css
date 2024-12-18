@@ -1,13 +1,151 @@
-.data-table-top{
-    margin: 0;
+/* Styles généraux */
+body {
+  font-family: Arial, sans-serif;
 }
 
+/* Titre principal */
+h1 {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
 
-@media (max-width: 991.98px) {
-    .data-table-top{
-      width: 100%;
-    }
-    .data-table-top button{
-        display: list-item;
-    }
+/* Conteneur de la table */
+.table-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Barre supérieure de la table (actions et recherche) */
+.data-table-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.data-table-top input[type="text"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.data-table-top input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Icône d'ajout */
+.add-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-icon:hover {
+  color: #28a745;
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Table */
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table-container th,
+.table-container td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-container th {
+  background: #f8f9fa;
+  font-weight: bold;
+}
+
+.table-container td {
+  vertical-align: middle;
+}
+
+.table-container tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Actions dans les colonnes */
+.table-container .d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.table-container button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+}
+
+.table-container button:hover {
+  color: #0056b3;
+}
+
+/* Modal */
+.modal-content {
+  border-radius: 8px;
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Messages */
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+/* Réactivité */
+@media (max-width: 768px) {
+  .table-container {
+    padding: 1rem;
   }
+
+  .data-table-top {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .data-table-top input[type="text"] {
+    width: 100%;
+  }
+}

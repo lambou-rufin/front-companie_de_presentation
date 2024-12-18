@@ -47,7 +47,7 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
           {/* Afficher le nom et l'email de l'utilisateur */}
           {user && (
             <div className="user-info">
-              <span className="user-name">{user.name}</span>
+              {/* <span className="user-name">{user.name}</span> */}
               {/* <span className="user-email">{user.email}</span> */}
             </div>
           )}
@@ -68,8 +68,23 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
           {/* Menu déroulant qui s'affiche en fonction de l'état du menu */}
           <div className={`dropdown_menu ${isOpen ? "open" : ""}`}>
             <ul className="uldrop">
+              <li>Compte</li>
               <li>
-                <Link to={routes.LOGOUT}><Icon name="user" className="icon" type="user" />Déconnexion</Link>
+                <div className="email-initial">
+                  <span className="toggle_button">{firstChar}</span>
+                  {user && (
+                    <div className="user-info">
+                      <span className="user-name">{user.name}</span>
+                      <span className="user-email">{user.email}</span>
+                    </div>
+                  )}
+                </div>
+              </li>
+              <li>
+                <Link to={routes.LOGOUT} className="link">
+                  <Icon name="user" className="icon" type="user" />
+                  Déconnexion
+                </Link>
               </li>
             </ul>
           </div>

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clearToken } from '../../services/user';// Assurez-vous de créer une fonction pour effacer le token
 
-const Logout: React.FC = () => {
+const Logout:React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {

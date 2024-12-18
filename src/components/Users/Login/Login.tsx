@@ -3,69 +3,54 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button, Container, Row, Col, Form as BootstrapForm } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../../services/user'; 
+import { login } from '../../../services/user';
 import Spinner from 'shared/components/Spinner/Spinner';
 import SweetAlert from 'shared/components/SweetAlert/SweetAlert';
 import { AuthForm } from 'utils/inteface/interface';
 import routes from 'router/routes';
-const logo = require("../../../assets/img/logo.jpg")
+import './Login.css'; // Importez le fichier CSS
+const logo = require('../../../assets/img/logo.jpg'); // Importez votre logo
 
-
-// Schéma de validation avec Yup pour les champs email et mot de passe
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Email is required').email('Invalid email address'),
   password: Yup.string().required('Password is required'),
 });
 
 const LoginForm: React.FC = () => {
-  const [loading, setLoading] = useState(false); // État pour gérer le spinner de chargement
-  const [alertVisible, setAlertVisible] = useState(false); // État pour afficher l'alerte
-  const [alertMessage, setAlertMessage] = useState(''); // Message d'alerte
-  const [alertType, setAlertType] = useState<'success' | 'error' | 'warning' | 'info'>('success'); // Type d'alerte
-  const navigate = useNavigate(); // Hook pour naviguer entre les routes
+  const [loading, setLoading] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState<'success' | 'error' | 'warning' | 'info'>('success');
+  const navigate = useNavigate();
 
-  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (values: AuthForm) => {
     try {
-      // Déclenche le spinner pendant le traitement du login
-      // setLoading(true);
       const { token, user } = await login(values.email, values.password);
-      // Stocke le token et les informations utilisateur dans le localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-
-      // Arrête le spinner une fois que le login est réussi
-      // setLoading(false);
-
-      // Redirige immédiatement après la réussite de la connexion
-      navigate('/personne'); // Redirection vers le tableau de bord
+      navigate('/personne');
     } catch (error) {
-      setAlertMessage('Une erreur s\'est produite lors de la connexion.');
+      setAlertMessage("Une erreur s'est produite lors de la connexion.");
       setAlertType('error');
-      setAlertVisible(true); // Affiche l'alerte en cas d'erreur
-      // setLoading(false); 
-      // Arrête le spinner en cas d'erreur
+      setAlertVisible(true);
     }
   };
 
   return (
-    <Container className="vh-100 d-flex justify-content-center align-items-center">
-      <Row className="w-100">
-        <Col md={6} className="d-flex align-items-center">
-          <div className="w-100 text-center">
-              {/* Utilisation de l'image importée */}
-              <img src={logo} alt="Logo" className="img-fluid"/>
-              </div>
+    <Container fluid className="login-container vh-100">
+      <Row className="h-100">
+        {/* Image côté gauche */}
+        <Col xs={12} md={6} className="image-container">
+          <img src={logo} alt="Logo" className="image-full" />
         </Col>
-        <Col md={6} className="d-flex align-items-center">
-          <div className="w-100">
+
+        {/* Formulaire côté droit */}
+        <Col xs={12} md={6} className="form-container">
+          <div className="form-content">
             <div className="text-center mb-4">
               <h2>Se connecter</h2>
-              {/* <p>Welcome back. Please login to your account.</p> */}
             </div>
-            {/* Affiche le spinner pendant le chargement */}
-            {loading && <Spinner loading={loading} />} 
-            
+            {loading && <Spinner loading={loading} />}
             <Formik
               initialValues={{ email: '', password: '', remember: false }}
               validationSchema={LoginSchema}
@@ -73,48 +58,52 @@ const LoginForm: React.FC = () => {
             >
               {({ errors, touched }) => (
                 <Form>
-                  {/* Champ pour l'email */}
-                  <BootstrapForm.Group controlId="formEmail">
+                  <BootstrapForm.Group controlId="formEmail" className="text-start mt-3">
                     <BootstrapForm.Label>Email</BootstrapForm.Label>
                     <Field
                       name="email"
                       type="email"
                       className={`form-control ${errors.email && touched.email ? 'is-invalid' : ''}`}
                     />
-                    {errors.email && touched.email ? (
+                    {errors.email && touched.email && (
                       <div className="invalid-feedback">{errors.email}</div>
-                    ) : null}
+                    )}
                   </BootstrapForm.Group>
 
-                  {/* Champ pour le mot de passe */}
-                  <BootstrapForm.Group controlId="formPassword">
-                    <BootstrapForm.Label>Password</BootstrapForm.Label>
+                  <BootstrapForm.Group controlId="formPassword" className="text-start mt-3">
+                    <BootstrapForm.Label>Mot de passe</BootstrapForm.Label>
                     <Field
                       name="password"
                       type="password"
                       className={`form-control ${errors.password && touched.password ? 'is-invalid' : ''}`}
                     />
-                    {errors.password && touched.password ? (
+                    {errors.password && touched.password && (
                       <div className="invalid-feedback">{errors.password}</div>
-                    ) : null}
+                    )}
                   </BootstrapForm.Group>
-                  <p><Link to={routes.FORGOTPASSWORD}>Forgot Password?</Link></p>
+
+                  <p>
+                    <Link to={routes.FORGOTPASSWORD}>Mot de passe oublié ?</Link>
+                  </p>
+
                   <Button variant="danger" type="submit" className="w-100 mt-3" disabled={loading}>
-                    {loading ? 'Loading...' : 'Login'} {/* Change le texte du bouton pendant le chargement */}
+                    {loading ? 'Chargement...' : 'Connexion'}
                   </Button>
                   <div className="text-center mt-3">
-                    <p>Don't have an account? <Link to={routes.REGISTER}>Register here</Link></p>
+                    <p>
+                      Pas encore de compte ?{' '}
+                      <Link to={routes.REGISTER}>Inscrivez-vous ici</Link>
+                    </p>
                   </div>
                 </Form>
               )}
             </Formik>
 
-            {/* Affiche l'alerte si nécessaire */}
             {alertVisible && (
               <SweetAlert
                 message={alertMessage}
                 type={alertType}
-                onClose={() => setAlertVisible(false)} // Ferme l'alerte
+                onClose={() => setAlertVisible(false)}
               />
             )}
           </div>

@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { AddPersonneProps, IPersonnes } from 'utils/inteface/interface';
 import Spinner from 'shared/components/Spinner/Spinner';
+import { AddPersonneProps } from 'utils/inteface/interface';
 
-
-const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
-  const [loading, setLoading] = useState(false); // Etat pour le loading
-  const [imagePreview, setImagePreview] = useState<string | null>(null); // État pour l'aperçu de l'image
+const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose, onSuccessToast }) => {
+  const [loading, setLoading] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const formik = useFormik({
     initialValues: {
@@ -17,21 +16,18 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
       email: '',
       phone: '',
       adress: '',
-      image: null, // Ajout de l'image ici
+      image: null,
     },
     validationSchema: Yup.object({
-      nom: Yup.string()
-        .required('Le nom est requis'),
-      prenom: Yup.string().required("Le prénom est requis"),
-      email: Yup.string()
-        .required("L'email est requis")
-        .email('Adresse email invalide'),
-      phone: Yup.string().required("Le contact est requis")
-        .required('Le numéro de téléphone est requis')
+      nom: Yup.string().required('Le nom est requis'),
+      prenom: Yup.string().required('Le prénom est requis'),
+      email: Yup.string().email('Adresse email invalide').required("L'email est requis"),
+      phone: Yup.string()
         .matches(/^[0-9]+$/, 'Le numéro de téléphone ne peut contenir que des chiffres')
-        .min(10, 'Le numéro de téléphone doit comporter au moins 10 chiffres'),
+        .min(10, 'Le numéro de téléphone doit comporter au moins 10 chiffres')
+        .required('Le numéro de téléphone est requis'),
       adress: Yup.string().required("L'adresse est requise"),
-      image: Yup.mixed().nullable().optional(), // Image facultative
+      image: Yup.mixed().nullable().optional(),
     }),
     onSubmit: async (values, { resetForm }) => {
       setLoading(true);
@@ -39,24 +35,26 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         await onAddPerson(values);
         resetForm();
         onClose();
+        setImagePreview(null);
+        onSuccessToast(); // Lever l'événement de succès vers le parent
       } finally {
         setLoading(false);
       }
     },
   });
 
-  // Gérer l'aperçu de l'image sélectionnée
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // Sélectionner le premier fichier
+    const file = event.target.files?.[0];
     if (file) {
-      const imageURL = URL.createObjectURL(file); // Créer une URL temporaire pour prévisualiser l'image
+      const imageURL = URL.createObjectURL(file);
       setImagePreview(imageURL);
-      formik.setFieldValue('image', file); // Assurez-vous de stocker le fichier dans Formik
+      formik.setFieldValue('image', file);
     }
   };
 
   return (
     <Form onSubmit={formik.handleSubmit}>
+      {/* Champs du formulaire */}
       <Form.Group controlId="formNom" className="text-start mt-3">
         <Form.Label>Nom:</Form.Label>
         <Form.Control
@@ -66,9 +64,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
           onChange={formik.handleChange}
           isInvalid={!!formik.errors.nom}
         />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.nom}
-        </Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">{formik.errors.nom}</Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formPrenom" className="text-start mt-3">
@@ -80,9 +76,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
           onChange={formik.handleChange}
           isInvalid={!!formik.errors.prenom}
         />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.prenom}
-        </Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">{formik.errors.prenom}</Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formEmail" className="text-start mt-3">
@@ -94,9 +88,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
           onChange={formik.handleChange}
           isInvalid={!!formik.errors.email}
         />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.email}
-        </Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">{formik.errors.email}</Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formPhone" className="text-start mt-3">
@@ -108,9 +100,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
           onChange={formik.handleChange}
           isInvalid={!!formik.errors.phone}
         />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.phone}
-        </Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">{formik.errors.phone}</Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formAdress" className="text-start mt-3">
@@ -120,16 +110,14 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
           name="adress"
           value={formik.values.adress}
           onChange={formik.handleChange}
+          isInvalid={!!formik.errors.adress}
         />
+        <Form.Control.Feedback type="invalid">{formik.errors.adress}</Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formImage" className="text-start mt-3">
         <Form.Label>Image:</Form.Label>
-        <Form.Control
-          type="file"
-          accept="image/*" // Accepter uniquement les images
-          onChange={handleImageChange} // Gestionnaire pour l'aperçu de l'image
-        />
+        <Form.Control type="file" accept="image/*" onChange={handleImageChange} />
         {imagePreview && (
           <div className="mt-3">
             <img
@@ -141,12 +129,13 @@ const AddPersonne: React.FC<AddPersonneProps> = ({ onAddPerson, onClose }) => {
         )}
       </Form.Group>
 
-      <Row className="text-space-beetween mt-3">
+      {/* Boutons */}
+      <Row className="text-space-between mt-3">
         <Col>
           <Button variant="success" type="submit" disabled={loading} className="me-2">
             {loading ? (
               <>
-                <Spinner loading={loading} /> {' '}Ajout...
+                <Spinner loading={loading} /> {' '} Ajout...
               </>
             ) : (
               'Ajouter'

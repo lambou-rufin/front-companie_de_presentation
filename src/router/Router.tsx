@@ -76,7 +76,7 @@ const Router: FC = () => {
           <Route path={routes.PERSONNE} element={<Personne />} />
           <Route path={routes.TUTORIAL} element={<Tutorial />} />
           <Route path={routes.LANGAGEDEPROGRAMMATION} element={<LangageDeProgrammation />} />
-          <Route path={routes.PROFILE} element={<Profile />} />
+          <Route path={routes.PROFILE} element={<Profile user={null} />} />
           <Route path={routes.SETTINGS} element={<Settings />} />
           <Route path={routes.LOGOUT} element={<Logout />} />
           <Route path={routes.ABOUT} element={<About />} />

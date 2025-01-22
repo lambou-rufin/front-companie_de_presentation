@@ -28,7 +28,7 @@ const AddLanguage: React.FC<AddLanguageProps> = ({ onAddLanguage, onClose }) => 
 
   return (
     <Form onSubmit={formik.handleSubmit}>
-      <Form.Group controlId="formNom" className="text-start mt-3 mb-3">
+      <Form.Group controlId="formNom" className="text-start mt-2">
         <Form.Label>Nom</Form.Label>
         <Form.Control
           type="text"

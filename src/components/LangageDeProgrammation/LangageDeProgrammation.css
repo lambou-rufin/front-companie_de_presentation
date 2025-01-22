@@ -1,6 +1,7 @@
 .langage-container {
     padding: 20px;
     background-color: #f4f4f9; /* Fond clair pour le contraste */
+    flex: 1; /* Prend tout l'espace disponible après le SideNav */
   }
   
   .data-table-top {

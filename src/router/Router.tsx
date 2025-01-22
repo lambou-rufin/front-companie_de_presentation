@@ -59,6 +59,7 @@ import Personne from '../components/Personnes/Personne';
 import About from '../components/About';
 import ForgotPassword from '../components/Users/ForgotPass';
 import Layout from '../components/main/layout/Layout'; // Vérifie que Layout utilise Outlet pour afficher les composants enfants
+import PresenterTutorial from 'components/Tutorials/PresenterTutorial/PresenterTutorial';
 
 const Router: FC = () => {
   return (
@@ -75,6 +76,7 @@ const Router: FC = () => {
           <Route path={routes.DASHBOARD} element={<Dashboard />} />
           <Route path={routes.PERSONNE} element={<Personne />} />
           <Route path={routes.TUTORIAL} element={<Tutorial />} />
+          <Route path={routes.PRESENTERTUTORIAL} element={<PresenterTutorial />} />
           <Route path={routes.LANGAGEDEPROGRAMMATION} element={<LangageDeProgrammation />} />
           <Route path={routes.PROFILE} element={<Profile user={null} />} />
           <Route path={routes.SETTINGS} element={<Settings />} />

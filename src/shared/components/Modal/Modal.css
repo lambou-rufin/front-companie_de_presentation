@@ -13,9 +13,7 @@
 
 .modal-content {
   background-color: white; /* Fond du modal */
-  border-radius: 8px; /* Coins arrondis */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
-  width: 90%; /* Largeur adaptable */
   width: 600px; /* Largeur maximum du modal */
   padding: 20px; /* Espacement interne */
   position: relative; /* Position relative pour le bouton de fermeture */
@@ -34,11 +32,11 @@
 .close-button {
   background: none; /* Pas de fond */
   border: none; /* Pas de bordure */
-  font-size: 24px; /* Taille de la police pour le bouton */
+  font-size: 24px;
   cursor: pointer; /* Curseur pointer pour l'interaction */
-  color: #333; /* Couleur du texte */
+  color: #333;
 }
 
 .close-button:hover {
-  color: red; /* Change la couleur au survol */
+  color: red; 
 }

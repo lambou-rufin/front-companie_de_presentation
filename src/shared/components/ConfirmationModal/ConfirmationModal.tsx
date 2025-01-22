@@ -19,8 +19,8 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onConfirm
         <p>{message}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onCancel}>Cancel</Button>
-        <Button variant="primary" onClick={onConfirm}>Confirm</Button>
+        <Button variant="danger" onClick={onCancel}>Cancel</Button>
+        <Button variant="success" onClick={onConfirm}>Confirm</Button>
       </Modal.Footer>
     </Modal>
   );

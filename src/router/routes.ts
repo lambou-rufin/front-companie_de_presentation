@@ -6,6 +6,7 @@ const routes = {
     REGISTER: '/register',
     DASHBOARD: '/dashboard',
     TUTORIAL: '/tutoriel',
+    PRESENTERTUTORIAL: '/presernterTutoriel',
     LANGAGEDEPROGRAMMATION: '/langageDeProgrammation',
     PROFILE: '/profile',
     SETTINGS: '/settings',

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import routes from "../../../router/routes";
 import "./Header.css";
 import Icon from "shared/components/Icon/Icon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface HeaderProps {
   toggleSideNav: () => void; // Propriété pour toggler le Sidenav
@@ -82,7 +84,12 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
               </li>
               <li>
                 <Link to={routes.LOGOUT} className="link">
-                  <Icon name="user" className="icon" type="user" />
+                  <Icon name="user" className="text-danger d-flex justify-content-between align-items-center" type="user"/>
+                  {/* <FontAwesomeIcon
+                    icon={faUserCircle}
+                    size="2x"
+                    className="text-danger"
+                  /> */}
                   Déconnexion
                 </Link>
               </li>

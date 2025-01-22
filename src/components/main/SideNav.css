@@ -1,106 +1,72 @@
 /* src/components/Layout/SideNav.css */
+.sidenav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto; 
+  width: 300px;
+  height: 100%;
+  background-color: #111827;
+  color: white;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
 
-/* .sidenav {
-    position: fixed;
-    left: 0;
-    top: 0; */
-    /* width: 300px; */
-    /* height: 100%; */
-    /* background-color: #1b1f24; */
-    /* background-color: #111827;
-    color: white;
-    font: italic;
-    transition: transform 0.3s ease;
-    z-index: 1000;
-  } */
-  
-  /* .sidenav.closed {
-    transform: translateX(-250px);
-  }
-  
-  .sidenav.open {
-    transform: translateX(0);
-  } */
+.sidenav.closed {
+  transform: translateX(-250px);
+}
 
-  .sidenav {
-    position: fixed;
-    left: 0;
-    top: 0;
-    overflow-y: auto; /* Si le contenu du sidenav dépasse, autoriser uniquement le scroll interne */
-    width: 250px; /* Définir une largeur fixe pour le menu latéral */
-    height: 100%;
-    background-color: #111827;
-    color: white;
-    transition: transform 0.3s ease;
-    z-index: 1000; /* S'assurer que le SideNav est derrière le bouton */
-  }
-  
-  .sidenav.closed {
-    transform: translateX(-250px);
-  }
-  
-  .sidenav.open {
-    transform: translateX(0);
-  }
-  
-  
-  .logoSidenav{
+.sidenav.open {
+  transform: translateX(0);
+}
+
+.logoSidenav {
   margin-top: 2rem;
-  }
+}
 
-  .menu-btn {
-    background-color: #111827;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    width: 100%;
-    text-align: right;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-  
-  .sidenav .menu-btn{
-   display: block;
-  }
-  .nav-links {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    transition: background-color 0.3s ease;
-    overflow: hidden;
-    transition: all 0.5s;
-  }
-  
-  .nav-links a:hover {
-    /* background-color: #495057; */
-    border-radius: 5px;
-    border-color: transparent;
-    background: linear-gradient(
-      90deg,
-      #7a7b7c,
-      #696d6c,
-      #636566,
-      #9c9c9ca8,
-      #7e7d7d,
-      #b8b8b8
-    );
-    background-size: 400%;
-    /* box-shadow: 0 0 15px rgb(2, 4, 24); */
-    /* animation: glow 12s linear forwards; */
-    /* margin: 1rem; */
-  }
+.menu-btn {
+  background-color: #111827;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: right;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
 
-  
-  .nav-links a::before {
+.nav-links {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  border-radius: 5px;
+  background: linear-gradient(
+    90deg,
+    #7a7b7c,
+    #696d6c,
+    #636566,
+    #9c9c9ca8,
+    #7e7d7d,
+    #b8b8b8
+  );
+  background-size: 400%;
+}
+
+.nav-links a::before {
   content: "";
   position: absolute;
   top: -1px;
@@ -111,54 +77,113 @@
   filter: blur(36px);
   z-index: -1;
   opacity: 0;
-  /* transition: 0.5s ease-out; */
 }
 
-/* @keyframes glow {
-  from {
-    background-position: 0%;
+@media (max-width: 991.98px) {
+  .sidenav {
+    display: none;
+    transition: left 0.3s ease;
   }
-  to {
-    background-position: 400%;
-  }
-} */
+}
 
-  @media (max-width: 991.98px) {
-    .sidenav {
-      /* width: 100%; */
-      display: none;
-      transition: left 0.3s ease; /* Animation fluide du déplacement */
+.nav-links a .icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
 
-    }
-  }
+.logoSidenav {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
 
+.logoSidenav img {
+  width: 80px;
+  max-width: 100px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 3rem;
+}
 
+/* Accordion Styles */
+.accordion {
+  border: none;
+  margin-left: 4rem;
+}
 
-  /* .nav-links a {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-  } */
-  
-  .nav-links a .icon {
-    margin-right: 10px;
-    font-size: 18px;
-  }
-  
-  .logoSidenav {
-    margin-top: 1rem; /* Espace en haut */
-    display: flex; /* Pour centrer l'image si besoin */
-    justify-content: center; /* Centre l'image horizontalement */
-  }
-  
-  .logoSidenav img {
-    width: 80px; /* Ajuste la largeur de l'image à 80% de la largeur de son conteneur */
-    max-width: 100px; /* Limite la largeur maximale de l'image */
-    height: auto; /* Garde les proportions de l'image */
-    border-radius: 5px; /* Arrondir les coins de l'image */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet 3D */
-    height: 3rem;
-  }
-  
+.accordion-item {
+  border: none;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: white;
+  background-color: #1a202c;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.accordion-header:hover {
+  background-color: #7a7b7c;
+  border-radius: 5px;
+}
+
+.accordion-collapse {
+  background-color: #2d3748;
+  border-radius: 5px;
+  border: none;
+}
+
+.accordion-button {
+  color: white;
+  background-color: #1a202c;
+  border: none;
+  text-align: left;
+}
+
+.accordion-button:hover,
+.accordion-button:focus {
+  background-color: #1a202c;
+  color: #fff;
+  box-shadow: none;
+}
+
+.accordion-collapse .card-body {
+  background-color: #1a202c;
+  border: none;
+}
+
+.custom-dropdown-menu li {
+  margin-top: 10px;
+}
+
+.custom-dropdown-menu li a {
+  margin-top: 10px;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.custom-dropdown-menu {
+  padding-left: 20px;
+  overflow: hidden;
+  max-height: 0; /* Initial hidden state */
+  transition: max-height 0.3s ease-out; /* Smooth expansion */
+}
+
+.accordion-item.open .custom-dropdown-menu {
+  max-height: 500px; /* Enough height to show all items */
+}
+
+.accordion-header:hover {
+  background-color: #f1f1f1;
+}
+

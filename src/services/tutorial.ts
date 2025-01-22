@@ -1,6 +1,6 @@
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
-async function getTutorialList(): Promise<any[]> { // Ajout d'un type de retour
+async function getTutorialList(): Promise<any[]> { 
   try {
     const response = await fetch(`${baseURL}api/tutorials/findAll`, {
       method: "GET",

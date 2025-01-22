@@ -2,7 +2,6 @@ import {
     ECategory,
     EStatus,
     ETypeResources,
-    ETypeLocalizations,
     ETypeProgramsEventEnum,
     ERole,
     TutorialStatus,
@@ -26,14 +25,14 @@ export interface IFrequencyPersonne {
 // }
 
 export interface IPersonnes {
+    pers_id: number;
     nom: string;
     prenom: string;
     email: string;
-    phone: string;
-    adress?: string;
-    image?: string | null; // Accepter null en plus de string ou undefined
+    phoneNumber: string;
+    adress: string;
+    image?: string | null;
   }
-  
 
 export interface IPrograms {
     // debut_time: string;
@@ -144,4 +143,23 @@ export interface AddLanguageProps {
     status: TutorialStatus; // Utilisation de l'énumération
     createdAt: Date; // Type Date
 }
+  
+export interface UpdatePersonneProps {
+    personne: {
+      pers_id: string | number;  // Allow both string and number
+      nom: string;
+      prenom: string;
+      email: string;
+      phoneNumber: string;
+      adress: string;
+      image?: string;
+    };
+    isOpen: boolean;
+    onUpdatePerson: (personne: IPersonnes) => void;
+    onClose: () => void;
+    title: string;
+    onSuccessToast: () => void;
+  }
+  
+
   

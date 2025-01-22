@@ -83,7 +83,7 @@ const LangageDeProgrammation: FC = () => {
           <FontAwesomeIcon
             icon={faPlusCircle}
             size="2x"
-            className="text-success"
+            className="text-dark"
           />
         </span>
         <input

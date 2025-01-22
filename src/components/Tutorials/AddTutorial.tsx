@@ -35,7 +35,7 @@ export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) =>
   return (
     <Form onSubmit={formik.handleSubmit}>
       {/* Title field */}
-      <Form.Group controlId="formTitle" className="text-start mt-3 mb-3">
+      <Form.Group controlId="formTitle" className="text-start mt-2">
         <Form.Label>Title</Form.Label>
         <Form.Control
           type="text"
@@ -50,7 +50,7 @@ export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) =>
       </Form.Group>
 
       {/* Description field */}
-      <Form.Group controlId="formDescription" className="text-start mt-3 mb-3">
+      <Form.Group controlId="formDescription" className="text-start mt-2">
         <Form.Label>Description</Form.Label>
         <Form.Control
           as="textarea"
@@ -65,7 +65,7 @@ export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) =>
       </Form.Group>
 
       {/* Designation field */}
-      <Form.Group controlId="formDesignation" className="text-start mt-3 mb-3">
+      <Form.Group controlId="formDesignation" className="text-start mt-2">
         <Form.Label>Designation</Form.Label>
         <Form.Control
           type="text"
@@ -80,7 +80,7 @@ export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) =>
       </Form.Group>
 
       {/* Status field */}
-      <Form.Group controlId="formStatus" className="text-start mt-3 mb-3">
+      <Form.Group controlId="formStatus" className="text-start mt-2">
         <Form.Label>Status</Form.Label>
         <Form.Control
           as="select"
@@ -101,7 +101,7 @@ export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) =>
       </Form.Group>
 
       {/* Date field */}
-      <Form.Group controlId="formCreatedAt" className="text-start mt-3 mb-3">
+      <Form.Group controlId="formCreatedAt" className="text-start mt-2">
         <Form.Label>Date</Form.Label>
         <Form.Control
           type="date"

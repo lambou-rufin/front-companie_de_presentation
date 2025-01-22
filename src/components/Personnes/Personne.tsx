@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import "./Personne.css";
 import Modal from "shared/components/Modal/Modal";
 import AddPersonne from "./AddPersonne";
-import getPersonneList, { deletePersonne } from "services/personne";
+import getPersonneList, {
+  deletePersonne,
+  updatePersonne,
+} from "services/personne";
 import { IPersonnes } from "utils/inteface/interface";
 import { Dropdown, ButtonGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,16 +19,30 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "shared/components/ConfirmationModal/ConfirmationModal";
+import UpdatePersonne from "./EditPersonne";
 
 const Personne: FC = () => {
   const [personnes, setPersonnes] = useState<any[]>([]);
   const [filteredPersonnes, setFilteredPersonnes] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // State for Add Modal
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false); // State for Update Modal
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false); // State for Confirmation Modal
   const [filter, setFilter] = useState({ nom: "", email: "" });
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false); // Nouvelle state pour le modal de confirmation
-  const [personToDelete, setPersonToDelete] = useState<number | undefined>(undefined); // ID de la personne à supprimer
+  const [personToDelete, setPersonToDelete] = useState<number | undefined>(
+    undefined
+  );
   const navigate = useNavigate();
+  const [personToUpdate, setPersonToUpdate] = useState<IPersonnes | null>(null);
+
+  const openUpdateModal = (person: IPersonnes) => {
+    setPersonToUpdate(person);
+    setIsUpdateModalOpen(true); // Open Update Modal
+  };
+
+  const closeUpdateModal = () => setIsUpdateModalOpen(false); // Close Update Modal
+  const closeAddModal = () => setIsAddModalOpen(false); // Close Add Modal
+  const closeConfirmationModal = () => setIsConfirmationModalOpen(false); // Close Confirmation Modal
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +55,6 @@ const Personne: FC = () => {
         setError("Échec du chargement des données.");
       }
     };
-
     fetchData();
   }, []);
 
@@ -46,6 +62,7 @@ const Personne: FC = () => {
     setPersonnes((prev) => [...prev, person]);
     setFilteredPersonnes((prev) => [...prev, person]);
     toast.success("Personne ajoutée avec succès !");
+    closeAddModal(); // Close the Add Modal after successful addition
   };
 
   const handleDelete = (pers_id: number | undefined) => {
@@ -53,10 +70,8 @@ const Personne: FC = () => {
       toast.error("ID de la personne manquant !");
       return;
     }
-    
-    // Ouvrir le modal de confirmation avec l'ID de la personne à supprimer
     setPersonToDelete(pers_id);
-    setIsConfirmationModalOpen(true);
+    setIsConfirmationModalOpen(true); // Open Confirmation Modal for deletion
   };
 
   const confirmDelete = async () => {
@@ -73,9 +88,32 @@ const Personne: FC = () => {
       } catch (error) {
         toast.error("Une erreur est survenue lors de la suppression.");
       } finally {
-        setIsConfirmationModalOpen(false); // Fermer le modal de confirmation après l'action
-        setPersonToDelete(undefined); // Réinitialiser l'ID de la personne à supprimer
+        closeConfirmationModal(); // Close the Confirmation Modal after deletion
+        setPersonToDelete(undefined); // Reset the ID of the person to delete
       }
+    }
+  };
+
+  const handleUpdatePerson = async (updatedPerson: IPersonnes) => {
+    try {
+      // Convertir pers_id en string avant de l'envoyer
+      const updatedData = await updatePersonne(
+        Number(updatedPerson.pers_id),
+        updatedPerson
+      );
+
+      // Mise à jour de l'état local avec les données retournées
+      setPersonnes((prev) =>
+        prev.map((p) => (p.pers_id === updatedPerson.pers_id ? updatedData : p))
+      );
+      setFilteredPersonnes((prev) =>
+        prev.map((p) => (p.pers_id === updatedPerson.pers_id ? updatedData : p))
+      );
+
+      // toast.success("Mise à jour réussie !");
+      closeUpdateModal(); // Ferme la modal après la mise à jour réussie
+    } catch (error) {
+      toast.error("Erreur lors de la mise à jour.");
     }
   };
 
@@ -93,9 +131,6 @@ const Personne: FC = () => {
 
     setFilteredPersonnes(filteredData);
   };
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   const columns = React.useMemo(
     () => [
@@ -135,11 +170,12 @@ const Personne: FC = () => {
         accessor: "action",
         Cell: ({ row }: any) => (
           <Dropdown as={ButtonGroup}>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-              {/* Options */}
-            </Dropdown.Toggle>
+            <Dropdown.Toggle
+              variant="secondary"
+              id="dropdown-basic"
+            ></Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => handleUpdate(row.original)}>
+              <Dropdown.Item onClick={() => openUpdateModal(row.original)}>
                 <FontAwesomeIcon icon={faUserEdit} className="me-2" />
                 Modifier
               </Dropdown.Item>
@@ -158,24 +194,26 @@ const Personne: FC = () => {
     []
   );
 
-  const handleUpdate = (person: IPersonnes) => {
-    console.log("Modifier la personne", person);
-  };
-
   return (
     <div className="personne-container">
       <ToastContainer />
-      <div className="header-section">
-        <h1 className="page-title">Gestion des Personnes</h1>
-        <span className="add-icon" onClick={openModal} role="button">
-          <FontAwesomeIcon icon={faPlusCircle} size="2x" />
+      <h1 className="page-title">Gestion des Personnes</h1>
+      <div className="data-table-top d-flex justify-content-between align-items-center mb-3 mt-3">
+        <span
+          className="add-icon"
+          onClick={() => setIsAddModalOpen(true)}
+          role="button"
+        >
+          <FontAwesomeIcon
+            icon={faPlusCircle}
+            size="2x"
+            className="text-dark"
+          />
         </span>
-      </div>
-      <div className="text-start filter-section">
         <input
           type="text"
           name="nom"
-          placeholder="Rechercher un nom"
+          placeholder="Rechercher..."
           value={filter.nom}
           onChange={handleFilterChange}
           className="filter-input"
@@ -188,25 +226,49 @@ const Personne: FC = () => {
           <p>Aucune personne trouvée.</p>
         )}
       </div>
+
+      {/* Add Person Modal */}
       <Modal
-        isOpen={isModalOpen}
+        isOpen={isAddModalOpen}
         title="Ajouter une personne"
-        onClose={closeModal}
+        onClose={closeAddModal}
       >
         <AddPersonne
           onAddPerson={handleAddPerson}
-          onClose={closeModal}
+          onClose={closeAddModal}
           onSuccessToast={() => {}}
         />
       </Modal>
 
-      {/* Modal de confirmation de suppression */}
+      {/* Confirmation Modal for deletion */}
       <ConfirmationModal
         isOpen={isConfirmationModalOpen}
         onConfirm={confirmDelete}
-        onCancel={() => setIsConfirmationModalOpen(false)}
+        onCancel={closeConfirmationModal}
         message="Êtes-vous sûr de vouloir supprimer cette personne ?"
       />
+
+      {/* Update Person Modal */}
+      {isUpdateModalOpen && personToUpdate && (
+        <Modal
+          onClose={closeUpdateModal}
+          isOpen={isUpdateModalOpen}
+          title="Modifier une personne"
+        >
+          <UpdatePersonne
+            isOpen={isUpdateModalOpen}
+            personne={{
+              ...personToUpdate,
+              pers_id: String(personToUpdate.pers_id),
+              image: personToUpdate.image ?? undefined,
+            }}
+            onUpdatePerson={handleUpdatePerson}
+            onClose={closeUpdateModal}
+            title="Modifier une personne"
+            onSuccessToast={() => toast.success("Mise à jour réussie !")}
+          />
+        </Modal>
+      )}
     </div>
   );
 };

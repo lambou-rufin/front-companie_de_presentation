@@ -67,6 +67,37 @@ export async function deletePersonne(pers_id: string) {
   }
 }
 
+// Fonction pour mettre à jour une personne
+export async function updatePersonne(pers_id: number, updatedData: any) {
+  try {
+    console.log('Mise à jour des données de la personne :', updatedData); // Vérifiez les données envoyées
+
+    const response = await fetch(`${baseURL}api/personnes/updatePersonne/${pers_id}`, {
+      method: 'PUT',
+      credentials: 'include', // Important pour envoyer les informations d'identification
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData), // Envoi des données mises à jour
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erreur API : ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Réponse après mise à jour :', data);
+    return data; // Retourne les données mises à jour
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de la personne :', error);
+    throw error; // Lance l’erreur pour qu’elle soit gérée dans le composant
+  }
+}
+
+
+
+
+
 
 
 

@@ -217,6 +217,9 @@ const RegisterForm: React.FC = () => {
                   <Button type="submit" className="w-100 mt-3 btn btn-danger">
                     Register
                   </Button>
+                  <div className="text-center mt-3">
+                      <Link to={routes.LOGIN}>Se connecter</Link>
+                  </div>
                 </Form>
               )}
             </Formik>

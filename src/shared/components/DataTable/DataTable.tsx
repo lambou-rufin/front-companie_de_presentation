@@ -1,14 +1,18 @@
-import React from 'react';
-import { useTable, usePagination, TableInstance, Column } from 'react-table';
-import './DataTable.css';
+import React from "react";
+import { useTable, usePagination, TableInstance, Column } from "react-table";
+import "./DataTable.css";
 
 interface DataTableProps<T extends object> {
-  columns: Column<T>[]; 
-  data: T[]; 
+  columns: Column<T>[];
+  data: T[];
   onRowClick?: (row: T) => void; // Add onRowClick as an optional prop
 }
 
-const DataTable = <T extends object>({ columns, data, onRowClick }: DataTableProps<T>) => {
+const DataTable = <T extends object>({
+  columns,
+  data,
+  onRowClick,
+}: DataTableProps<T>) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -29,17 +33,19 @@ const DataTable = <T extends object>({ columns, data, onRowClick }: DataTablePro
       data,
       initialState: { pageIndex: 0 },
     },
-    usePagination 
+    usePagination
   );
 
   return (
     <div>
       <table {...getTableProps()} className="table table-hover">
         <thead>
-          {headerGroups.map(headerGroup => (
+          {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()} key={column.id}>{column.render('Header')}</th>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()} key={column.id}>
+                  {column.render("Header")}
+                </th>
               ))}
             </tr>
           ))}
@@ -52,10 +58,12 @@ const DataTable = <T extends object>({ columns, data, onRowClick }: DataTablePro
                 {...row.getRowProps()}
                 key={row.id}
                 onClick={() => onRowClick && onRowClick(row.original)} // Handle row click
-                style={{ cursor: 'pointer' }} // Make it clear that rows are clickable
+                style={{ cursor: "pointer" }} // Make it clear that rows are clickable
               >
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()} key={cell.column.id}>{cell.render('Cell')}</td>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()} key={cell.column.id}>
+                    {cell.render("Cell")}
+                  </td>
                 ))}
               </tr>
             );
@@ -65,45 +73,44 @@ const DataTable = <T extends object>({ columns, data, onRowClick }: DataTablePro
 
       {/* Pagination Controls */}
       <div className="pagination">
-  <div className="pagination-controls">
-    {/* Retirer le bouton de retour à la première page */}
-    {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+        <div className="pagination-controls">
+          {/* Retirer le bouton de retour à la première page */}
+          {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
       {'<<'}
     </button> */}
-    
-    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-      {'<'}
-    </button>
-    <span>
-      {' '}
-      <strong>
-        {pageIndex + 1} of {pageOptions.length}
-      </strong>{' '}
-    </span>
-    <button onClick={() => nextPage()} disabled={!canNextPage}>
-      {'>'}
-    </button>
-    
-    {/* Retirer le bouton d'aller à la dernière page */}
-    {/* <button onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
+
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            {"<"}
+          </button>
+          <span>
+            {" "}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>{" "}
+          </span>
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            {">"}
+          </button>
+
+          {/* Retirer le bouton d'aller à la dernière page */}
+          {/* <button onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
       {'>>'}
     </button> */}
-    
-    <select
-      value={pageSize}
-      onChange={e => {
-        setPageSize(Number(e.target.value));
-      }}
-    >
-      {[10, 20, 30, 40, 50].map(size => (
-        <option key={size} value={size}>
-          Show {size}
-        </option>
-      ))}
-    </select>
-  </div>
-</div>
 
+          <select
+            value={pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((size) => (
+              <option key={size} value={size}>
+                Show {size}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
     </div>
   );
 };

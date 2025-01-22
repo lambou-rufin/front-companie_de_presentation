@@ -61,7 +61,7 @@ const ForgotPasswordForm: React.FC = () => {
                       {errors.email}
                     </BootstrapForm.Control.Feedback>
                   </BootstrapForm.Group>
-                  <div className="text-end">
+                  <div className="text-center mt-3">
                     <p><Link to={routes.LOGIN}>Login here</Link></p>
                   </div>
                   <Button variant="danger" type="submit" className="w-100 mt-3 btn btn-danger">

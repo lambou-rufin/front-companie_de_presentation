@@ -3,7 +3,11 @@ import { Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import getTutorialList from "services/tutorial";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faPlusCircle, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faPlusCircle,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import DataTable from "shared/components/DataTable/DataTable";
 import { AddTutorial } from "./AddTutorial";
 import "./Tutoriel.css";
@@ -133,7 +137,7 @@ const Tutorial: FC = () => {
               variant="link"
               size="sm"
               onClick={() => handleDeleteClick(row.original)}
-              className="text-danger p-0"
+              className="btn btn-outline-danger btn-md delete-all d-flex justify-content-between align-items-center"
             >
               <FontAwesomeIcon icon={faTrashAlt} />
             </Button>
@@ -147,23 +151,25 @@ const Tutorial: FC = () => {
   if (error) return <div className="text-danger text-center">{error}</div>;
 
   return (
-    <div>
+    <div className="tutoriel-container">
       <h1 className="text-center mt-3">Gestion des tutoriels</h1>
-      <div className="data-table-top mt-3">
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <span className="add-icon" onClick={openModal} role="button">
-            <FontAwesomeIcon icon={faPlusCircle} size="2x" className="text-success" />
-          </span>
-          <input
-            type="text"
-            name="title"
-            placeholder="Rechercher par titre"
-            value={filter.title}
-            onChange={handleFilterChange}
-            className="form-control"
-            style={{ width: "200px" }}
+      <div className="data-table-top d-flex justify-content-between align-items-center mb-3 mt-3">
+        <span className="add-icon" onClick={openModal} role="button">
+          <FontAwesomeIcon
+            icon={faPlusCircle}
+            size="2x"
+            className="text-dark"
           />
-        </div>
+        </span>
+        <input
+          type="text"
+          name="title"
+          placeholder="Rechercher..."
+          value={filter.title}
+          onChange={handleFilterChange}
+          className="form-control"
+          style={{ width: "200px" }}
+        />
       </div>
       <div className="table-container mt-3">
         {filteredTutorials.length > 0 ? (

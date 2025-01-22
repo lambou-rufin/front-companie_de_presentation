@@ -4,7 +4,7 @@
   box-shadow: 0 0 10px rgb(190, 190, 194);
   border-radius: 8px; /* Coins arrondis */
   overflow: hidden; /* Cache les débordements */
-  margin: auto;
+  margin: auto
 }
 
 .table th,
@@ -18,12 +18,13 @@
 .table th {
   color: #000000;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 /* Couleur de fond uniforme pour toutes les lignes */
 .table tbody tr {
   background-color: #ffffff; /* Toutes les lignes en blanc */
+  font-size: 12px;
 }
 
 .table tr:hover {

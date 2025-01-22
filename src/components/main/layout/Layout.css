@@ -13,15 +13,13 @@
 
 .main-content {
   flex: 1; /* Prend tout l'espace disponible après le SideNav */
-  padding: 10px; /* Espace intérieur */
+  padding: 20px; /* Espace intérieur */
   overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
   width: 100%;
   /* grid-area: main; */
   transition: margin-left 0.3s ease; /* Animation fluide pour le contenu */
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
-
 }
 
 /* Styles pour le Sidenav */
@@ -38,7 +36,8 @@
 }
 
 .main-content.sidenav-open {
-  margin-left: 300px; /* Décalage du contenu principal lorsque le SideNav est ouvert */
+  margin-left: 20px; /* Décalage du contenu principal lorsque le SideNav est ouvert */
+  margin-right: 10px; /* Décalage du contenu principal lorsque le SideNav est ouvert */
 }
 
 .main-content.sidenav-closed {

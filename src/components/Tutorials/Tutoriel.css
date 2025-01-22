@@ -3,6 +3,13 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.tutoriel-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  /* min-height: 100vh; */
+  flex: 1; /* Prend tout l'espace disponible après le SideNav */
+}
+
 /* Titre principal */
 h1 {
   font-size: 2rem;
@@ -126,8 +133,9 @@ h1 {
 }
 
 /* Messages */
-.text-danger {
+.delete-all {
   color: #dc3545 !important;
+  margin-top: 7px;
 }
 
 .text-center {

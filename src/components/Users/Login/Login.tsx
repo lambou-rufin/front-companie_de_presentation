@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
   Button,
@@ -7,6 +7,7 @@ import {
   Row,
   Col,
   Form as BootstrapForm,
+  Card,
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../services/user";
@@ -52,88 +53,130 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <Container fluid className="login-container vh-100">
-      {/* Conteneur pour les notifications */}
+    <Container
+      fluid
+      className="vh-100 d-flex justify-content-center align-items-center"
+    >
       <ToastContainer />
-      <Row className="h-100">
-        {/* Image côté gauche */}
-        <Col xs={12} md={8} className="image-container">
-          <img src={logo} alt="Logo" className="image-full" />
-        </Col>
-
-        {/* Formulaire côté droit */}
-        <Col xs={12} md={4} className="form-container">
-          <div className="form-content">
-            <div className="text-center mb-4">
-              <h2>Se connecter</h2>
-            </div>
-            <Formik
-              initialValues={{ email: "", password: "", remember: false }}
-              validationSchema={LoginSchema}
-              onSubmit={handleSubmit}
+      <div className="container p-2 p-sm-4">
+        <Card className="overflow-hidden rounded-4 card-auth card-auth-mh">
+          <Row className="g-0 flex-lg-row-reverse">
+            {/* Partie formulaire */}
+            <Col
+              lg="5"
+              className="d-flex justify-content-center align-items-center"
             >
-              {({ errors, touched }) => (
-                <Form>
-                  <BootstrapForm.Group
-                    controlId="formEmail"
-                    className="text-start mt-3"
-                  >
-                    <BootstrapForm.Label>Email</BootstrapForm.Label>
-                    <Field
-                      name="email"
-                      type="email"
-                      className={`form-control ${
-                        errors.email && touched.email ? "is-invalid" : ""
-                      }`}
-                    />
-                    {errors.email && touched.email && (
-                      <div className="invalid-feedback">{errors.email}</div>
-                    )}
-                  </BootstrapForm.Group>
-
-                  <BootstrapForm.Group
-                    controlId="formPassword"
-                    className="text-start mt-3"
-                  >
-                    <BootstrapForm.Label>Mot de passe</BootstrapForm.Label>
-                    <Field
-                      name="password"
-                      type="password"
-                      className={`form-control ${
-                        errors.password && touched.password ? "is-invalid" : ""
-                      }`}
-                    />
-                    {errors.password && touched.password && (
-                      <div className="invalid-feedback">{errors.password}</div>
-                    )}
-                  </BootstrapForm.Group>
-
-                  <p className="text-end mt-3">
-                    <Link to={routes.FORGOTPASSWORD}>
-                      Mot de passe oublié ?
-                    </Link>
+              <Card.Body className="h-100 d-flex flex-column justify-content-center">
+                <div className="nk-block-head text-center">
+                  <h3 className="nk-block-title mb-1">Se connecter</h3>
+                  <p className="small">
+                    Bienvenue ! Connectez-vous pour continuer.
                   </p>
+                </div>
 
-                  <Button
-                    variant="danger"
-                    type="submit"
-                    className="w-100 mt-3"
-                    disabled={loading}
-                  >
-                    {loading ? "Chargement..." : "Connexion"}
-                  </Button>
-                  <div className="text-end mt-3">
-                    <p>
-                      Pas encore de compte ?{" "}
-                      <Link to={routes.REGISTER}>Inscrivez-vous ici</Link>
-                    </p>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </Col>
-      </Row>
+                <Formik
+                  initialValues={{ email: "", password: "", remember: false }}
+                  validationSchema={LoginSchema}
+                  onSubmit={handleSubmit}
+                >
+                  {({ errors, touched }) => (
+                    <Form>
+                      <Row className="gy-3">
+                        <Col xs="12">
+                          <BootstrapForm.Group className="form-group">
+                            <BootstrapForm.Label>Email</BootstrapForm.Label>
+                            <Field
+                              name="email"
+                              type="email"
+                              className={`form-control ${
+                                errors.email && touched.email
+                                  ? "is-invalid"
+                                  : ""
+                              }`}
+                            />
+                            <ErrorMessage
+                              name="email"
+                              component="div"
+                              className="invalid-feedback"
+                            />
+                          </BootstrapForm.Group>
+                        </Col>
+
+                        <Col xs="12">
+                          <BootstrapForm.Group className="form-group">
+                            <BootstrapForm.Label>
+                              Mot de passe
+                            </BootstrapForm.Label>
+                            <Field
+                              name="password"
+                              type="password"
+                              className={`form-control ${
+                                errors.password && touched.password
+                                  ? "is-invalid"
+                                  : ""
+                              }`}
+                            />
+                            <ErrorMessage
+                              name="password"
+                              component="div"
+                              className="invalid-feedback"
+                            />
+                          </BootstrapForm.Group>
+                        </Col>
+
+                        <Col xs="12">
+                          <div className="d-flex flex-wrap justify-content-between">
+                            <Field
+                              as={BootstrapForm.Check}
+                              type="checkbox"
+                              id="remember"
+                              label="Se souvenir de moi"
+                              name="remember"
+                            />
+                            <Link to={routes.FORGOTPASSWORD}>
+                              Mot de passe oublié ?
+                            </Link>
+                          </div>
+                        </Col>
+
+                        <Col xs="12">
+                          <Button
+                            variant="danger"
+                            type="submit"
+                            className="w-100 mt-3"
+                            disabled={loading}
+                          >
+                            {loading ? "Chargement..." : "Connexion"}
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Form>
+                  )}
+                </Formik>
+
+                <div className="text-center mt-4">
+                  <p className="small">
+                    Pas encore de compte ?{" "}
+                    <Link to={routes.REGISTER}>Inscrivez-vous ici</Link>
+                  </p>
+                </div>
+              </Card.Body>
+            </Col>
+
+            {/* Partie image */}
+            <Col
+              lg="7"
+              className="d-flex justify-content-center align-items-center"
+            >
+              <Card.Body className="d-flex flex-column justify-content-center">
+                <div className="brand-logo text-center">
+                  <img src={logo} alt="Logo" className="img-fluid" />
+                </div>
+              </Card.Body>
+            </Col>
+          </Row>
+        </Card>
+      </div>
     </Container>
   );
 };

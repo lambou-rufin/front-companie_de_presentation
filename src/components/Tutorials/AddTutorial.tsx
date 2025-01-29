@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import Spinner from "shared/components/Spinner/Spinner";
 import { AddTutorialProps, ITutorial } from "utils/inteface/interface";
 import { TutorialStatus } from "utils/inteface/enum";
+import { createTutorial } from "services/tutorial";
 
 export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -26,9 +27,17 @@ export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) =>
         .required('Le statut est requis'),
       createdAt: Yup.date().required('La date est requise'),
     }),
-    onSubmit: (values) => {
-      // Call the parent onAddTutorial to add the new tutorial to the list
-      onAddTutorial(values);
+    onSubmit: async (values) => {
+      setLoading(true); // Affiche le spinner
+      try {
+        const response = await createTutorial(values); // Appel de la fonction pour créer le tutoriel
+        onAddTutorial(response); // Passer la réponse à onAddTutorial (ajouter à la liste)
+        setLoading(false); // Arrêter le chargement une fois que l'appel est terminé
+        onClose(); // Fermer le modal ou effectuer une action après ajout
+      } catch (error) {
+        console.error("Erreur lors de la création du tutoriel :", error);
+        setLoading(false); // Arrêter le chargement même en cas d'erreur
+      }
     },
   });
 

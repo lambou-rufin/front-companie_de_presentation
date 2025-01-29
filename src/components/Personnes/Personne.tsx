@@ -123,12 +123,9 @@ const Personne: FC = () => {
 
     const filteredData = personnes.filter(
       (person) =>
-        (person.nom.toLowerCase().includes(value.toLowerCase()) &&
-          name === "nom") ||
-        (person.email.toLowerCase().includes(value.toLowerCase()) &&
-          name === "email")
-    );
-
+        person.nom.toLowerCase().includes(filter.nom.toLowerCase()) &&
+        person.email.toLowerCase().includes(filter.email.toLowerCase())
+    );    
     setFilteredPersonnes(filteredData);
   };
 
@@ -218,6 +215,13 @@ const Personne: FC = () => {
           onChange={handleFilterChange}
           className="filter-input"
         />
+      </div>
+      <div className="table-container">
+        <div className="count-container mb-2">
+          <span className="person-count">
+            Nombre total de personnes : {filteredPersonnes.length}
+          </span>
+        </div>
       </div>
       <div className="table-container">
         {filteredPersonnes.length > 0 ? (

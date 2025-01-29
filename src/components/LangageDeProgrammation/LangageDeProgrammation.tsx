@@ -1,20 +1,34 @@
 import React, { FC, useEffect, useState } from "react";
 import getLangageDeProgrammation from "../../services/langageDeProgrammation";
-import { Button } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+} from "react-bootstrap";
 import DataTable from "shared/components/DataTable/DataTable";
 import Modal from "shared/components/Modal/Modal"; // Modal personnalisé
 import AddLanguage from "./AddLanguage";
 import { useNavigate } from "react-router-dom";
-import { ILanguage } from "utils/inteface/interface";
+import { ILanguage } from "utils/inteface/interface"; // Import de l'interface ILanguage
 import "./LangageDeProgrammation.css"; // Import de votre fichier CSS
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlusCircle,
+  faTrashAlt,
+  faUserEdit,
+} from "@fortawesome/free-solid-svg-icons";
+import { toast, ToastContainer } from "react-toastify";
 
 const LangageDeProgrammation: FC = () => {
-  const [langageDeProgrammation, setLangageDeProgrammation] = useState<any[]>(
-    []
+  const [langageDeProgrammation, setLangageDeProgrammation] = useState<
+    ILanguage[]
+  >(
+    [] // Utilisation de l'interface ILanguage
   );
-  const [filteredLangage, setFilteredLangage] = useState<any[]>([]);
+  const [filteredLangage, setFilteredLangage] = useState<ILanguage[]>([]); // Utilisation de l'interface ILanguage
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState({ nom: "" });
   const navigate = useNavigate();
@@ -27,10 +41,11 @@ const LangageDeProgrammation: FC = () => {
     const fetchData = async () => {
       try {
         const data = await getLangageDeProgrammation();
-        setLangageDeProgrammation(data);
+        setLangageDeProgrammation(data); // Assurez-vous que 'data' est de type ILanguage[]
         setFilteredLangage(data);
       } catch (err) {
         setError("Erreur lors du chargement des langages de programmation.");
+        toast.error("Erreur lors du chargement des langages de programmation."); // Ajouter un toast d'erreur
       }
     };
     fetchData();
@@ -39,35 +54,68 @@ const LangageDeProgrammation: FC = () => {
   const columns = [
     {
       Header: "ID",
-      accessor: "langage_id",
+      accessor: "langage_id" as keyof ILanguage,
     },
     {
       Header: "Nom",
-      accessor: "nom",
+      accessor: "nom" as keyof ILanguage,
     },
     {
-      Header: "Action",
-      accessor: "action",
+      Header: "Actions",
+      accessor: "action" as keyof ILanguage,
+      Cell: ({ row }: { row: any }) => (
+        <Dropdown as={ButtonGroup}>
+          <Dropdown.Toggle
+            variant="secondary"
+            id="dropdown-basic"
+          ></Dropdown.Toggle>
+          <DropdownMenu>
+            <DropdownItem onClick={() => openUpdateModal(row.original)}>
+              <FontAwesomeIcon icon={faUserEdit} className="me-2" />
+              Modifier
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => handleDelete(row.original.pers_id)}
+              className="text-danger"
+            >
+              <FontAwesomeIcon icon={faTrashAlt} className="me-2" />
+              Supprimer
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      ),
     },
   ];
 
   const handleAddLanguage = (language: ILanguage) => {
     setLangageDeProgrammation((prev) => [...prev, language]);
     setFilteredLangage((prev) => [...prev, language]);
+  
+    toast.success("Langage de programmation ajouté avec succès !");
     closeModal();
+  };  
+
+  const openUpdateModal = (language: ILanguage) => {
+    // Implémentez la logique pour ouvrir la modal d'édition
+    console.log("Modifier :", language);
   };
 
-  const handleRowClick = (row: any) => {
-    navigate(`/langage/${row.langage_id}`);
+  const handleDelete = (id: string) => {
+    // Implémentez la logique de suppression
+    console.log("Supprimer l'élément avec ID :", id);
   };
+
+  // const handleRowClick = (row: any) => {
+  //   navigate(`/langage/${row.langage_id}`);
+  // };
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFilter((prev) => ({ ...prev, [name]: value }));
 
     const filteredData = langageDeProgrammation.filter(
-      (langage: { nom: string }) =>
-        langage.nom.toLowerCase().includes(value.toLowerCase())
+      (langage: ILanguage) =>
+        langage.nom.toLowerCase().includes(value.toLowerCase()) // Assurez-vous que 'nom' existe dans ILanguage
     );
 
     setFilteredLangage(filteredData);
@@ -77,6 +125,7 @@ const LangageDeProgrammation: FC = () => {
 
   return (
     <div className="langage-container">
+      <ToastContainer />
       <h1 className="text-center mt-3">Langage de programmation</h1>
       <div className="data-table-top d-flex justify-content-between align-items-center mb-3 mt-3">
         <span className="add-icon" onClick={openModal} role="button">
@@ -100,7 +149,7 @@ const LangageDeProgrammation: FC = () => {
           <DataTable
             columns={columns}
             data={filteredLangage}
-            onRowClick={handleRowClick}
+            // onRowClick={handleRowClick}
           />
         ) : (
           <p className="text-center">Aucun langage disponible.</p>

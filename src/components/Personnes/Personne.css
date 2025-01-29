@@ -62,3 +62,16 @@
   font-weight: bold;
   text-align: center;
 }
+
+.count-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.person-count {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}

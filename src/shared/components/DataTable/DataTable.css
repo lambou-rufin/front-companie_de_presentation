@@ -1,18 +1,28 @@
+/* Conteneur du tableau pour permettre un défilement horizontal */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permet un défilement horizontal */
+  -webkit-overflow-scrolling: touch; /* Amélioration pour iOS/Android */
+  margin: 0 auto; /* Centre le tableau dans le conteneur */
+}
+
+/* Style principal du tableau */
 .table {
   width: 100%;
   border-collapse: collapse;
   box-shadow: 0 0 10px rgb(190, 190, 194);
-  border-radius: 8px; /* Coins arrondis */
-  overflow: hidden; /* Cache les débordements */
-  margin: auto
+  border-radius: 8px;
+  overflow: hidden;
+  margin: auto;
 }
 
+/* Cellules du tableau */
 .table th,
 .table td {
-  padding: 5px;
+  padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ffffff;
-  background-color: #ffffff; /* Couleur de fond blanche pour toutes les cellules */
+  border-bottom: 1px solid #eaeaea;
+  background-color: #ffffff;
 }
 
 .table th {
@@ -21,56 +31,64 @@
   font-size: 15px;
 }
 
-/* Couleur de fond uniforme pour toutes les lignes */
 .table tbody tr {
-  background-color: #ffffff; /* Toutes les lignes en blanc */
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .table tr:hover {
-  background-color: #f9f9f9; /* Couleur de fond plus claire lors du survol */
-  transition: background-color 0.2s; /* Ajout d'une transition */
+  background-color: #f9f9f9;
+  transition: background-color 0.2s;
 }
 
-/* Style pour la pagination */
+/* Pagination */
 .pagination {
   display: flex;
-  justify-content: flex-end; /* Alignement à droite */
+  justify-content: flex-end;
   margin-top: 20px;
 }
 
-.pagination-controls {
-  display: flex;
-  align-items: center;
-}
-
 .pagination button {
-  margin: 0 3px; /* Réduire l'espacement entre les boutons */
-  padding: 3px 6px; /* Réduire le padding pour rendre les boutons plus petits */
-  font-size: 12px; /* Réduire la taille de la police */
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-size: 12px;
   cursor: pointer;
-  border: none; /* Suppression des bordures par défaut */
-  background-color: #59595c; /* Couleur de fond des boutons */
-  color: white; /* Couleur du texte */
-  border-radius: 4px; /* Coins arrondis */
-  transition: background-color 0.3s; /* Ajout d'une transition */
+  border: none;
+  background-color: #59595c;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
 .pagination button:hover {
-  background-color: #4b4b4e; /* Couleur de fond lors du survol */
+  background-color: #4b4b4e;
 }
 
 .pagination select {
   margin-left: 10px;
-  padding: 3px; /* Réduire le padding du sélecteur */
-  font-size: 12px; /* Réduire la taille de la police pour le sélecteur */
-  border-radius: 4px; /* Coins arrondis pour le sélecteur */
-  border: 1px solid #ccc; /* Bordure du sélecteur */
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
+/* Responsive - pour les petits écrans */
 @media (max-width: 768px) {
-  .table  {
-   flex-direction: column;
-    transition: transform 0.3s ease;
+  .table-container {
+    padding: 0 10px; /* Ajout d'un padding pour éviter que le tableau ne touche les bords */
+  }
+
+  .pagination {
+    justify-content: center; /* Pagination centrée */
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .pagination select {
+    font-size: 10px;
+    padding: 3px;
   }
 }

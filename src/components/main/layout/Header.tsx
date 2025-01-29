@@ -26,10 +26,12 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
       const parsedUser = JSON.parse(userData); // Convertir les données stockées en objet
       setUser(parsedUser);
       if (parsedUser.email) {
-        setFirstChar(parsedUser.email.charAt(0).toUpperCase()); // Extraire et mettre en majuscule le premier caractère
+        // Extraire les deux premiers caractères et les mettre en majuscule
+        const firstTwoChars = parsedUser.email.substring(0, 2).toUpperCase();
+        setFirstChar(firstTwoChars); // Mettre en état les deux premiers caractères
       }
     }
-  }, []);
+  }, []);  
 
   // Fonction pour basculer l'état du menu
   const toggleMenu = () => {
@@ -42,9 +44,9 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
         <li className="toggle-sidenav">
           <button onClick={toggleSideNav}>{isSideNavOpen ? "✖" : "☰"}</button>
         </li>
-        <li>
+        {/* <li>
           <h1>Gestion de présentation</h1>
-        </li>
+        </li> */}
         <li className="user-section">
           {/* Afficher le nom et l'email de l'utilisateur */}
           {user && (

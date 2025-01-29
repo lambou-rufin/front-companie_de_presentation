@@ -11,8 +11,8 @@ import {
 import DataTable from "shared/components/DataTable/DataTable";
 import { AddTutorial } from "./AddTutorial";
 import "./Tutoriel.css";
-import { ITutorial } from "utils/inteface/interface";
 import { TutorialStatus } from "utils/inteface/enum";
+import { ITutorial } from "utils/inteface/interface";
 
 const Tutorial: FC = () => {
   const [tutorials, setTutorials] = useState<ITutorial[]>([]);

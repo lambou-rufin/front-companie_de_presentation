@@ -45,3 +45,6 @@ h2 {
   display: block;
   color: red;
 }
+.card-auth {
+  min-height: 600px; /* Ajuste cette valeur selon la hauteur souhaitée */
+}

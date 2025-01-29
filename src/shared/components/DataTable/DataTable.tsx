@@ -5,7 +5,7 @@ import "./DataTable.css";
 interface DataTableProps<T extends object> {
   columns: Column<T>[];
   data: T[];
-  onRowClick?: (row: T) => void; // Add onRowClick as an optional prop
+  onRowClick?: (row: T) => void;
 }
 
 const DataTable = <T extends object>({
@@ -22,7 +22,6 @@ const DataTable = <T extends object>({
     canPreviousPage,
     canNextPage,
     pageOptions,
-    gotoPage,
     nextPage,
     previousPage,
     setPageSize,
@@ -37,7 +36,7 @@ const DataTable = <T extends object>({
   );
 
   return (
-    <div>
+    <>
       <table {...getTableProps()} className="table table-hover">
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -57,8 +56,8 @@ const DataTable = <T extends object>({
               <tr
                 {...row.getRowProps()}
                 key={row.id}
-                onClick={() => onRowClick && onRowClick(row.original)} // Handle row click
-                style={{ cursor: "pointer" }} // Make it clear that rows are clickable
+                onClick={() => onRowClick && onRowClick(row.original)}
+                style={{ cursor: "pointer" }}
               >
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()} key={cell.column.id}>
@@ -71,47 +70,28 @@ const DataTable = <T extends object>({
         </tbody>
       </table>
 
-      {/* Pagination Controls */}
       <div className="pagination">
-        <div className="pagination-controls">
-          {/* Retirer le bouton de retour à la première page */}
-          {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-      {'<<'}
-    </button> */}
-
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {"<"}
-          </button>
-          <span>
-            {" "}
-            <strong>
-              {pageIndex + 1} of {pageOptions.length}
-            </strong>{" "}
-          </span>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            {">"}
-          </button>
-
-          {/* Retirer le bouton d'aller à la dernière page */}
-          {/* <button onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
-      {'>>'}
-    </button> */}
-
-          <select
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-            }}
-          >
-            {[10, 20, 30, 40, 50].map((size) => (
-              <option key={size} value={size}>
-                Show {size}
-              </option>
-            ))}
-          </select>
-        </div>
+        <button onClick={previousPage} disabled={!canPreviousPage}>
+          {"<"}
+        </button>
+        <span>
+          {pageIndex + 1} of {pageOptions.length}
+        </span>
+        <button onClick={nextPage} disabled={!canNextPage}>
+          {">"}
+        </button>
+        <select
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[10, 20, 30, 40, 50].map((size) => (
+            <option key={size} value={size}>
+              Show {size}
+            </option>
+          ))}
+        </select>
       </div>
-    </div>
+    </>
   );
 };
 

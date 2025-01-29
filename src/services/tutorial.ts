@@ -1,5 +1,6 @@
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
+// Fonction pour récupérer la liste des tutoriels
 async function getTutorialList(): Promise<any[]> { 
   try {
     const response = await fetch(`${baseURL}api/tutorials/findAll`, {
@@ -17,9 +18,30 @@ async function getTutorialList(): Promise<any[]> {
   }
 }
 
-export default getTutorialList;
+// Fonction pour créer un tutoriel
+export async function createTutorial(tutorialData: any) {
+  try {
+    const response = await fetch(`${baseURL}api/tutorials/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Spécifie que les données envoyées sont en JSON
+      },
+      credentials: "include", // Pour envoyer les credentials
+      body: JSON.stringify(tutorialData), // Convertit les données du tutoriel en JSON
+    });
 
-// Fonction pour supprimer un tuto
+    if (!response.ok) {
+      throw new Error(`Erreur API : ${response.statusText}`);
+    }
+
+    return await response.json(); // Retourner la réponse JSON, si elle existe
+  } catch (error) {
+    console.error("Erreur dans la création du tutoriel :", error);
+    throw error; // Propager l'erreur
+  }
+}
+
+// Fonction pour supprimer un tutoriel
 export async function deleteTutoriel(id: number) {
   try {
     const response = await fetch(`${baseURL}api/tutorials/deleteTutoriel/${id}`, {
@@ -37,3 +59,5 @@ export async function deleteTutoriel(id: number) {
     throw error;
   }
 }
+
+export default getTutorialList;

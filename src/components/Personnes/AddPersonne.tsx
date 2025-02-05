@@ -14,22 +14,16 @@ const AddPersonne: React.FC<AddPersonneProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [personnes, setPersonnes] = useState<any[]>([]);
-  const [filteredPersonnes, setFilteredPersonnes] = useState<any[]>([]);
 
-  // Handle the form submission, ensuring pers_id is included
+  // Handle the form submission
   const handleSubmit = async (values: any, { resetForm }: any) => {
     setLoading(true);
     try {
-      // Enlever `pers_id` si le serveur le génère
-      const newPerson = { ...values };
-
       // Appel à l'API pour ajouter la personne
-      const addedPerson = await addPersonne(newPerson);
+      const addedPerson = await addPersonne(values);
 
-      // Mettre à jour l'état local après l'ajout
-      setPersonnes((prev) => [...prev, addedPerson]);
-      setFilteredPersonnes((prev) => [...prev, addedPerson]);
+      // Appeler la fonction du parent pour mettre à jour l'état global
+      onAddPerson(addedPerson);
 
       // Réinitialiser et fermer le modal
       resetForm();

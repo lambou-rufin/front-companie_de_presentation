@@ -3,9 +3,14 @@ import React, { FC, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import * as Yup from "yup";
 import Spinner from "shared/components/Spinner/Spinner";
-import { AddTutorialProps, ITutorial } from "utils/inteface/interface";
 import { TutorialStatus } from "utils/inteface/enum";
 import { createTutorial } from "services/tutorial";
+import { ITutorial } from "utils/inteface/interface";
+
+ interface AddTutorialProps {
+  onAddTutorial: (tutorial: ITutorial) => void;
+  onClose: () => void;
+}
 
 export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) => {
   const [loading, setLoading] = useState(false);

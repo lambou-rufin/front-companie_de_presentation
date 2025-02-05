@@ -130,10 +130,6 @@ export interface AddLanguageProps {
     onClose: () => void;
   }
 
-  export interface AddTutorialProps {
-    onAddTutorial: (tutorial: ITutorial) => void;
-    onClose: () => void;
-  }
 
   export interface ITutorial {
     id?: number;

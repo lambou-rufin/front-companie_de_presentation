@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Card, Container } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import des styles
+import "react-toastify/dist/ReactToastify.css";
 import "./Profile.css";
 import ProfileEdit from "./EditProfile";
 
-interface ProfileProps {
-  user: { name: string; email: string } | null;
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  phoneNumber?: string;
+  image?: string;
 }
 
-const Profile: React.FC<ProfileProps> = ({}) => {
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+const Profile: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,36 +24,27 @@ const Profile: React.FC<ProfileProps> = ({}) => {
     }
   }, []);
 
-  const handleSaveUser = (updatedUser: { name: string; email: string }) => {
+  const handleSaveUser = (updatedUser: User) => {
     setUser(updatedUser);
     localStorage.setItem("user", JSON.stringify(updatedUser));
-    
-    // Afficher un toast de succès
-    toast.success("Profil mis à jour avec succès ! 🎉", {
+
+    toast.success("Profil mis à jour avec succès !", {
       position: "top-right",
       autoClose: 3000,
     });
   };
 
-  const handleOpenModal = () => setShowEditModal(true);
-  const handleCloseModal = () => setShowEditModal(false);
-
   return (
     <Container>
-      <ToastContainer /> {/* Ajoute le conteneur Toast */}
+      <ToastContainer />
       <Card className="profile_user">
-        <h1 className="text-center mt-3">Profile de {user?.name || "Utilisateur"}</h1>
-        <img src="/assets/img/developer.jpg" alt="sary" />
+        <h1 className="text-center mt-3">Profil de {user?.name || "Utilisateur"}</h1>
+        <img src={user?.image || "/assets/img/developer.jpg"} alt="Profil" className="profile-image" />
         <p>Email: {user?.email || "Pas d'email disponible"}</p>
-        <button className="edit-button" onClick={handleOpenModal}>Éditer</button>
+        <p>Téléphone: {user?.phoneNumber || "Pas de numéro disponible"}</p>
+        <button className="edit-button" onClick={() => setShowEditModal(true)}>Éditer</button>
       </Card>
-
-      <ProfileEdit
-        show={showEditModal}
-        handleClose={handleCloseModal}
-        user={user}
-        onSave={handleSaveUser}
-      />
+      <ProfileEdit show={showEditModal} handleClose={() => setShowEditModal(false)} user={user} onSave={handleSaveUser} />
     </Container>
   );
 };

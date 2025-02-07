@@ -144,11 +144,14 @@ export async function updateProfile(
   base64Image?: string
 ) {
   try {
+    const token = localStorage.getItem("token"); // Récupère le token (ou autre stockage)
+    if (!token) throw new Error("Token d'authentification manquant.");
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
     formData.append("phoneNumber", phoneNumber);
-    
+
     if (password) {
       formData.append("password", password);
     }
@@ -162,6 +165,9 @@ export async function updateProfile(
       method: "PUT",
       body: formData,
       credentials: "include",
+      headers: {
+        Authorization: `Bearer ${token}`, // Ajout du token ici
+      },
     });
 
     if (!response.ok) {
@@ -172,7 +178,8 @@ export async function updateProfile(
     return await response.json();
   } catch (error) {
     console.error("Erreur lors de la mise à jour du profil :", error);
-    throw error; // Permet au composant qui appelle cette fonction de gérer l'erreur
+    throw error;
   }
 }
+
 

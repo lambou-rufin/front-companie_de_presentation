@@ -1,7 +1,7 @@
 const baseURL = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080';
 
 // Fonction pour récupérer la liste des tutoriels
-async function getTutorialList(): Promise<any[]> { 
+export async function getTutorialList(): Promise<any[]> { 
   try {
     const response = await fetch(`${baseURL}api/tutorials/findAll`, {
       method: "GET",
@@ -61,3 +61,35 @@ export async function deleteTutoriel(id: number) {
 }
 
 export default getTutorialList;
+
+// Fonction pour présenter un tutoriel
+export async function presentTutorial(tutorialData: any) {
+  try {
+    // Envoi de la requête API
+    const response = await fetch(`${baseURL}api/tutorials/present`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // Assurez-vous que l'authentification est incluse si nécessaire
+      body: JSON.stringify(tutorialData), // Envoyer les données du tutoriel (y compris le statut)
+    });
+
+    // Vérifier si la réponse est OK
+    if (!response.ok) {
+      // Si la réponse est une erreur, vérifiez si c'est une erreur de statut spécifique
+      const errorData = await response.json();
+      throw new Error(
+        `Erreur API : ${response.status} - ${errorData.message || response.statusText}`
+      );
+    }
+
+    // Si tout se passe bien, retourner les données du tutoriel créé
+    return await response.json();
+  } catch (error) {
+    console.error("Erreur dans la présentation du tutoriel :", error);
+    // Si une erreur se produit, renvoyer un message d'erreur générique
+    throw new Error("Une erreur est survenue lors de la présentation du tutoriel.");
+  }
+}
+

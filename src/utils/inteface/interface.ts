@@ -139,6 +139,19 @@ export interface AddLanguageProps {
     status: TutorialStatus; // Utilisation de l'énumération
     createdAt: Date; // Type Date
 }
+
+// Définir l'interface pour le type des données envoyées
+export interface IPresenterTutorialRequest {
+    title: string;
+    designation?: string;
+    description?: string;
+    status: TutorialStatus;
+    createdAt: Date; // Ajoutez cette ligne
+    selectedPersonne: string;
+    selectedLangage: string;
+    personneId: string;
+    langageId:string;
+  }
   
 export interface UpdatePersonneProps {
     personne: {

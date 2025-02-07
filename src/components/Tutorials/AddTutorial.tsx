@@ -6,41 +6,47 @@ import Spinner from "shared/components/Spinner/Spinner";
 import { TutorialStatus } from "utils/inteface/enum";
 import { createTutorial } from "services/tutorial";
 import { ITutorial } from "utils/inteface/interface";
+import { toast } from "react-toastify";
 
- interface AddTutorialProps {
+interface AddTutorialProps {
   onAddTutorial: (tutorial: ITutorial) => void;
   onClose: () => void;
 }
 
-export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) => {
+export const AddTutorial: FC<AddTutorialProps> = ({
+  onAddTutorial,
+  onClose,
+}) => {
   const [loading, setLoading] = useState(false);
 
   const formik = useFormik<ITutorial>({
     initialValues: {
-      title: '',
-      description: '',
-      designation: '',
+      title: "",
+      description: "",
+      designation: "",
       status: TutorialStatus.EN_ATTENTE, // Default value
       createdAt: new Date(), // Current date
     },
     validationSchema: Yup.object({
-      title: Yup.string().required('Le titre est requis'),
-      description: Yup.string().required('La description est requise'),
-      designation: Yup.string().required('La désignation est requise'),
+      title: Yup.string().required("Le titre est requis"),
+      description: Yup.string().required("La description est requise"),
+      designation: Yup.string().required("La désignation est requise"),
       status: Yup.mixed<TutorialStatus>()
-        .oneOf(Object.values(TutorialStatus), 'Statut invalide')
-        .required('Le statut est requis'),
-      createdAt: Yup.date().required('La date est requise'),
+        .oneOf(Object.values(TutorialStatus), "Statut invalide")
+        .required("Le statut est requis"),
+      createdAt: Yup.date().required("La date est requise"),
     }),
     onSubmit: async (values) => {
       setLoading(true); // Affiche le spinner
       try {
         const response = await createTutorial(values); // Appel de la fonction pour créer le tutoriel
         onAddTutorial(response); // Passer la réponse à onAddTutorial (ajouter à la liste)
+        toast.success("Tutoriel ajouté avec succès !");
         setLoading(false); // Arrêter le chargement une fois que l'appel est terminé
         onClose(); // Fermer le modal ou effectuer une action après ajout
       } catch (error) {
         console.error("Erreur lors de la création du tutoriel :", error);
+        toast.error("Erreur lors de l'ajout de tutoriel.");
         setLoading(false); // Arrêter le chargement même en cas d'erreur
       }
     },
@@ -132,7 +138,12 @@ export const AddTutorial: FC<AddTutorialProps> = ({ onAddTutorial, onClose }) =>
       {/* Action buttons */}
       <Row className="text-space-between mt-3">
         <Col>
-          <Button variant="success" type="submit" disabled={loading} className="me-2">
+          <Button
+            variant="success"
+            type="submit"
+            disabled={loading}
+            className="me-2"
+          >
             {loading ? <Spinner loading={loading} /> : "Ajouter"}
           </Button>
           <Button variant="danger" onClick={onClose}>

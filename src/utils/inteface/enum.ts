@@ -36,8 +36,9 @@ export enum ECrudAction {
 
 
 export enum TutorialStatus {
-    EN_COURS = 'en_cours',
-    EN_ATTENTE = 'en_attente',
-    DEJA_FINI = 'déjà_fini',
+    EN_COURS = 'en cours',   // Changez en 'en cours' pour correspondre au backend
+    EN_ATTENTE = 'en attente',
+    DEJA_FINI = 'déjà fini',
   }
+  
   

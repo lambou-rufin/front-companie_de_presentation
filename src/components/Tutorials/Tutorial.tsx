@@ -13,6 +13,7 @@ import { AddTutorial } from "./AddTutorial";
 import "./Tutoriel.css";
 import { TutorialStatus } from "utils/inteface/enum";
 import { ITutorial } from "utils/inteface/interface";
+import { ToastContainer } from "react-toastify";
 
 const Tutorial: FC = () => {
   const [tutorials, setTutorials] = useState<ITutorial[]>([]);
@@ -152,6 +153,7 @@ const Tutorial: FC = () => {
 
   return (
     <div className="tutoriel-container">
+      <ToastContainer />
       <h1 className="text-center mt-3">Gestion des tutoriels</h1>
       <div className="data-table-top d-flex justify-content-between align-items-center mb-3 mt-3">
         <span className="add-icon" onClick={openModal} role="button">

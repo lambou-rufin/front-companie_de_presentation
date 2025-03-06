@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import routes from "../../../router/routes";
 import "./Header.css";
 import Icon from "shared/components/Icon/Icon";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface HeaderProps {
   toggleSideNav: () => void; // Propriété pour toggler le Sidenav
@@ -17,6 +15,7 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
   const [user, setUser] = useState<{ name: string; email: string } | null>(
     null
   );
+  const token = localStorage.getItem('token'); // Récupérer le token
   const [firstChar, setFirstChar] = useState<string>(""); // État pour le premier caractère de l'email
 
   // Récupérer les informations utilisateur depuis localStorage au chargement du composant
@@ -44,9 +43,9 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
         <li className="toggle-sidenav">
           <button onClick={toggleSideNav}>{isSideNavOpen ? "✖" : "☰"}</button>
         </li>
-        {/* <li>
+        <li>
           <h1>Gestion de présentation</h1>
-        </li> */}
+        </li>
         <li className="user-section">
           {/* Afficher le nom et l'email de l'utilisateur */}
           {user && (
@@ -86,7 +85,7 @@ const Header: FC<HeaderProps> = ({ toggleSideNav, isSideNavOpen }) => {
               </li>
               <li>
                 <Link to={routes.LOGOUT} className="link">
-                  <Icon name="user" className="text-danger d-flex justify-content-between align-items-center" type="user"/>
+                  <Icon name="user" className="text-danger d-flex justify-content-between align-items-center gap-3" type="user"/>
                   {/* <FontAwesomeIcon
                     icon={faUserCircle}
                     size="2x"

@@ -5,7 +5,8 @@
   overflow-y: auto;
   width: 300px;
   height: 100%;
-  background-color: #111827;
+  background-color: #f8f9fa;
+  /* background-color: #111827; */
   color: white;
   transition: transform 0.3s ease;
   z-index: 1000;
@@ -29,7 +30,7 @@
 .logoSidenav img {
   width: 150px;
   max-width: 150px;
-  height: 100px;
+  height: 70px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -47,7 +48,7 @@
   display: block;
 }
 .nav-links {
-  margin-top: 40px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centrer les éléments verticalement */
@@ -59,13 +60,14 @@
   display: flex;
   align-items: center; /* Alignement vertical des icônes et du texte */
   gap: 10px; /* Espacement entre l'icône et le texte */
-  color: white;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   padding: 10px 15px; /* Ajout de marges internes */
   border-radius: 5px;
   transition: background-color 0.3s ease;
   position: relative;
   justify-content: center; /* Centrer le contenu horizontalement */
+  margin-top: 10px;
 }
 
 .nav-links a:hover,
@@ -76,9 +78,8 @@
 .nav-links a .icon,
 .accordion-header .icon {
   font-size: 18px; /* Taille uniforme des icônes */
-  margin-left: 10px; /* Ajout d'une marge à gauche */
-  margin-right: 0; /* Suppression de la marge à droite */
-  color: #fff; /* Couleur des icônes */
+  margin-left: 6; /* Ajout d'une marge à gauche */
+  color: #000000; /* Couleur des icônes */
 }
 
 .custom-dropdown-menu {
@@ -86,6 +87,7 @@
   overflow: hidden;
   max-height: 0; /* Initialement masqué */
   transition: max-height 0.3s ease-out;
+  margin-left: 2rem;
 }
 
 .accordion-item.open .custom-dropdown-menu {
@@ -119,7 +121,7 @@
 }
 
 .custom-dropdown-menu li a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 @media (max-width: 991.98px) {

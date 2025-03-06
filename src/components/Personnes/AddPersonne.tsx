@@ -173,7 +173,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({
       <Row className="text-space-between mt-3">
         <Col>
           <Button
-            variant="success"
+            variant="outlined"
             type="submit"
             disabled={loading}
             className="me-2"
@@ -183,7 +183,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({
                 <Spinner loading={loading} /> Ajout...
               </>
             ) : (
-              "Ajouter"
+              "Sauvegarder"
             )}
           </Button>
           <Button variant="danger" onClick={onClose}>

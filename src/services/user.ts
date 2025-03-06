@@ -136,15 +136,55 @@ export async function forgotPass(email: string): Promise<ForgotpassResponse> {
   }
 }
 
+// export async function updateProfile(
+//   name: string,
+//   email: string,
+//   phoneNumber: string,
+//   password?: string,
+//   base64Image?: string
+// ) {
+//   try {
+//     const token = localStorage.getItem("token"); // Récupère le token (ou autre stockage)
+//     if (!token) throw new Error("Token d'authentification manquant.");
+
+//     const formData = new FormData();
+//     formData.append("name", name);
+//     formData.append("email", email);
+//     formData.append("phoneNumber", phoneNumber);
+
+//     if (password) {
+//       formData.append("password", password);
+//     }
+
+//     if (base64Image) {
+//       const imageBlob = base64ToBlob(base64Image);
+//       formData.append("image", imageBlob, "image.jpg");
+//     }
+
+//     const response = await fetch(`${baseURL}api/auth/updateProfile`, {
+//       method: "PUT",
+//       body: formData,
+//       credentials: "include",
+//       headers: {
+//         Authorization: `Bearer ${token}`, // Ajout du token ici
+//       },
+//     });
+
+//     if (!response.ok) {
+//       const errorData = await response.json();
+//       throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+//     }
+
+//     return await response.json();
+//   } catch (error) {
+//     console.error("Erreur lors de la mise à jour du profil :", error);
+//     throw error;
+//   }
+// }
 export async function updateProfile(
-  name: string,
-  email: string,
-  phoneNumber: string,
-  password?: string,
-  base64Image?: string
-) {
+name: string, email: string, phoneNumber: string, password?: string, base64Image?: string, token?: string | null) {
   try {
-    const token = localStorage.getItem("token"); // Récupère le token (ou autre stockage)
+    const token = localStorage.getItem("token"); // Récupère le token depuis le stockage local
     if (!token) throw new Error("Token d'authentification manquant.");
 
     const formData = new FormData();
@@ -172,7 +212,7 @@ export async function updateProfile(
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+      throw new Error(errorData.message || `Erreur HTTP ! Statut : ${response.status}`);
     }
 
     return await response.json();
@@ -181,5 +221,3 @@ export async function updateProfile(
     throw error;
   }
 }
-
-

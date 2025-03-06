@@ -24,7 +24,7 @@
 
 /* Styles pour le Sidenav */
 .sidenav {
-  width: 300px; /* Largeur fixe pour le Sidenav */
+  width: 280px; /* Largeur fixe pour le Sidenav */
   transition: width 0.3s ease; /* Transition fluide pour l'ouverture du SideNav */
   overflow-x: hidden;
   white-space: nowrap;

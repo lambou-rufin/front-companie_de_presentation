@@ -36,21 +36,6 @@ const LangageDeProgrammation: FC = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getLangageDeProgrammation();
-        setLangageDeProgrammation(data); // Assurez-vous que 'data' est de type ILanguage[]
-        setFilteredLangage(data);
-      } catch (err) {
-        setError("Erreur lors du chargement des langages de programmation.");
-        toast.error("Erreur lors du chargement des langages de programmation."); // Ajouter un toast d'erreur
-      }
-    };
-    fetchData();
-  }, []);
-
   const columns = [
     {
       Header: "ID",
@@ -61,7 +46,7 @@ const LangageDeProgrammation: FC = () => {
       accessor: "nom" as keyof ILanguage,
     },
     {
-      Header: "Actions",
+      Header: "Action",
       accessor: "action" as keyof ILanguage,
       Cell: ({ row }: { row: any }) => (
         <Dropdown as={ButtonGroup}>
@@ -86,6 +71,20 @@ const LangageDeProgrammation: FC = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getLangageDeProgrammation();
+        setLangageDeProgrammation(data); // Assurez-vous que 'data' est de type ILanguage[]
+        setFilteredLangage(data);
+      } catch (err) {
+        setError("Erreur lors du chargement des langages de programmation.");
+        toast.error("Erreur lors du chargement des langages de programmation."); // Ajouter un toast d'erreur
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleAddLanguage = (language: ILanguage) => {
     setLangageDeProgrammation((prev) => [...prev, language]);
@@ -126,8 +125,8 @@ const LangageDeProgrammation: FC = () => {
   return (
     <div className="langage-container">
       <ToastContainer />
-      <h1 className="text-center mt-3">Langage de programmation</h1>
-      <div className="data-table-top d-flex justify-content-between align-items-center mb-3 mt-3">
+      <h1 className="text-center mt-1">Langage de programmation</h1>
+      <div className="data-table-top d-flex justify-content-between align-items-center">
         <span className="add-icon" onClick={openModal} role="button">
           <FontAwesomeIcon
             icon={faPlusCircle}

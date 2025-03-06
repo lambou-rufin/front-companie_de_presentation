@@ -26,6 +26,77 @@ const Tutorial: FC = () => {
   // Ouvrir et fermer le modal
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  // Colonnes de la table avec typage explicite
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: "id" as const,
+      },
+      {
+        Header: "Titre",
+        accessor: "title" as const,
+      },
+      {
+        Header: "Description",
+        accessor: "description" as const,
+      },
+      {
+        Header: "Désignation",
+        accessor: "designation" as const,
+      },
+      {
+        Header: "Statut",
+        accessor: "status" as const,
+        Cell: ({ value }: { value: TutorialStatus }) => {
+          switch (value) {
+            case TutorialStatus.EN_ATTENTE:
+              return "En attente";
+            case TutorialStatus.DEJA_FINI:
+              return "Déjà fini";
+            case TutorialStatus.EN_COURS:
+              return "En cours";
+            default:
+              return "Inconnu";
+          }
+        },
+      },
+      {
+        Header: "Date",
+        accessor: "createdAt" as const,
+        Cell: ({ value }: { value: Date }) =>
+          new Date(value).toLocaleDateString("fr-FR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+      },
+      {
+        Header: "Action",
+        Cell: ({ row }: { row: { original: ITutorial } }) => (
+          <div className="d-flex">
+            <Button
+              variant="link"
+              size="sm"
+              onClick={() => handleEditClick(row.original)}
+              className="p-0 me-2"
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </Button>
+            <Button
+              variant="link"
+              size="sm"
+              onClick={() => handleDeleteClick(row.original)}
+              className="btn btn-outline-danger btn-md delete-all d-flex justify-content-between align-items-center"
+            >
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </Button>
+          </div>
+        ),
+      },
+    ],
+    [tutorials]
+  );
 
   // Récupérer la liste des tutoriels
   useEffect(() => {
@@ -77,85 +148,13 @@ const Tutorial: FC = () => {
     setFilteredTutorials(filteredData);
   };
 
-  // Colonnes de la table avec typage explicite
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "ID",
-        accessor: "id" as const,
-      },
-      {
-        Header: "Titre",
-        accessor: "title" as const,
-      },
-      {
-        Header: "Description",
-        accessor: "description" as const,
-      },
-      {
-        Header: "Désignation",
-        accessor: "designation" as const,
-      },
-      {
-        Header: "Statut",
-        accessor: "status" as const,
-        Cell: ({ value }: { value: TutorialStatus }) => {
-          switch (value) {
-            case TutorialStatus.EN_ATTENTE:
-              return "En attente";
-            case TutorialStatus.DEJA_FINI:
-              return "Terminé";
-            case TutorialStatus.EN_COURS:
-              return "En cours";
-            default:
-              return "Inconnu";
-          }
-        },
-      },
-      {
-        Header: "Date",
-        accessor: "createdAt" as const,
-        Cell: ({ value }: { value: Date }) =>
-          new Date(value).toLocaleDateString("fr-FR", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }),
-      },
-      {
-        Header: "Actions",
-        Cell: ({ row }: { row: { original: ITutorial } }) => (
-          <div className="d-flex">
-            <Button
-              variant="link"
-              size="sm"
-              onClick={() => handleEditClick(row.original)}
-              className="p-0 me-2"
-            >
-              <FontAwesomeIcon icon={faEdit} />
-            </Button>
-            <Button
-              variant="link"
-              size="sm"
-              onClick={() => handleDeleteClick(row.original)}
-              className="btn btn-outline-danger btn-md delete-all d-flex justify-content-between align-items-center"
-            >
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </Button>
-          </div>
-        ),
-      },
-    ],
-    [tutorials]
-  );
-
   if (error) return <div className="text-danger text-center">{error}</div>;
 
   return (
     <div className="tutoriel-container">
       <ToastContainer />
-      <h1 className="text-center mt-3">Gestion des tutoriels</h1>
-      <div className="data-table-top d-flex justify-content-between align-items-center mb-3 mt-3">
+      <h1 className="text-center">Gestion des tutoriels</h1>
+      <div className="data-table-top d-flex justify-content-between align-items-center">
         <span className="add-icon" onClick={openModal} role="button">
           <FontAwesomeIcon
             icon={faPlusCircle}

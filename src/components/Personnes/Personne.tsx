@@ -43,6 +43,67 @@ const Personne: FC = () => {
   const closeUpdateModal = () => setIsUpdateModalOpen(false); // Close Update Modal
   const closeAddModal = () => setIsAddModalOpen(false); // Close Add Modal
   const closeConfirmationModal = () => setIsConfirmationModalOpen(false); // Close Confirmation Modal
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: "pers_id",
+      },
+      {
+        Header: "Nom",
+        accessor: "nom",
+      },
+      {
+        Header: "Prénom",
+        accessor: "prenom",
+      },
+      {
+        Header: "Email",
+        accessor: "email",
+      },
+      {
+        Header: "Adresse",
+        accessor: "adress",
+      },
+      {
+        Header: "Téléphone",
+        accessor: "phoneNumber",
+      },
+      {
+        Header: "Image",
+        accessor: "image",
+        Cell: ({ value }: { value: string }) => (
+          <img src={value} alt="Personne" className="table-avatar" />
+        ),
+      },
+      {
+        Header: "Action",
+        accessor: "action",
+        Cell: ({ row }: any) => (
+          <Dropdown as={ButtonGroup}>
+            <Dropdown.Toggle
+              variant="secondary"
+              id="dropdown-basic"
+            ></Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => openUpdateModal(row.original)}>
+                <FontAwesomeIcon icon={faUserEdit} className="me-2" />
+                Modifier
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => handleDelete(row.original.pers_id)}
+                className="text-danger"
+              >
+                <FontAwesomeIcon icon={faTrashAlt} className="me-2" />
+                Supprimer
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        ),
+      },
+    ],
+    []
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,73 +190,11 @@ const Personne: FC = () => {
     setFilteredPersonnes(filteredData);
   };
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "ID",
-        accessor: "pers_id",
-      },
-      {
-        Header: "Nom",
-        accessor: "nom",
-      },
-      {
-        Header: "Prénom",
-        accessor: "prenom",
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "Adresse",
-        accessor: "adress",
-      },
-      {
-        Header: "Téléphone",
-        accessor: "phoneNumber",
-      },
-      {
-        Header: "Image",
-        accessor: "image",
-        Cell: ({ value }: { value: string }) => (
-          <img src={value} alt="Personne" className="table-avatar" />
-        ),
-      },
-      {
-        Header: "Actions",
-        accessor: "action",
-        Cell: ({ row }: any) => (
-          <Dropdown as={ButtonGroup}>
-            <Dropdown.Toggle
-              variant="secondary"
-              id="dropdown-basic"
-            ></Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => openUpdateModal(row.original)}>
-                <FontAwesomeIcon icon={faUserEdit} className="me-2" />
-                Modifier
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => handleDelete(row.original.pers_id)}
-                className="text-danger"
-              >
-                <FontAwesomeIcon icon={faTrashAlt} className="me-2" />
-                Supprimer
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        ),
-      },
-    ],
-    []
-  );
-
   return (
     <div className="personne-container">
       <ToastContainer />
       <h1 className="page-title">Gestion des Personnes</h1>
-      <div className="data-table-top d-flex justify-content-between align-items-center mb-3 mt-3">
+      <div className="data-table-top d-flex justify-content-between align-items-center">
         <span
           className="add-icon"
           onClick={() => setIsAddModalOpen(true)}

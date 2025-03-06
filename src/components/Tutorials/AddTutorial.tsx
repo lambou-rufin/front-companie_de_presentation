@@ -139,12 +139,12 @@ export const AddTutorial: FC<AddTutorialProps> = ({
       <Row className="text-space-between mt-3">
         <Col>
           <Button
-            variant="success"
+           variant="outlined"
             type="submit"
             disabled={loading}
             className="me-2"
           >
-            {loading ? <Spinner loading={loading} /> : "Ajouter"}
+            {loading ? <Spinner loading={loading} /> : "Sauvegarder"}
           </Button>
           <Button variant="danger" onClick={onClose}>
             Annuler

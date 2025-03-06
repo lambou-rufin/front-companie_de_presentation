@@ -15,6 +15,7 @@ import Layout from "../../main/layout/Layout"; // Décommentez si vous utilisez 
 import { register } from "../../../services/user"; 
 import "./Register.css";
 import { convertToBase64 } from "utils/convertToBase64";
+import { toast, ToastContainer } from "react-toastify";
 const logo = require("../../../assets/img/logo.jpg");
 
 const RegisterSchema = Yup.object().shape({
@@ -70,8 +71,9 @@ const RegisterForm: React.FC = () => {
   
       // Redirection ou gestion après une inscription réussie
       navigate("/login");
+      toast.success("User registerd successfuly.");
     } catch (error) {
-      setError("Failed to register. Please check your details and try again.");
+      toast.error("Failed to register. Please check your details and try again.");
     }
   };
   
@@ -91,6 +93,7 @@ const RegisterForm: React.FC = () => {
   return (
     // <Layout>
     <Container className="vh-100 d-flex justify-content-center align-items-center">
+      <ToastContainer />
       <Row className="w-100">
         <Col md={6} className="d-flex align-items-center">
           <div className="w-100 text-center">

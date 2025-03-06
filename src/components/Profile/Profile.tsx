@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Profile.css";
 import ProfileEdit from "./EditProfile";
 
-// Définir l'interface User pour représenter un utilisateur
+// Interface pour représenter un utilisateur
 interface User {
   id: number;
   name: string;
@@ -14,18 +14,31 @@ interface User {
   image?: string;
 }
 
-// Définir les props du composant Profile
+// Interface pour les props du composant Profile
 interface ProfileProps {
-  user: User | null; // La prop 'user' peut être un objet 'User' ou 'null'
+  user?: User | null;
 }
 
-const Profile: React.FC<ProfileProps> = ({ user }) => {
+const Profile: React.FC<ProfileProps> = ({ user: initialUser }) => {
+  const [user, setUser] = useState<User | null>(initialUser || null);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
-  // Fonction de sauvegarde du profil mis à jour
-  const handleSaveUser = (updatedUser: User) => {
-    localStorage.setItem("user", JSON.stringify(updatedUser)); // Mettre à jour le localStorage avec le nouvel utilisateur
+  // Charger l'utilisateur depuis localStorage au montage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error("Erreur de parsing du localStorage", error);
+      }
+    }
+  }, []);
 
+  // Sauvegarder le profil mis à jour
+  const handleSaveUser = (updatedUser: User) => {
+    setUser(updatedUser);
+    localStorage.setItem("user", JSON.stringify(updatedUser));
     toast.success("Profil mis à jour avec succès !", {
       position: "top-right",
       autoClose: 3000,
@@ -36,7 +49,9 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
     <Container>
       <ToastContainer />
       <Card className="profile_user">
-        <h1 className="text-center mt-3">Profil de {user?.name || "Utilisateur"}</h1>
+        <h1 className="text-center mt-3">
+          Profil de {user?.name || "Utilisateur"}
+        </h1>
         <img
           src={user?.image || "/assets/img/developer.jpg"}
           alt="Profil"
@@ -44,16 +59,23 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         />
         <p>Email: {user?.email || "Pas d'email disponible"}</p>
         <p>Téléphone: {user?.phoneNumber || "Pas de numéro disponible"}</p>
-        <button className="edit-button" onClick={() => setShowEditModal(true)}>
-          Éditer
-        </button>
+        <div className="profile-buttons">
+          <button
+            className="edit-button"
+            onClick={() => setShowEditModal(true)}
+          >
+            Éditer
+          </button>
+        </div>
       </Card>
-      <ProfileEdit
-        show={showEditModal}
-        handleClose={() => setShowEditModal(false)}
-        user={user}
-        onSave={handleSaveUser}
-      />
+      {showEditModal && (
+        <ProfileEdit
+          show={showEditModal}
+          handleClose={() => setShowEditModal(false)}
+          user={user}
+          onSave={handleSaveUser}
+        />
+      )}
     </Container>
   );
 };

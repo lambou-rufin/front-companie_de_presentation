@@ -69,9 +69,9 @@ const LoginForm: React.FC = () => {
               <Card.Body className="h-100 d-flex flex-column justify-content-center">
                 <div className="nk-block-head text-center">
                   <h3 className="nk-block-title mb-1">Se connecter</h3>
-                  <p className="small">
+                  {/* <p className="small">
                     Bienvenue ! Connectez-vous pour continuer.
-                  </p>
+                  </p> */}
                 </div>
 
                 <Formik
@@ -83,7 +83,7 @@ const LoginForm: React.FC = () => {
                     <Form>
                       <Row className="gy-3">
                         <Col xs="12">
-                          <BootstrapForm.Group className="form-group">
+                          <BootstrapForm.Group className="form-group text-start mt-3">
                             <BootstrapForm.Label>Email</BootstrapForm.Label>
                             <Field
                               name="email"
@@ -103,7 +103,7 @@ const LoginForm: React.FC = () => {
                         </Col>
 
                         <Col xs="12">
-                          <BootstrapForm.Group className="form-group">
+                          <BootstrapForm.Group className="form-group text-start mt-3">
                             <BootstrapForm.Label>
                               Mot de passe
                             </BootstrapForm.Label>
@@ -132,9 +132,10 @@ const LoginForm: React.FC = () => {
                               id="remember"
                               label="Se souvenir de moi"
                               name="remember"
+                              required
                             />
                             <Link to={routes.FORGOTPASSWORD}>
-                              Mot de passe oublié ?
+                              Mot de passe oublié
                             </Link>
                           </div>
                         </Col>
@@ -154,7 +155,7 @@ const LoginForm: React.FC = () => {
                   )}
                 </Formik>
 
-                <div className="text-center mt-4">
+                <div className="text-start mt-4">
                   <p className="small">
                     Pas encore de compte ?{" "}
                     <Link to={routes.REGISTER}>Inscrivez-vous ici</Link>
@@ -170,7 +171,7 @@ const LoginForm: React.FC = () => {
             >
               <Card.Body className="d-flex flex-column justify-content-center">
                 <div className="brand-logo text-center">
-                  <img src={logo} alt="Logo" className="img-fluid" />
+                  <img src={logo} alt="Logo" className="image-full" />
                 </div>
               </Card.Body>
             </Col>

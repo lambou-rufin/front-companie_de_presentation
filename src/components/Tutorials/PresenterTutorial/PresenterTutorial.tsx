@@ -135,7 +135,7 @@ const PresenterTutorial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         isInvalid={!!formik.errors.selectedPersonne}
         className="text-start mt-2"
       >
-        <option value="">--Sélectionnez une personne--</option>
+        <option value="">-- Sélectionnez une personne --</option>
         {personnes.map((personne) => (
           <option key={personne.pers_id} value={personne.pers_id}>
             {personne.nom}
@@ -151,7 +151,7 @@ const PresenterTutorial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         isInvalid={!!formik.errors.selectedLangage}
         className="text-start mt-2"
       >
-        <option value="">--Sélectionnez un langage--</option>
+        <option value="">-- Sélectionnez un langage --</option>
         {langages.map((langage) => (
           <option key={langage.langage_id} value={langage.langage_id}>
             {langage.nom}
@@ -201,14 +201,10 @@ const PresenterTutorial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       {/* Action buttons */}
       <Row className="text-space-between mt-3">
         <Col>
-          <Button
-            variant="success"
-            type="submit"
-            disabled={loading}
-            className="me-2"
-          >
-            {loading ? <Spinner animation="border" size="sm" /> : "Ajouter"}
+          <Button variant="success" type="submit" className="me-2">
+            Ajouter
           </Button>
+
           <Button variant="danger" onClick={onClose}>
             Annuler
           </Button>

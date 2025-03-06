@@ -5,9 +5,9 @@
   overflow-y: auto;
   width: 300px;
   height: 100%;
-  background-color: #f8f9fa;
-  /* background-color: #111827; */
-  color: white;
+  /* background-color: #f8f9fa; */
+  background-color: #111827;
+  color: rgb(255, 255, 255);
   transition: transform 0.3s ease;
   z-index: 1000;
 }
@@ -60,7 +60,7 @@
   display: flex;
   align-items: center; /* Alignement vertical des icônes et du texte */
   gap: 10px; /* Espacement entre l'icône et le texte */
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   text-decoration: none;
   padding: 10px 15px; /* Ajout de marges internes */
   border-radius: 5px;
@@ -79,7 +79,7 @@
 .accordion-header .icon {
   font-size: 18px; /* Taille uniforme des icônes */
   margin-left: 6; /* Ajout d'une marge à gauche */
-  color: #000000; /* Couleur des icônes */
+  color: #ffffff; /* Couleur des icônes */
 }
 
 .custom-dropdown-menu {

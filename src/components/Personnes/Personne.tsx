@@ -191,9 +191,17 @@ const Personne: FC = () => {
   };
 
   return (
+    <>
+    <h1 className="w-100 text-start mb-4">Personnes</h1>
+    <div className="table-container mb-4">
+        <div className="count-container mb-2">
+          <span className="person-count">
+            Nombre total de personnes : {filteredPersonnes.length}
+          </span>
+        </div>
+      </div>
     <div className="personne-container">
       <ToastContainer />
-      <h1 className="page-title">Gestion des Personnes</h1>
       <div className="data-table-top d-flex justify-content-between align-items-center">
         <span
           className="add-icon"
@@ -214,13 +222,6 @@ const Personne: FC = () => {
           onChange={handleFilterChange}
           className="filter-input"
         />
-      </div>
-      <div className="table-container">
-        <div className="count-container mb-2">
-          <span className="person-count">
-            Nombre total de personnes : {filteredPersonnes.length}
-          </span>
-        </div>
       </div>
       <div className="table-container">
         {filteredPersonnes.length > 0 ? (
@@ -273,7 +274,10 @@ const Personne: FC = () => {
         </Modal>
       )}
     </div>
+    </>
   );
 };
+
+
 
 export default Personne;

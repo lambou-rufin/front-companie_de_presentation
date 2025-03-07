@@ -33,7 +33,17 @@
   background-color: #ffffff;
 }
 
-.card:hover {
+.card-personnes:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+} 
+
+.card-langages:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-tutoriels:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -52,15 +62,15 @@
 
 /* Définir les couleurs des headers des cartes */
 .card-personnes .card-title {
-  background-color: #007bff; /* Bleu */
+  background-color: #9BBBFC; /* Bleu */
 }
 
 .card-langages .card-title {
-  background-color: #28a745; /* Vert */
+  background-color: #4741A6; /* Vert */
 }
 
 .card-tutoriels .card-title {
-  background-color: #ffc107; /* Jaune */
+  background-color: #F9CE69; /* Jaune */
 }
 
 .card-text {

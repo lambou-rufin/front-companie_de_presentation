@@ -151,43 +151,48 @@ const Tutorial: FC = () => {
   if (error) return <div className="text-danger text-center">{error}</div>;
 
   return (
-    <div className="tutoriel-container">
-      <ToastContainer />
-      <h1 className="text-center">Gestion des tutoriels</h1>
-      <div className="data-table-top d-flex justify-content-between align-items-center">
-        <span className="add-icon" onClick={openModal} role="button">
-          <FontAwesomeIcon
-            icon={faPlusCircle}
-            size="2x"
-            className="text-dark"
+    <>
+      <h1 className="w-100 text-start mb-4">Tutoriels</h1>
+      <div className="tutoriel-container">
+        <ToastContainer />
+        <div className="data-table-top d-flex justify-content-between align-items-center">
+          <span className="add-icon" onClick={openModal} role="button">
+            <FontAwesomeIcon
+              icon={faPlusCircle}
+              size="2x"
+              className="text-dark"
+            />
+          </span>
+          <input
+            type="text"
+            name="title"
+            placeholder="Rechercher..."
+            value={filter.title}
+            onChange={handleFilterChange}
+            className="form-control"
+            style={{ width: "200px" }}
           />
-        </span>
-        <input
-          type="text"
-          name="title"
-          placeholder="Rechercher..."
-          value={filter.title}
-          onChange={handleFilterChange}
-          className="form-control"
-          style={{ width: "200px" }}
-        />
+        </div>
+        <div className="table-container mt-3">
+          {filteredTutorials.length > 0 ? (
+            <DataTable columns={columns} data={filteredTutorials} />
+          ) : (
+            <p className="text-center">Aucun tutoriel disponible</p>
+          )}
+        </div>
+        <Modal show={isModalOpen} onHide={closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Ajouter un tutoriel</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <AddTutorial
+              onAddTutorial={handleAddTutorial}
+              onClose={closeModal}
+            />
+          </Modal.Body>
+        </Modal>
       </div>
-      <div className="table-container mt-3">
-        {filteredTutorials.length > 0 ? (
-          <DataTable columns={columns} data={filteredTutorials} />
-        ) : (
-          <p className="text-center">Aucun tutoriel disponible</p>
-        )}
-      </div>
-      <Modal show={isModalOpen} onHide={closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Ajouter un tutoriel</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddTutorial onAddTutorial={handleAddTutorial} onClose={closeModal} />
-        </Modal.Body>
-      </Modal>
-    </div>
+    </>
   );
 };
 

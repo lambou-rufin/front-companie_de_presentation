@@ -1,89 +1,89 @@
+/* Assurez-vous que le layout prend bien toute la hauteur */
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh; /* Hauteur totale de l'écran */
+  overflow: hidden; /* Évite les débordements */
 }
 
+/* Conteneur principal : Sidenav + Main Content */
 .container {
   display: flex;
-  flex: 1; /* Prend tout l'espace disponible */
-  transition: margin-left 0.3s ease; /* Animation fluide pour les déplacements */
+  flex: 1; /* Prend tout l'espace sous le header */
   width: 100%;
+  overflow: hidden; /* Empêche tout débordement horizontal */
 }
 
-.main-content {
-  flex: 1; /* Prend tout l'espace disponible après le SideNav */
-  padding: 20px; /* Espace intérieur */
-  overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur */
-  width: 100%;
-  /* grid-area: main; */
-  transition: margin-left 0.3s ease; /* Animation fluide pour le contenu */
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-/* Styles pour le Sidenav */
+/* SideNav */
 .sidenav {
-  width: 280px; /* Largeur fixe pour le Sidenav */
-  transition: width 0.3s ease; /* Transition fluide pour l'ouverture du SideNav */
+  width: 280px; /* Largeur fixe */
+  transition: width 0.3s ease-in-out;
   overflow-x: hidden;
   white-space: nowrap;
-  /* grid-area: sidenav; */
 }
 
 .sidenav.closed {
-  width: 0; /* Réduit la largeur à 0 quand le Sidenav est fermé */
+  width: 0;
 }
 
-.main-content.sidenav-open {
-  margin-left: 20px; /* Décalage du contenu principal lorsque le SideNav est ouvert */
-  margin-right: 10px; /* Décalage du contenu principal lorsque le SideNav est ouvert */
+/* Contenu principal */
+.main-content {
+  min-width: 500px;
+  flex-grow: 1; /* Prend tout l’espace disponible */
+  padding: 20px;
+  /* overflow-y: auto; */
 }
 
-.main-content.sidenav-closed {
-   width: 100%; /* Décalage du contenu principal lorsque le SideNav est fermé */
+/* Lorsque le Sidenav est ouvert */
+.sidenav-open .main-content {
+  margin-left: 280px;
 }
 
-
-.container.sidenav-open {
-  margin-left: 300px;/* Décalage du contenu principal lorsque le SideNav est fermé */
- }
-
-.container.sidenav-closed {
- width: 100%; /* Décalage du contenu principal lorsque le SideNav est fermé */
+/* Lorsque le Sidenav est fermé */
+.sidenav-closed .main-content {
+  margin-left: 0;
 }
 
-.header.sidenav-closed {
-    width: 100%; /* Décalage du header lorsque le SideNav est fermé */
+/* Correction pour que le Header ne casse pas la mise en page */
+.header {
+  width: 100%;
+  transition: margin-left 0.3s ease;
 }
 
-.header.sidenav-open {
-  margin-left: 300px; /* Décalage du header lorsque le SideNav est ouvert */
+.sidenav-open .header {
+  margin-left: 280px;
 }
 
-/* Responsive: Sidenav caché sur petits écrans */
+.sidenav-closed .header {
+  margin-left: 0;
+}
+
+/* ✅ Correction pour Android et iOS */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* Empile le Sidenav au-dessus du contenu principal */
+    flex-direction: column;
   }
 
   .sidenav {
-    width: 0; /* Réduit la largeur à 0 quand le Sidenav est caché */
-    flex: 1;
+    width: 0;
   }
 
   .sidenav.open {
-    width: 100%; /* Le SideNav occupe toute la largeur sur petits écrans */
+    width: 100%;
   }
 
-  .container.sidenav-open {
-    margin-left: 0; /* Pas de décalage sur petits écrans */
+  .sidenav-open .main-content,
+  .sidenav-closed .main-content {
+    margin-left: 0;
+  }
+
+  /* 🔥 Fixe pour Android : force le défilement */
+  .main-content {
+    overflow-y: scroll; 
+    -webkit-overflow-scrolling: touch; /* Améliore la fluidité sur iOS et Android */
   }
 
   .header.sidenav-open {
-    margin-left: 0; /* Pas de décalage sur petits écrans */
-  }
-  .main-content{
-    flex-direction: column;
+    margin-left: 0;
   }
 }

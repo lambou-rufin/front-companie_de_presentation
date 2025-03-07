@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Spinner } from 'react-bootstrap';
-import { Doughnut } from 'react-chartjs-2'; // Importation du graphique Doughnut
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js'; // Importation des composants nécessaires
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
+import { FaUser, FaCode, FaBook } from 'react-icons/fa';
 import getLangageDeProgrammationList from 'services/langageDeProgrammation';
 import getPersonneList from 'services/personne';
 import getTutorialList from 'services/tutorial';
-import './Dashboard.css'; // Assurez-vous d'importer le fichier CSS
+import './Dashboard.css';
 
-// Enregistrement des composants nécessaires pour le Doughnut chart
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 const Dashboard: React.FC = () => {
@@ -27,45 +27,40 @@ const Dashboard: React.FC = () => {
 
         const tutorialData = await getTutorialList();
         setTutorials(tutorialData);
-
       } catch (err) {
         console.error("Erreur lors du chargement des données", err);
       } finally {
         setLoading(false);
       }
     }
-
-    // Appel de fetchData uniquement lors du montage du composant
     fetchData();
-  }, []); // Tableau des dépendances vide pour éviter la boucle infinie
+  }, []);
 
-  // Définir les données des cartes dans un tableau
   const cardData = [
     {
-      title: 'Personnes',
+      icon: <FaUser style={{ fontSize: '30px' }} />, 
       count: personnes.length,
       className: 'card-personnes'
     },
     {
-      title: 'Langages de Programmation',
+      icon: <FaCode style={{ fontSize: '30px' }} />, 
       count: langages.length,
       className: 'card-langages'
     },
     {
-      title: 'Tutoriels',
+      icon: <FaBook style={{ fontSize: '30px' }} />, 
       count: tutorials.length,
       className: 'card-tutoriels'
     },
   ];
 
-  // Données pour le graphique circulaire
   const chartData = {
-    labels: ['Personnes', 'Langages', 'Tutoriels'], // Labels pour chaque catégorie
+    labels: ['Personnes', 'Langages', 'Tutoriels'],
     datasets: [
       {
         label: 'Répartition des Totaux',
-        data: [personnes.length, langages.length, tutorials.length], // Les données pour chaque catégorie
-        backgroundColor: ['#007bff', '#28a745', '#ffc107'], // Couleurs du graphique
+        data: [personnes.length, langages.length, tutorials.length],
+        backgroundColor: ['#9BBBFC', '#4741A6', '#F9CE69'],
         borderWidth: 1,
       }
     ]
@@ -74,29 +69,27 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-container">
       <div className="dashboard-content">
-        <h1>Dashboard</h1>
+        <h1 className="w-100 text-start">Dashboard</h1>
         {loading ? (
           <Spinner animation="border" variant="primary" />
         ) : (
           <Row className="g-4">
-            {/* Boucle pour générer les cartes */}
             {cardData.map((data, index) => (
               <Col md={4} key={index}>
                 <Card className={data.className}>
-                  <Card.Body>
-                    <Card.Title>{data.title}</Card.Title>
-                    <Card.Text>{data.count} {data.title}</Card.Text>
+                  <Card.Body className="text-center">
+                    {data.icon}
+                    <Card.Text>{data.count}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
             ))}
 
-            {/* Graphique des Totaux sous forme de Doughnut */}
             <Col md={12}>
               <Card>
                 <Card.Body>
                   <Card.Title>Répartition des Totaux</Card.Title>
-                  <div style={{ height: '300px' }}>
+                  <div style={{ height: '400px' }}>
                     <Doughnut data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
                   </div>
                 </Card.Body>

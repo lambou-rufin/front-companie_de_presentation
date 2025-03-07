@@ -89,10 +89,10 @@ const LangageDeProgrammation: FC = () => {
   const handleAddLanguage = (language: ILanguage) => {
     setLangageDeProgrammation((prev) => [...prev, language]);
     setFilteredLangage((prev) => [...prev, language]);
-  
+
     toast.success("Langage de programmation ajouté avec succès !");
     closeModal();
-  };  
+  };
 
   const openUpdateModal = (language: ILanguage) => {
     // Implémentez la logique pour ouvrir la modal d'édition
@@ -123,46 +123,48 @@ const LangageDeProgrammation: FC = () => {
   if (error) return <div className="text-danger">{error}</div>;
 
   return (
-    <div className="langage-container">
-      <ToastContainer />
-      <h1 className="text-center mt-1">Langage de programmation</h1>
-      <div className="data-table-top d-flex justify-content-between align-items-center">
-        <span className="add-icon" onClick={openModal} role="button">
-          <FontAwesomeIcon
-            icon={faPlusCircle}
-            size="2x"
-            className="text-dark"
+    <>
+      <h1 className="w-100 text-start mb-4">Langage de programmation</h1>
+      <div className="langage-container">
+        <ToastContainer />
+        <div className="data-table-top d-flex justify-content-between align-items-center">
+          <span className="add-icon" onClick={openModal} role="button">
+            <FontAwesomeIcon
+              icon={faPlusCircle}
+              size="2x"
+              className="text-dark"
+            />
+          </span>
+          <input
+            type="text"
+            name="nom"
+            value={filter.nom}
+            onChange={handleFilterChange}
+            placeholder="Rechercher..."
+            className="form-control search-input"
           />
-        </span>
-        <input
-          type="text"
-          name="nom"
-          value={filter.nom}
-          onChange={handleFilterChange}
-          placeholder="Rechercher..."
-          className="form-control search-input"
-        />
-      </div>
-      <div className="table-container">
-        {filteredLangage.length > 0 ? (
-          <DataTable
-            columns={columns}
-            data={filteredLangage}
-            // onRowClick={handleRowClick}
-          />
-        ) : (
-          <p className="text-center">Aucun langage disponible.</p>
-        )}
-      </div>
+        </div>
+        <div className="table-container">
+          {filteredLangage.length > 0 ? (
+            <DataTable
+              columns={columns}
+              data={filteredLangage}
+              // onRowClick={handleRowClick}
+            />
+          ) : (
+            <p className="text-center">Aucun langage disponible.</p>
+          )}
+        </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        title="Ajouter un langage"
-        onClose={closeModal}
-      >
-        <AddLanguage onAddLanguage={handleAddLanguage} onClose={closeModal} />
-      </Modal>
-    </div>
+        <Modal
+          isOpen={isModalOpen}
+          title="Ajouter un langage"
+          onClose={closeModal}
+        >
+          <AddLanguage onAddLanguage={handleAddLanguage} onClose={closeModal} />
+        </Modal>
+      </div>
+    </>
   );
 };
 

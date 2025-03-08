@@ -62,7 +62,8 @@ const Profile: React.FC<ProfileProps> = ({ user: initialUser }) => {
         <div className="profile-buttons">
           <button
             className="edit-button"
-            onClick={() => setShowEditModal(true)}
+            onClick={() => setShowEditModal(true) }
+            style={{ cursor: "pointer", background: "#4265D6", color:'black' }}
           >
             Éditer
           </button>

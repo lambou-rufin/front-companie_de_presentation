@@ -60,6 +60,10 @@
   border-radius: 8px;
 }
 
+/* .card-dashboard{
+  height: 10rem;
+} */
+
 /* Définir les couleurs des headers des cartes */
 .card-personnes .card-title {
   background-color: #9BBBFC; /* Bleu */

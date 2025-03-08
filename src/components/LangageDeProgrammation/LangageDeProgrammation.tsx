@@ -16,6 +16,7 @@ import { ILanguage } from "utils/inteface/interface"; // Import de l'interface I
 import "./LangageDeProgrammation.css"; // Import de votre fichier CSS
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faPlus,
   faPlusCircle,
   faTrashAlt,
   faUserEdit,
@@ -128,13 +129,20 @@ const LangageDeProgrammation: FC = () => {
       <div className="langage-container">
         <ToastContainer />
         <div className="data-table-top d-flex justify-content-between align-items-center">
-          <span className="add-icon" onClick={openModal} role="button">
-            <FontAwesomeIcon
-              icon={faPlusCircle}
-              size="2x"
-              className="text-dark"
-            />
-          </span>
+          <Button
+            // size="lg"
+            onClick={openModal}
+            style={{ cursor: "pointer", background: "#4265D6", color:'black' }}
+          >
+            <span className="d-none d-lg-inline ms-1">
+              {" "}
+              <FontAwesomeIcon
+                icon={faPlus}
+                className="text-dark"
+              />
+              Ajouter
+            </span>
+          </Button>
           <input
             type="text"
             name="nom"
@@ -158,7 +166,7 @@ const LangageDeProgrammation: FC = () => {
 
         <Modal
           isOpen={isModalOpen}
-          title="Ajouter un langage"
+          title="Ajout d'un langage"
           onClose={closeModal}
         >
           <AddLanguage onAddLanguage={handleAddLanguage} onClose={closeModal} />

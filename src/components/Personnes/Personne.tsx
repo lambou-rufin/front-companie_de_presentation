@@ -9,12 +9,13 @@ import getPersonneList, {
   updatePersonne,
 } from "services/personne";
 import { IPersonnes } from "utils/inteface/interface";
-import { Dropdown, ButtonGroup } from "react-bootstrap";
+import { Dropdown, ButtonGroup, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlusCircle,
   faUserEdit,
   faTrashAlt,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -186,98 +187,101 @@ const Personne: FC = () => {
       (person) =>
         person.nom.toLowerCase().includes(filter.nom.toLowerCase()) &&
         person.email.toLowerCase().includes(filter.email.toLowerCase())
-    );    
+    );
     setFilteredPersonnes(filteredData);
   };
 
   return (
     <>
-    <h1 className="w-100 text-start mb-4">Personnes</h1>
-    <div className="table-container mb-4">
+      <h1 className="w-100 text-start mb-4">Personnes</h1>
+      <div className="table-container mb-4">
         <div className="count-container mb-2">
           <span className="person-count">
-            Nombre total de personnes : {filteredPersonnes.length}
+               {filteredPersonnes.length} personnes
           </span>
         </div>
       </div>
-    <div className="personne-container">
-      <ToastContainer />
-      <div className="data-table-top d-flex justify-content-between align-items-center">
-        <span
-          className="add-icon"
-          onClick={() => setIsAddModalOpen(true)}
-          role="button"
-        >
-          <FontAwesomeIcon
-            icon={faPlusCircle}
-            size="2x"
-            className="text-dark"
+      <div className="personne-container">
+        <ToastContainer />
+        <div className="data-table-top d-flex justify-content-between align-items-center">
+          <Button
+            // variant="success"
+            onClick={() => setIsAddModalOpen(true)}
+            style={{ cursor: "pointer", background: "#4265D6", fontSize:"10", color:'black' }}
+          >
+            <span className="d-none d-lg-inline ms-1">
+              {" "}
+              <FontAwesomeIcon
+                icon={faPlus}
+                // size="2x"
+                className="text-dark"
+              />
+              Ajouter
+            </span>
+          </Button>
+
+          <input
+            type="text"
+            name="nom"
+            placeholder="Rechercher..."
+            value={filter.nom}
+            onChange={handleFilterChange}
+            className="filter-input"
           />
-        </span>
-        <input
-          type="text"
-          name="nom"
-          placeholder="Rechercher..."
-          value={filter.nom}
-          onChange={handleFilterChange}
-          className="filter-input"
-        />
-      </div>
-      <div className="table-container">
-        {filteredPersonnes.length > 0 ? (
-          <DataTable columns={columns} data={filteredPersonnes} />
-        ) : (
-          <p>Aucune personne trouvée.</p>
-        )}
-      </div>
+        </div>
+        <div className="table-container">
+          {filteredPersonnes.length > 0 ? (
+            <DataTable columns={columns} data={filteredPersonnes} />
+          ) : (
+            <p>Aucune personne trouvée.</p>
+          )}
+        </div>
 
-      {/* Add Person Modal */}
-      <Modal
-        isOpen={isAddModalOpen}
-        title="Ajouter une personne"
-        onClose={closeAddModal}
-      >
-        <AddPersonne
-          onAddPerson={handleAddPerson}
-          onClose={closeAddModal}
-          onSuccessToast={() => {}}
-        />
-      </Modal>
-
-      {/* Confirmation Modal for deletion */}
-      <ConfirmationModal
-        isOpen={isConfirmationModalOpen}
-        onConfirm={confirmDelete}
-        onCancel={closeConfirmationModal}
-        message="Êtes-vous sûr de vouloir supprimer cette personne ?"
-      />
-
-      {/* Update Person Modal */}
-      {isUpdateModalOpen && personToUpdate && (
+        {/* Add Person Modal */}
         <Modal
-          onClose={closeUpdateModal}
-          isOpen={isUpdateModalOpen}
-          title="Modifier une personne"
+          isOpen={isAddModalOpen}
+          title="Ajout d'une personne"
+          onClose={closeAddModal}
         >
-          <UpdatePersonne
-            isOpen={isUpdateModalOpen}
-            personne={{
-              ...personToUpdate,
-              pers_id: String(personToUpdate.pers_id),
-              image: personToUpdate.image ?? undefined,
-            }}
-            onUpdatePerson={handleUpdatePerson}
-            onClose={closeUpdateModal}
-            title="Modifier une personne"
-            onSuccessToast={() => toast.success("Mise à jour réussie !")}
+          <AddPersonne
+            onAddPerson={handleAddPerson}
+            onClose={closeAddModal}
+            onSuccessToast={() => {}}
           />
         </Modal>
-      )}
-    </div>
+
+        {/* Confirmation Modal for deletion */}
+        <ConfirmationModal
+          isOpen={isConfirmationModalOpen}
+          onConfirm={confirmDelete}
+          onCancel={closeConfirmationModal}
+          message="Êtes-vous sûr de vouloir supprimer cette personne ?"
+        />
+
+        {/* Update Person Modal */}
+        {isUpdateModalOpen && personToUpdate && (
+          <Modal
+            onClose={closeUpdateModal}
+            isOpen={isUpdateModalOpen}
+            title="Modifier une personne"
+          >
+            <UpdatePersonne
+              isOpen={isUpdateModalOpen}
+              personne={{
+                ...personToUpdate,
+                pers_id: String(personToUpdate.pers_id),
+                image: personToUpdate.image ?? undefined,
+              }}
+              onUpdatePerson={handleUpdatePerson}
+              onClose={closeUpdateModal}
+              title="Modifier une personne"
+              onSuccessToast={() => toast.success("Mise à jour réussie !")}
+            />
+          </Modal>
+        )}
+      </div>
     </>
   );
 };
-
-
 
 export default Personne;

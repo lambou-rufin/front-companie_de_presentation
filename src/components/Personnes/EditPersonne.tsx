@@ -170,7 +170,8 @@ const UpdatePersonne: React.FC<UpdatePersonneProps> = ({
 
       <Row className="text-space-between mt-3">
         <Col>
-          <Button variant="success" type="submit" disabled={loading} className="me-2">
+          <Button variant="success" type="submit" disabled={loading} className="me-2"
+           style={{ cursor: 'pointer', background:'#4265D6', color:'black'}}>
             {loading ? (
               <>
                 <Spinner loading={loading} /> Mise à jour...

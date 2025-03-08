@@ -132,7 +132,7 @@ const LoginForm: React.FC = () => {
                               id="remember"
                               label="Se souvenir de moi"
                               name="remember"
-                              required
+                              // required
                             />
                             <Link to={routes.FORGOTPASSWORD}>
                               Mot de passe oublié

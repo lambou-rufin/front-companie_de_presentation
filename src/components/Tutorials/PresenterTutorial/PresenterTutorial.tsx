@@ -201,7 +201,8 @@ const PresenterTutorial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       {/* Action buttons */}
       <Row className="text-space-between mt-3">
         <Col>
-          <Button variant="success" type="submit" className="me-2">
+          <Button variant="success" type="submit" className="me-2" style={{ cursor: "pointer", background: "#4265D6" , color:'black'}}
+          >
             Ajouter
           </Button>
 

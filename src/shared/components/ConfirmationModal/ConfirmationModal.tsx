@@ -20,7 +20,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onConfirm
       </Modal.Body>
       <Modal.Footer>
         <Button variant="danger" onClick={onCancel}>Cancel</Button>
-        <Button variant="success" onClick={onConfirm}>Confirm</Button>
+        <Button variant="success" onClick={onConfirm}  style={{ cursor: 'pointer', background:'#4265D6', color:'black'}}>Confirm</Button>
       </Modal.Footer>
     </Modal>
   );

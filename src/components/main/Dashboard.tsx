@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
       {
         label: 'Répartition des Totaux',
         data: [personnes.length, langages.length, tutorials.length],
-        backgroundColor: ['#9BBBFC', '#4741A6', '#F9CE69'],
+        backgroundColor: ['#4265D6', '#4741A6', '#F2AC20'],
         borderWidth: 1,
       }
     ]

@@ -143,6 +143,7 @@ export const AddTutorial: FC<AddTutorialProps> = ({
             type="submit"
             disabled={loading}
             className="me-2"
+            style={{ cursor: 'pointer', background:'#4265D6'}}
           >
             {loading ? <Spinner loading={loading} /> : "Sauvegarder"}
           </Button>

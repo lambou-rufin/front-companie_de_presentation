@@ -5,6 +5,7 @@ import getTutorialList from "services/tutorial";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
+  faPlus,
   faPlusCircle,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -156,13 +157,22 @@ const Tutorial: FC = () => {
       <div className="tutoriel-container">
         <ToastContainer />
         <div className="data-table-top d-flex justify-content-between align-items-center">
-          <span className="add-icon" onClick={openModal} role="button">
-            <FontAwesomeIcon
-              icon={faPlusCircle}
-              size="2x"
-              className="text-dark"
-            />
-          </span>
+          <Button
+            // size="lg"
+            onClick={openModal}
+            role="button"
+            style={{ cursor: "pointer", background: "#4265D6", color:'black' }}
+          >
+            <span className="d-none d-lg-inline ms-1">
+              {" "}
+              <FontAwesomeIcon
+                icon={faPlus}
+                // size="2x"
+                className="text-dark"
+              />
+              Ajouter
+            </span>
+          </Button>
           <input
             type="text"
             name="title"
@@ -182,7 +192,7 @@ const Tutorial: FC = () => {
         </div>
         <Modal show={isModalOpen} onHide={closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Ajouter un tutoriel</Modal.Title>
+            <Modal.Title>Ajout d'un tutoriel</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <AddTutorial

@@ -196,7 +196,8 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({ show, handleClose, onSave }) 
         </Form>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-end align-items-center">
-      <Button variant="outlined" onClick={handleSave} disabled={loading}>
+      <Button variant="outlined" onClick={handleSave} disabled={loading} style={{ cursor: "pointer", background: "#4265D6", color:'black' }}
+      >
         Sauvegarder
         </Button>
         <Button variant="danger" onClick={handleClose} disabled={loading}>Fermer</Button>

@@ -53,7 +53,8 @@ const AddLanguage: React.FC<AddLanguageProps> = ({ onAddLanguage, onClose }) => 
 
       <Row className="text-space-between mt-3">
         <Col>
-          <Button variant="outlined" type="submit" disabled={loading} className="me-2">
+          <Button variant="outlined" type="submit" disabled={loading} className="me-2" style={{ cursor: "pointer", background: "#4265D6", color:'black' }}
+          >
             {loading ? "Chargement..." : "Sauvegarder"} {/* Affiche 'Chargement...' quand en mode chargement */}
           </Button>
           <Button variant="danger" onClick={onClose}>

@@ -1,16 +1,24 @@
 import React from 'react';
-import './Spinner.css'; // Make sure to create the CSS file
+import { CirclesWithBar } from 'react-loader-spinner';
+import './SpinnerWithBar.css';
 
-interface SpinnerProps {
+interface SpinnerWithBarProps {
   loading: boolean;
 }
 
-const Spinner: React.FC<SpinnerProps> = ({ loading }) => {
-  if (!loading) return null; // Do not render if not loading
+const Spinner: React.FC<SpinnerWithBarProps> = ({ loading }) => {
+  if (!loading) return null;
 
   return (
     <div className="spinner-overlay">
-      <div className="spinner"></div>
+      <CirclesWithBar 
+        height="80" 
+        width="80" 
+        color="#221961" 
+        barColor="black"
+        ariaLabel="loading-indicator"
+        wrapperStyle={{ transition: 'all 5s ease-in-out', borderWidth: '55px' }} 
+      />
     </div>
   );
 };

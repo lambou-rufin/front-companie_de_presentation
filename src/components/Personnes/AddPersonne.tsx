@@ -24,6 +24,7 @@ const AddPersonne: React.FC<AddPersonneProps> = ({
 
       // Appeler la fonction du parent pour mettre à jour l'état global
       onAddPerson(addedPerson);
+      console.log('addedPerson')
 
       // Réinitialiser et fermer le modal
       resetForm();

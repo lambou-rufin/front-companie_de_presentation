@@ -21,6 +21,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmationModal from "shared/components/ConfirmationModal/ConfirmationModal";
 import UpdatePersonne from "./EditPersonne";
+import Spinner from "shared/components/Spinner/Spinner";
 
 const Personne: FC = () => {
   const [personnes, setPersonnes] = useState<any[]>([]);
@@ -35,6 +36,7 @@ const Personne: FC = () => {
   );
   const navigate = useNavigate();
   const [personToUpdate, setPersonToUpdate] = useState<IPersonnes | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // État du chargement
 
   const openUpdateModal = (person: IPersonnes) => {
     setPersonToUpdate(person);
@@ -182,13 +184,18 @@ const Personne: FC = () => {
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFilter((prev) => ({ ...prev, [name]: value }));
-
-    const filteredData = personnes.filter(
-      (person) =>
-        person.nom.toLowerCase().includes(filter.nom.toLowerCase()) &&
-        person.email.toLowerCase().includes(filter.email.toLowerCase())
-    );
-    setFilteredPersonnes(filteredData);
+  
+    setIsLoading(true); // Activer le spinner
+  
+    setTimeout(() => {
+      const filteredData = personnes.filter(
+        (person) =>
+          person.nom.toLowerCase().includes(value.toLowerCase()) ||
+          person.email.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredPersonnes(filteredData);
+      setIsLoading(false); // Désactiver le spinner après la recherche
+    }, 1000);
   };
 
   return (
@@ -219,7 +226,6 @@ const Personne: FC = () => {
               Ajouter
             </span>
           </Button>
-
           <input
             type="text"
             name="nom"
@@ -228,6 +234,7 @@ const Personne: FC = () => {
             onChange={handleFilterChange}
             className="filter-input"
           />
+            <Spinner loading={isLoading} />
         </div>
         <div className="table-container">
           {filteredPersonnes.length > 0 ? (
